@@ -1,17 +1,24 @@
--- ||********************************************************************||
--- ||                                                                    ||
--- || UNIVERSIDADE FEDERAL DO PIAUÍ - UFPI                               ||
--- || CENTRO DE CIÊNCIAS DA NATUREZA                                     ||
--- || DEPARTAMENTO DE COMPUTAÇÃO                                         ||
--- ||                                                                    ||
--- || Computer for Every Task Architecture 16 Bits - COMETA 16           ||
--- ||                                                                    ||
--- || Registred in 
--- ||
--- || Developers:                                                        ||
--- || 	- Ícaro Gabryel de Araujo Silva
--- ||                                                                    ||
--- ||********************************************************************||
+-- ||***************************************************************||
+-- ||                                                               ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                                 ||
+-- ||   NATURE SCIENCE CENTER                                       ||
+-- ||   COMPUTING DEPARTMENT                                        ||
+-- ||                                                               ||
+-- ||   Computer for Every Task Architecture 16 Bits - COMETA 16    ||
+-- ||                                                               ||
+-- ||   Registred in National Institute of Industrial Property      ||  
+-- ||   (INPI) under the number BR 51 2023 000286 0                 ||
+-- ||                                                               ||
+-- ||   Developers:                                                 ||
+-- || 	- Icaro Gabryel de Araujo Silva                             ||
+-- ||   - Fabio Anderson Carvalho Silva                             ||
+-- ||   - Cayo Cesar Lopes Mascarenhas Pires Cardoso                ||
+-- ||   - Claudiney Ryan da Silva                                   ||
+-- ||   - Antonio Geraldo Rego Junior                               ||
+-- ||   - Nivaldo Nogueira Paranagua Santos e Silva                 ||
+-- ||   - Ivan Saraiva Silva                                        ||
+-- ||                                                               ||
+-- ||***************************************************************||
 
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -58,7 +65,7 @@ begin
         high_data(15 downto 0) when others;
 
     with control_alu select alu_out <=
-	    out_amux_a(15 downto 0)                              when "0010",
+        out_amux_a(15 downto 0)                              when "0010",
         out_amux_b(15 downto 0)                              when "0011",
 		out_amux_a(15 downto 0) +    out_amux_b(15 downto 0) when "0000",
         out_amux_a(15 downto 0) -    out_amux_b(15 downto 0) when "0001",
@@ -68,10 +75,10 @@ begin
         out_amux_a(15 downto 0) nor  out_amux_b(15 downto 0) when "0111",  
         out_amux_a(15 downto 0) nand out_amux_b(15 downto 0) when others;
 
-    WITH alu_out SELECT
-        z <= '1' when "0000000000000000",
-             '0' when others;
+    with alu_out select z <=
+        '1' when "0000000000000000",
+        '0' when others;
 
-        n <= alu_out(15);
+    n <= alu_out(15);
 
 end behavior_alu;
