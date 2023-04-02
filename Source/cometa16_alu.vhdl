@@ -25,7 +25,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_signed.all;
 
 entity cometa16_alu is
-    port(     
+    port(
         -- Control signals
         control_alu:   in std_logic_vector(3 downto 0);
         control_mux_a: in std_logic;
@@ -57,12 +57,14 @@ architecture behavior_alu of cometa16_alu is
 begin
     with control_mux_a select out_mux_a <=
 		rf1_data(15 downto 0)  when '0',
-        rd_signal(15 downto 0) when others;
+        rd_signal(15 downto 0) when '1',
+        "xxxxxxxxxxxxxxxx"     when others;
 
     with control_mux_b select out_mux_b <=
 		rf2_data(15 downto 0)  when "00",
         ex_data(15 downto 0)   when "01",
-        high_data(15 downto 0) when others;
+        high_data(15 downto 0) when "11",
+        "xxxxxxxxxxxxxxxx"     when others;
 
     with control_alu select alu_out <=
         out_amux_a(15 downto 0)                              when "0010",
@@ -72,13 +74,11 @@ begin
         out_amux_a(15 downto 0) and  out_amux_b(15 downto 0) when "0100",
         out_amux_a(15 downto 0) or   out_amux_b(15 downto 0) when "0101",
         out_amux_a(15 downto 0) xor  out_amux_b(15 downto 0) when "0110",
-        out_amux_a(15 downto 0) nor  out_amux_b(15 downto 0) when "0111",  
-        out_amux_a(15 downto 0) nand out_amux_b(15 downto 0) when others;
+        out_amux_a(15 downto 0) nor  out_amux_b(15 downto 0) when "0111",
+        out_amux_a(15 downto 0) nand out_amux_b(15 downto 0) when "1111",
+        "xxxxxxxxxxxxxxxx"                                   when others;
 
-    with alu_out select z <=
-        '1' when "0000000000000000",
-        '0' when others;
-
+    z <= '1' when (alu_out = "0000000000000000") else '0';
     n <= alu_out(15);
 
 end behavior_alu;
