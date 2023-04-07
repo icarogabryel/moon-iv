@@ -1,0 +1,61 @@
+$date
+  Fri Apr 07 00:02:45 2023
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module textio $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module numeric_std $end
+$upscope $end
+$scope module testbench_shifter $end
+$var reg 2 ! control_shifter[1:0] $end
+$var reg 4 " shamt[3:0] $end
+$var reg 16 # alu_out[15:0] $end
+$var reg 16 $ shifter_out[15:0] $end
+$scope module shifter $end
+$var reg 2 % control_shifter[1:0] $end
+$var reg 4 & shamt[3:0] $end
+$var reg 16 ' alu_out[15:0] $end
+$var reg 16 ( shifter_out[15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b00 !
+b0010 "
+b0000000000000010 #
+b0000000000000010 $
+b00 %
+b0010 &
+b0000000000000010 '
+b0000000000000010 (
+#100000000
+b01 !
+b1000000000000100 #
+b0010000000000001 $
+b01 %
+b1000000000000100 '
+b0010000000000001 (
+#200000000
+b10 !
+b1000000000000001 #
+b0000000000000100 $
+b10 %
+b1000000000000001 '
+b0000000000000100 (
+#300000000
+b11 !
+b1000000000000100 #
+b1110000000000001 $
+b11 %
+b1000000000000100 '
+b1110000000000001 (
+#400000000

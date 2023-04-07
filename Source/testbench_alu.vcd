@@ -1,0 +1,84 @@
+$date
+  Wed Apr 05 20:18:28 2023
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module std_logic_arith $end
+$upscope $end
+$scope module std_logic_signed $end
+$upscope $end
+$scope module std_logic_unsigned $end
+$upscope $end
+$scope module testbench_alu $end
+$var reg 4 ! control_alu[3:0] $end
+$var reg 1 " control_mux_a $end
+$var reg 2 # control_mux_b[1:0] $end
+$var reg 16 $ rf1_data[15:0] $end
+$var reg 16 % rf2_data[15:0] $end
+$var reg 16 & rd_data[15:0] $end
+$var reg 16 ' ex_data[15:0] $end
+$var reg 16 ( hi_data[15:0] $end
+$var reg 1 ) z_signal $end
+$var reg 1 * n_signal $end
+$var reg 16 + alu_out[15:0] $end
+$scope module alu $end
+$var reg 4 , control_alu[3:0] $end
+$var reg 1 - control_mux_a $end
+$var reg 2 . control_mux_b[1:0] $end
+$var reg 16 / rf1_data[15:0] $end
+$var reg 16 0 rf2_data[15:0] $end
+$var reg 16 1 rd_data[15:0] $end
+$var reg 16 2 ex_data[15:0] $end
+$var reg 16 3 hi_data[15:0] $end
+$var reg 1 4 z_signal $end
+$var reg 1 5 n_signal $end
+$var reg 16 6 alu_out[15:0] $end
+$var reg 16 7 out_mux_a[15:0] $end
+$var reg 16 8 out_mux_b[15:0] $end
+$var reg 16 9 alu_out_bus[15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b0100 !
+0"
+b00 #
+b0000000000000100 $
+b0000000000001000 %
+b0000000000000000 &
+b0000000000000000 '
+b0000000000000000 (
+0)
+0*
+b0000000000001100 +
+b0100 ,
+0-
+b00 .
+b0000000000000100 /
+b0000000000001000 0
+b0000000000000000 1
+b0000000000000000 2
+b0000000000000000 3
+04
+05
+b0000000000001100 6
+b0000000000000100 7
+b0000000000001000 8
+b0000000000001100 9
+#100000000
+b0101 !
+1*
+b1111111111111100 +
+b0101 ,
+15
+b1111111111111100 6
+b1111111111111100 9
+#200000000
