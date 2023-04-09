@@ -1,25 +1,35 @@
--- || ****************************************************************** ||
--- ||                                                                    ||
--- || UNIVERSIDADE FEDERAL DO PIAUÍ - UFPI                               ||
--- || CENTRO DE CIÊNCIAS DA NATUREZA                                     ||
--- || DEPARTAMENTO DE COMPUTAÇÃO                                         ||
--- ||                                                                    ||
--- || Trabalho de Arquitetura de Computadores                            ||
--- || Computer for Every Task Architecture 16 Bits - COMETA 16           ||
--- ||                                                                    ||
--- || ****************************************************************** ||
+-- ||***************************************************************||
+-- ||                                                               ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                                 ||
+-- ||   NATURE SCIENCE CENTER                                       ||
+-- ||   COMPUTING DEPARTMENT                                        ||
+-- ||                                                               ||
+-- ||   Computer for Every Task Architecture 16 Bits - COMETA 16    ||
+-- ||                                                               ||
+-- ||   Registred in National Institute of Industrial Property      ||
+-- ||   (INPI) under the number BR 51 2023 000286 0                 ||
+-- ||                                                               ||
+-- ||   Developers:                                                 ||
+-- ||   - Icaro Gabryel de Araujo Silva                             ||
+-- ||   - Fabio Anderson Carvalho Silva                             ||
+-- ||   - Cayo Cesar Lopes Mascarenhas Pires Cardoso                ||
+-- ||   - Claudiney Ryan da Silva                                   ||
+-- ||   - Antonio Geraldo Rego Junior                               ||
+-- ||   - Nivaldo Nogueira Paranagua Santos e Silva                 ||
+-- ||   - Ivan Saraiva Silva                                        ||
+-- ||                                                               ||
+-- ||***************************************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-ENTITY ISA_bank_registers_1 IS
-	PORT(
-		clk           : IN std_logic;
-		reset         : IN std_logic;
+entity cometa16_bank_registers_32 is
+	port(
+		clk: in std_logic;
+		rst: in std_logic;
 
-		-- Controle de leitura e controle do multiplexador
-		EscReg1       : IN std_logic;
+		control_EscReg1       : IN std_logic;
 		SrcReg1Esc    : IN std_logic;
 
 		pop		      : IN std_logic;
@@ -38,9 +48,9 @@ ENTITY ISA_bank_registers_1 IS
 		dado_lido_rf1 : OUT std_logic_vector(15 DOWNTO 0);
 		dado_lido_rf2 : OUT std_logic_vector(15 DOWNTO 0)
 	);
-END ISA_bank_registers_1;
+end cometa16_bank_registers_32;
 
-ARCHITECTURE bhv_bank_registers_1 OF ISA_bank_registers_1 IS
+ARCHITECTURE behavior_bank_registers_32 OF cometa16_bank_registers_32 IS
 
 	TYPE BANKREG1 IS ARRAY(0 TO 15) OF std_logic_vector(15 DOWNTO 0);
 	SIGNAL bank_register1 : BANKREG1;

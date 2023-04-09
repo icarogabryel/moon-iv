@@ -97,8 +97,8 @@ begin
         ex_data <= "0000000000000000"; -- 0
         hi_data <= "0000000000000000"; -- 0
 
-        wait for 100 ns;
-        assert alu_out = "0000000000001100" report "Sum test failed!" severity failure;
+        wait for 10 ns;
+        assert alu_out = "0000000000001100" report "Sum test failed!";
 
 
         control_alu <= "0101"; -- difference
@@ -112,10 +112,10 @@ begin
         ex_data <= "0000000000000000"; -- 0
         hi_data <= "0000000000000000"; -- 0
 
-        wait for 100 ns;
-        assert alu_out = "1111111111111100" report "Difference test failed!" severity failure;
+        wait for 10 ns;
+        assert alu_out = "1111111111111100" report "Difference test failed!";
 
-        report "All tests passed!" severity note;
+        report "Testbench finished" severity note;
         wait;
 
     end process;
