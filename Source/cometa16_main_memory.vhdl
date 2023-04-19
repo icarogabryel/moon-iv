@@ -30,36 +30,42 @@ entity cometa16_main_memory is
         clk: in std_logic;
         rst: in std_logic;
 
-        control_wr_main_memory: in std_logic;
-        addr: in std_logic_vector(15 downto 0);
-        data: in std_logic_vector(15 downto 0);
-
-        main_memory_out: out std_logic_vector(15 downto 0)
+        ins_addr:        in std_logic_vector(15 downto 0);
+        rd_time:         out std_logic_vector(9 downto 0);
+        main_mem_out:       out std_logic_vector(63 downto 0)
 
     );
 
 end cometa16_main_memory;
 
 architecture behavior_main_memory of cometa16_main_memory is
-    type main_memory is array(0 to 65535) of std_logic_vector(15 downto 0);
-    signal main: main_memory;
+    type memory is array(0 to 63, 0 to 3) of std_logic_vector(15 downto 0);
+    signal main_memory: memory;
 
-    impure function read_main_memory_file(file_name: in string) return main_memory is
+    signal rd_time_reg: std_logic_vector(9 downto 0) := "0001100100";
+
+    impure function read_main_memory_file(file_name: in string) return memory is
         file main_memory_file: text open read_mode is file_name;
         variable main_memory_line: line;
         
         variable temp_bit_vector: bit_vector(15 downto 0);
-        variable temp_main_memory: main_memory;
+        variable temp_main_memory: memory;
         
         variable i: integer := 0;
+        variable j: integer := 0;
 
     begin
         while not endfile(main_memory_file) loop
             readline(main_memory_file, main_memory_line);
             read(main_memory_line, temp_bit_vector);
-            temp_main_memory(i) := to_stdlogicvector(temp_bit_vector);
-
-            i := i + 1;
+            temp_main_memory(i, j) := to_stdlogicvector(temp_bit_vector);
+            
+            if(j = 3) then
+                j := 0;
+                i := i + 1;
+            else
+                j := j + 1;
+            end if;
 
         end loop;
 
@@ -68,21 +74,26 @@ architecture behavior_main_memory of cometa16_main_memory is
     end function read_main_memory_file;
 
 begin
+    main_mem_out <=
+        main_memory(conv_integer(ins_addr)/4, 0) &
+        main_memory(conv_integer(ins_addr)/4, 1) &
+        main_memory(conv_integer(ins_addr)/4, 2) &
+        main_memory(conv_integer(ins_addr)/4, 3);
+
+    rd_time <= rd_time_reg(9 downto 0);
+
     wr_main_memory: process(clk, rst)
-    
+
     begin
         if(rst = '1') then
-            main <= read_main_memory_file("memories/main_memory.txt");
-        
-        elsif(rising_edge(clk)) then
-            if(control_wr_main_memory = '1') then
-                main(conv_integer(addr)) <= data;
-            end if;
-            
-            main_memory_out <= main(conv_integer(addr))(15 downto 0);
-        
+            main_memory <= read_main_memory_file("memories/main_memory.txt");
         end if;
+
+        -- writing in main memory
+        -- elsif(rising_edge(clk) and control sign) then
+
+        -- end if;
     
     end process wr_main_memory;
- 
+
 end behavior_main_memory;
