@@ -123,15 +123,13 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity ISA_testbench
 -- Compiling architecture bhv_testbench of ISA_testbench
 
-} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_instruction_memory.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_instruction_memory.vhdl
+} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_alu.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_alu.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity cometa16_instruction_memory
--- Compiling architecture behavior_instruction_memory of cometa16_instruction_memory
+-- Compiling entity testbench_alu
+-- Compiling architecture testbench of testbench_alu
 
 } {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_alu.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_alu.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -144,13 +142,13 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling architecture behavior_alu of cometa16_alu
 -- Loading package STD_LOGIC_UNSIGNED
 
-} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_alu.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_alu.vhdl
+} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_shifter.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_shifter.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling entity testbench_alu
--- Compiling architecture testbench of testbench_alu
+-- Compiling entity testbench_shifter
+-- Compiling architecture testbench of testbench_shifter
 
 } {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl {0 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -165,15 +163,7 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 ** Error: C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl(46): ** Error: (vcom-1583) Illegal type converson from 'unknown' to 'ieee.std_logic_1164.STD_LOGIC_VECTOR' (operand type is not known).
 ** Error: C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl(49): VHDL Compiler exiting
 
-} {9.0 13.0} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_shifter.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/testbench_shifter.vhdl
-Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity testbench_shifter
--- Compiling architecture testbench of testbench_shifter
-
-} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_miss_penalty_unit.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_miss_penalty_unit.vhdl
+} {9.0 13.0} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_miss_penalty_unit.vhdl {1 {vcom -work work -2002 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_miss_penalty_unit.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
