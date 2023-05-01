@@ -1,118 +1,98 @@
--- ||***************************************************************||
--- ||                                                               ||
--- ||   FEDERAL UNIVERSITY OF PIAUI                                 ||
--- ||   NATURE SCIENCE CENTER                                       ||
--- ||   COMPUTING DEPARTMENT                                        ||
--- ||                                                               ||
--- ||   Computer for Every Task Architecture 16 Bits - COMETA 16    ||
--- ||                                                               ||
--- ||   Registred in National Institute of Industrial Property      ||
--- ||   (INPI) under the number BR 51 2023 000286 0                 ||
--- ||                                                               ||
--- ||   Developers:                                                 ||
--- ||   - Icaro Gabryel de Araujo Silva                             ||
--- ||   - Fabio Anderson Carvalho Silva                             ||
--- ||   - Cayo Cesar Lopes Mascarenhas Pires Cardoso                ||
--- ||   - Claudiney Ryan da Silva                                   ||
--- ||   - Antonio Geraldo Rego Junior                               ||
--- ||   - Nivaldo Nogueira Paranagua Santos e Silva                 ||
--- ||   - Ivan Saraiva Silva                                        ||
--- ||                                                               ||
--- ||***************************************************************||
+-- ||****************************************************************||
+-- ||                                                                ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                                  ||
+-- ||   NATURE SCIENCE CENTER                                        ||
+-- ||   COMPUTING DEPARTMENT                                         ||
+-- ||                                                                ||
+-- ||   Computer for Every Task Architecture 16 Bits Generation 2    ||
+-- ||   COMETA 16 G2                                                 ||
+-- ||                                                                ||
+-- ||   Developer: Icaro Gabryel de Araujo Silva                     ||
+-- ||                                                                ||
+-- ||****************************************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_bank_registers_32 is
-	port(
-		clk: in std_logic;
-		rst: in std_logic;
+entity cometa16_rf_bank_registers is
+    port(
+        clk: in std_logic;
+        rst: in std_logic;
 
-		control_EscReg1       : IN std_logic;
-		SrcReg1Esc    : IN std_logic;
+        ctrl_wr_rf_reg: IN std_logic; --todo
+        ctrl_src_rf_reg: IN std_logic;  --todo
 
-		pop		      : IN std_logic;
-		push          : IN std_logic;
-		jump          : IN std_logic;
+        ctrl_stack: in std_logic_vector(1 downto 0);
+        ctrl_link: in std_logic;
 
-		-- Dados que podem ser escritos
-		pc_mais_um    : IN std_logic_vector(15 DOWNTO 0);
-		rd_lido       : IN std_logic_vector(15 DOWNTO 0);
+        pc_plus_one: in std_logic_vector(15 downto 0);
+        rd_bank_reg_out: in std_logic_vector(15 downto 0);
 
-		-- Endereco de rf1 e rf2
-		rf1_address   : IN std_logic_vector(3 DOWNTO 0);
-		rf2_address   : IN std_logic_vector(3 DOWNTO 0);
+        rf1_addr: in std_logic_vector(3 downto 0);
+        rf2_addr: in std_logic_vector(3 downto 0);
 
-		-- Dados lidos
-		dado_lido_rf1 : OUT std_logic_vector(15 DOWNTO 0);
-		dado_lido_rf2 : OUT std_logic_vector(15 DOWNTO 0)
-	);
-end cometa16_bank_registers_32;
+        rf1_out : out std_logic_vector(15 downto 0);
+        rf2_out : out std_logic_vector(15 downto 0)
+    );
+end cometa16_rf_bank_registers;
 
-ARCHITECTURE behavior_bank_registers_32 OF cometa16_bank_registers_32 IS
+architecture behavior_rf_bank_registers of cometa16_rf_bank_registers is
+    type bank_register is array(0 to 15) of std_logic_vector(15 downto 0);
+	signal rf_bank_register: bank_register;
 
-	TYPE BANKREG1 IS ARRAY(0 TO 15) OF std_logic_vector(15 DOWNTO 0);
-	SIGNAL bank_register1 : BANKREG1;
+	signal src_rf_reg_mux: std_logic_vector(15 downto 0);
+	signal wr_adrr: std_logic_vector(3 downto 0);
 
-	-- Saida do multiplexador
-	SIGNAL amux_out : std_logic_vector(15 DOWNTO 0);
-	SIGNAL pp       : std_logic_vector(1 DOWNTO 0);
+begin
+	with ctrl_stack select rf1_out <=
+		rf_bank_register(conv_integer(rf1_addr)) when "00",
+		rf_bank_register(14)                     when "01",
+		rf_bank_register(14) - 1                 when "10",
+		"XXXXXXXXXXXXXXXX"                       when others;
 
-	SIGNAL Endereco_escrita : std_logic_vector(3 DOWNTO 0);
+	rf2_out <= rf_bank_register(conv_integer(rf2_addr));
 
-	BEGIN
+	with ctrl_link select wr_adrr <=
+		rf1_addr(3 downto 0) when '0',
+		"1111"               when '1',
+		"XXXX"               when others;
 
-		pp <= push & pop;
+	with ctrl_src_rf_reg select src_rf_reg_mux <=
+		pc_plus_one(15 DOWNTO 0)     when '0',
+		rd_bank_reg_out(15 DOWNTO 0) when '1',
+		"XXXXXXXXXXXXXXXX"           when others;
 
-		WITH pp SELECT
-			dado_lido_rf1 <= bank_register1(14)                        WHEN "01",
-			                 bank_register1(14) - 1                    WHEN "10",
-							 bank_register1(conv_integer(rf1_address)) WHEN OTHERS;
+	wr_rf_bank_register: process(clk, rst, EscReg1)
 
-		dado_lido_rf2 <= bank_register1(conv_integer(rf2_address));
+	begin
 
-		WITH jump SELECT
-			Endereco_escrita <= rf1_address(3 downto 0) WHEN '0',
-			                    "1111" WHEN OTHERS;
+		if rst = '1' then
+			rf_bank_register(0)  <= "0000000000000000"; -- rf0 
+			rf_bank_register(1)  <= "0000000000000000"; -- rf1
+			rf_bank_register(2)  <= "0000000000000000"; -- rf2 
+			rf_bank_register(3)  <= "0000000000000000"; -- rf3
+			rf_bank_register(4)  <= "0000000000000000"; -- rf4
+			rf_bank_register(5)  <= "0000000000000000"; -- rf5 
+			rf_bank_register(6)  <= "0000000000000000"; -- rf6
+			rf_bank_register(7)  <= "0000000000000000"; -- rf7
+			rf_bank_register(8)  <= "0000000000000000"; -- rf8
+			rf_bank_register(9)  <= "0000000000000000"; -- rf9 
+			rf_bank_register(10) <= "0000000000000000"; -- rf10
+			rf_bank_register(11) <= "0000000000000000"; -- rf11
+			rf_bank_register(12) <= "0000000000000000"; -- rf12
+			rf_bank_register(13) <= "0000000000000000"; -- rf13
+			rf_bank_register(14) <= "0000000000000000"; -- sp
+			rf_bank_register(15) <= "0000000000000000"; -- link
 
-		-- Saida do multiplexador
-		WITH SrcReg1Esc SELECT
-				amux_out <= pc_mais_um(15 DOWNTO 0)  WHEN '0',
-						    rd_lido(15 DOWNTO 0)     WHEN OTHERS;
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf_Reg = '1') and (stack = "00")) then
+			rf_bank_register(conv_integer(wr_adrr)) <= amux_out;
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf_Reg = '1') and (stack = "01")) then -- pop
+			rf_bank_register(14) <= rf_bank_register(14) + 1;
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf_Reg = '1') and (stack = "10")) then -- push
+			rf_bank_register(14) <= rf_bank_register(14) - 1;
+		end if;
 
+	end process wr_rf_bank_register;
 
-		write_bank_register1 : PROCESS (clk, EscReg1, reset)
-			BEGIN
-
-				IF reset = '1' THEN
-					bank_register1(0)  <= "0000000000000000"; -- rf0 
-					bank_register1(1)  <= "0000000000000000"; -- rf1
-					bank_register1(2)  <= "0000000000000000"; -- rf2 
-					bank_register1(3)  <= "0000000000000000"; -- rf3
-					bank_register1(4)  <= "0000000000000000"; -- rf4
-					bank_register1(5)  <= "0000000000000000"; -- rf5 
-					bank_register1(6)  <= "0000000000000000"; -- rf6
-					bank_register1(7)  <= "0000000000000000"; -- rf7
-					bank_register1(8)  <= "0000000000000000"; -- rf8
-					bank_register1(9)  <= "0000000000000000"; -- rf9 
-					bank_register1(10) <= "0000000000000000"; -- rf10
-					bank_register1(11) <= "0000000000000000"; -- rf11
-					bank_register1(12) <= "0000000000000000"; -- rf12
-					bank_register1(13) <= "0000000000000000"; -- rf13
-					bank_register1(14) <= "0000000000000000"; -- sp
-					bank_register1(15) <= "0000000000000000"; -- rf15 (pc+1)
-				
-				-- Salvando dado no registrador
-				ELSIF ((clk'event AND clk ='1') AND (EscReg1 = '1') AND (pp = "00")) THEN
-				    bank_register1(conv_integer(endereco_escrita)) <= amux_out;
-				ELSIF ((clk'event AND clk ='1') AND (EscReg1 = '1') AND (pp = "01")) THEN -- pop
-					bank_register1(14) <= bank_register1(14) + 1;
-				ELSIF ((clk'event AND clk ='1') AND (EscReg1 = '1') AND (pp = "10")) THEN -- push
-					bank_register1(14) <= bank_register1(14) - 1;
-				END IF;
-
-					
-			END PROCESS write_bank_register1;
-
-END bhv_bank_registers_1;
+END behavior_rf_bank_registers;

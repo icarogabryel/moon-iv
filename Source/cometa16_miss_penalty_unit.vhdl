@@ -5,7 +5,7 @@
 -- ||   COMPUTING DEPARTMENT                                         ||
 -- ||                                                                ||
 -- ||   Computer for Every Task Architecture 16 Bits Generation 2    ||
--- ||   COMETA16 G2                                                  ||
+-- ||   COMETA 16 G2                                                 ||
 -- ||                                                                ||
 -- ||   Developer: Icaro Gabryel de Araujo Silva                     ||
 -- ||                                                                ||
