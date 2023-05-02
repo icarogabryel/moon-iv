@@ -22,7 +22,7 @@ entity cometa16_instruction_memory is
 
         pc_out: in std_logic_vector(15 downto 0);
         main_mem_data_read: in std_logic_vector(63 downto 0);
-        ctrl_ins_mem_wr: in std_logic;
+        ctrl_wr_ins_mem: in std_logic;
 
         ins_mux_out: out std_logic_vector(15 downto 0);
         hit_out: out std_logic
@@ -81,7 +81,7 @@ begin
             instruction_memory(3, 2)  <= "00000000000000000000000000000";
             instruction_memory(3, 3)  <= "00000000000000000000000000000";
         
-        elsif ((clk'event and clk = '1') and (ctrl_ins_mem_wr = '1')) then
+        elsif ((clk'event and clk = '1') and (ctrl_wr_ins_mem = '1')) then
             instruction_memory((conv_integer(pc_out)/4) mod 4, 0) <= '1' & pc_out(15 downto 4) & main_mem_data_read(63 downto 48);
             instruction_memory((conv_integer(pc_out)/4) mod 4, 1) <= '1' & pc_out(15 downto 4) & main_mem_data_read(47 downto 32);
             instruction_memory((conv_integer(pc_out)/4) mod 4, 2) <= '1' & pc_out(15 downto 4) & main_mem_data_read(31 downto 16);

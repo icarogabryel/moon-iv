@@ -1,13 +1,15 @@
--- || ****************************************************************** ||
--- ||                                                                    ||
--- || UNIVERSIDADE FEDERAL DO PIAUÍ - UFPI                               ||
--- || CENTRO DE CIÊNCIAS DA NATUREZA                                     ||
--- || DEPARTAMENTO DE COMPUTAÇÃO                                         ||
--- ||                                                                    ||
--- || Trabalho de Arquitetura de Computadores                            ||
--- || Computer for Every Task Architecture 16 Bits - COMETA 16           ||
--- ||                                                                    ||
--- || ****************************************************************** ||
+-- ||****************************************************************||
+-- ||                                                                ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                                  ||
+-- ||   NATURE SCIENCE CENTER                                        ||
+-- ||   COMPUTING DEPARTMENT                                         ||
+-- ||                                                                ||
+-- ||   Computer for Every Task Architecture 16 Bits Generation 2    ||
+-- ||   COMETA 16 G2                                                 ||
+-- ||                                                                ||
+-- ||   Developer: Icaro Gabryel de Araujo Silva                     ||
+-- ||                                                                ||
+-- ||****************************************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -15,41 +17,43 @@ use ieee.std_logic_1164.all;
 library work;
 use work.codops.all;
 
-entity ISA_controller is
-	port( 	  
-		CLK	        : in std_logic;
-		RESET	        : in std_logic;
-              CODOP          : in std_logic_vector(5 DOWNTO 0);
+entity cometa16_controller is
+    port( 	  
+        clk: in std_logic;
+        rst: in std_logic;
+        codop: in std_logic_vector(5 DOWNTO 0);
 
-              Dvc           : out std_logic_vector(2 DOWNTO 0);
-              Dvi           : out std_logic_vector(1 DOWNTO 0);
-              SrcReg1Esc    : out std_logic;
-              Reg1Esc       : out std_logic;
-              SrcReg2Esc    : out std_logic_vector(1 DOWNTO 0);
-              Reg2Esc       : out std_logic;
-              SrcRLH        : out std_logic;
-              EscRLH        : out std_logic;
-              Push          : out std_logic;
-              Pop           : out std_logic;
-              Jump          : out std_logic;
-              Extensor      : out std_logic_vector(1 DOWNTO 0);
-              SrcAluA       : out std_logic;
-              SrcAluB       : out std_logic_vector(1 DOWNTO 0);
-              AluOP         : out std_logic_vector(3 DOWNTO 0);
-              SH            : out std_logic_vector(1 DOWNTO 0);
-              LerMem        : out std_logic;
-              EscMem        : out std_logic;
-              Saida         : out std_logic
-       );
-end ISA_controller;
+-- Dvc           : out std_logic_vector(2 DOWNTO 0);
+-- Dvi           : out std_logic_vector(1 DOWNTO 0);
+-- SrcReg1Esc    : out std_logic;
+-- Reg1Esc       : out std_logic;
+-- SrcReg2Esc    : out std_logic_vector(1 DOWNTO 0);
+-- Reg2Esc       : out std_logic;
+-- SrcRLH        : out std_logic;
+-- EscRLH        : out std_logic;
+-- Push          : out std_logic;
+-- Pop           : out std_logic;
+-- Jump          : out std_logic;
+-- Extensor      : out std_logic_vector(1 DOWNTO 0);
+-- SrcAluA       : out std_logic;
+-- SrcAluB       : out std_logic_vector(1 DOWNTO 0);
+-- AluOP         : out std_logic_vector(3 DOWNTO 0);
+-- SH            : out std_logic_vector(1 DOWNTO 0);
+-- LerMem        : out std_logic;
+-- EscMem        : out std_logic;
+-- Saida         : out std_logic
+    );
+end cometa16_controller;
 
 architecture bhv_controller of ISA_controller is
 
 begin
 
- process (CODOP)
- begin 	
-	case CODOP is
+    process (CODOP)
+
+    begin 	
+
+        case CODOP is
 
 		when ADDx  => Dvc          <= "100";
 					  Dvi          <= "00";

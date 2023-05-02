@@ -15,7 +15,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 package codops is
-    constant nop_ins:   std_logic_vector(5 downto 0) := "000000";
+    -- Logical and Arithmetic Instructions
+    constant nope_ins:  std_logic_vector(5 downto 0) := "000000";
 
     constant add_ins:   std_logic_vector(5 downto 0) := "000001";
     constant sub_ins:   std_logic_vector(5 downto 0) := "000010";
@@ -43,6 +44,7 @@ package codops is
 
     constant slt_ins:   std_logic_vector(5 downto 0) := "001110";
 
+    -- Inmediate Instructions
     constant addi_ins:  std_logic_vector(5 downto 0) := "001111";
     constant subi_ins:  std_logic_vector(5 downto 0) := "010000";
 
@@ -57,11 +59,13 @@ package codops is
     constant nori_ins:  std_logic_vector(5 downto 0) := "011000";
     constant xnori_ins: std_logic_vector(5 downto 0) := "011001";
 
+    -- Memory Instructions
     constant lwr_ins:   std_logic_vector(5 downto 0) := "011010";
     constant swr_ins:   std_logic_vector(5 downto 0) := "011011";
     constant push_ins:  std_logic_vector(5 downto 0) := "011100";
     constant pop_ins:   std_logic_vector(5 downto 0) := "011101";
 
+    -- Jump Instructions
     constant j_ins:     std_logic_vector(5 downto 0) := "011110";
     constant jal_ins:   std_logic_vector(5 downto 0) := "011111";
     constant jr_ins:    std_logic_vector(5 downto 0) := "100000";
