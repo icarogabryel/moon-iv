@@ -21,7 +21,8 @@ entity cometa16_controller is
     port( 	  
         clk: in std_logic;
         rst: in std_logic;
-        codop: in std_logic_vector(5 DOWNTO 0);
+
+        opcode: in std_logic_vector(5 downto 0);
 
 -- Dvc           : out std_logic_vector(2 DOWNTO 0);
 -- Dvi           : out std_logic_vector(1 DOWNTO 0);
@@ -45,7 +46,7 @@ entity cometa16_controller is
     );
 end cometa16_controller;
 
-architecture bhv_controller of ISA_controller is
+architecture behavior_controller of cometa16_controller is
 
 begin
 
@@ -839,4 +840,4 @@ begin
 	end case;
    end process;
 
-end bhv_controller;
+end behavior_controller;
