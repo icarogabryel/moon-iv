@@ -17,7 +17,7 @@ use ieee.std_logic_1164.all;
 package codops is
     constant nope_opcode:  std_logic_vector(5 downto 0) := "000000";
 
-    -- Logical and Arithmetic Instructions
+    -- Logical and Arithmetic Operations
     constant add_opcode:   std_logic_vector(5 downto 0) := "000001";
     constant sub_opcode:   std_logic_vector(5 downto 0) := "000010";
 
@@ -39,12 +39,12 @@ package codops is
     constant mth_opcode:   std_logic_vector(5 downto 0) := "010000";
     constant mfh_opcode:   std_logic_vector(5 downto 0) := "010001";
 
-    constant mfac_opcode:  std_logic_vector(5 downto 0) := "010010";
-    constant mtac_opcode:  std_logic_vector(5 downto 0) := "010011";
+    constant mtac_opcode:  std_logic_vector(5 downto 0) := "010010";
+    constant mfac_opcode:  std_logic_vector(5 downto 0) := "010011";
 
     constant slt_opcode:   std_logic_vector(5 downto 0) := "010100";
 
-    -- Inmediate Instructions
+    -- Inmediate Operations
     constant addi_opcode:  std_logic_vector(5 downto 0) := "010101";
     constant subi_opcode:  std_logic_vector(5 downto 0) := "010110";
 
@@ -59,13 +59,13 @@ package codops is
     constant nori_opcode:  std_logic_vector(5 downto 0) := "011110";
     constant xnori_opcode: std_logic_vector(5 downto 0) := "011111";
 
-    -- Memory Access Instructions
+    -- Memory Access Operations
     constant lwr_opcode:   std_logic_vector(5 downto 0) := "100000";
     constant swr_opcode:   std_logic_vector(5 downto 0) := "100001";
     constant push_opcode:  std_logic_vector(5 downto 0) := "100010";
     constant pop_opcode:   std_logic_vector(5 downto 0) := "100011";
 
-    -- Control Instructions
+    -- Control Operations
     constant j_opcode:     std_logic_vector(5 downto 0) := "100100";
     constant jal_opcode:   std_logic_vector(5 downto 0) := "100101";
     constant jr_opcode:    std_logic_vector(5 downto 0) := "100110";

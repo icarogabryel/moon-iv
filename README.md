@@ -1,0 +1,14 @@
+# COMETA 16 G2
+## Computer for Every Task Architecture 16 Bits Gen 2
+
+Developed by Ícaro Gabryel
+GitHub:
+LinkedIn:
+
+FEDERAL UNIVERSITY OF PIAUI
+NATURE SCIENCE CENTER
+COMPUTING DEPARTMENT
+
+First generation of this architecture is registered in INPI (National Institute of Industrial Property) under the number BR 51 2023 000286 0.
+
+COMETA 16 G2 is as 16 Bit, unicycle computer designed for general purpose.
