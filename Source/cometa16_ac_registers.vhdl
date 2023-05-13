@@ -26,8 +26,8 @@ entity cometa16_ac_registers is
         alu_out:      in std_logic_vector(15 downto 0);
         data_mem_out: in std_logic_vector(15 downto 0);
         n_signal:     in std_logic;
-        hi_reg:  in std_logic_vector(15 downto 0);
-        lo_reg:  in std_logic_vector(15 downto 0);
+        hi_reg:       in std_logic_vector(15 downto 0);
+        lo_reg:       in std_logic_vector(15 downto 0);
 
         ac_addr:      in std_logic_vector(1 downto 0);
         ac_out:       out std_logic_vector(15 downto 0)

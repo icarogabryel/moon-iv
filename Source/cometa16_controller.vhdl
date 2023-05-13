@@ -15,13 +15,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
-use work.codops.all;
+use work.opcodes.all;
 
 entity cometa16_controller is
-    port( 	  
-        clk: in std_logic;
-        rst: in std_logic;
-
+    port(
         opcode: in std_logic_vector(5 downto 0);
 
 -- Dvc           : out std_logic_vector(2 DOWNTO 0);
@@ -50,11 +47,11 @@ architecture behavior_controller of cometa16_controller is
 
 begin
 
-    process (CODOP)
+    process(opcode)
 
     begin 	
 
-        case CODOP is
+        case opcode is
 
 		when ADDx  => Dvc          <= "100";
 					  Dvi          <= "00";

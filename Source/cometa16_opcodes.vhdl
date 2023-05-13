@@ -14,7 +14,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-package codops is
+package opcodes is
     constant nope_opcode:  std_logic_vector(5 downto 0) := "000000";
 
     -- Logical and Arithmetic Operations
@@ -78,6 +78,6 @@ package codops is
 
 end package;
 
-package body codops is
+package body opcodes is
 
 end package body;

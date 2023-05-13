@@ -17,16 +17,16 @@ use ieee.std_logic_signed.all;
 
 entity cometa16_alu is
     port(
-        control_alu:   in std_logic_vector(3 downto 0);
-        control_mux_a: in std_logic;
-        control_mux_b: in std_logic_vector(1 downto 0);
+        ctrl_alu:       in std_logic_vector(3 downto 0);
+        ctrl_src_alu_a: in std_logic;
+        ctrl_src_alu_b: in std_logic_vector(1 downto 0);
 
-        rf1_data:      in std_logic_vector(15 downto 0);
-        rf2_data:      in std_logic_vector(15 downto 0);
+        rf1_data:       in std_logic_vector(15 downto 0);
+        rf2_data:       in std_logic_vector(15 downto 0);
 
-        rd_data:       in std_logic_vector(15 downto 0);
-        ex_data:       in std_logic_vector(15 downto 0);
-        hi_data:       in std_logic_vector(15 downto 0);
+        ac_out:        in std_logic_vector(15 downto 0);
+        ex_data:        in std_logic_vector(15 downto 0);
+        hi_data:        in std_logic_vector(15 downto 0);
 
         z_signal:      out std_logic;
         n_signal:      out std_logic;
@@ -39,23 +39,22 @@ end cometa16_alu;
 architecture behavior_alu of cometa16_alu is
     signal out_mux_a: std_logic_vector(15 downto 0);
     signal out_mux_b: std_logic_vector(15 downto 0);
-    signal alu_result:   std_logic_vector(15 downto 0);
 
 begin
-    with control_mux_a select out_mux_a <=
+    with ctrl_src_alu_a select out_mux_a <=
         rf1_data(15 downto 0)  when '0',
-        rd_data(15 downto 0)   when '1',
+        ac_out(15 downto 0)    when '1',
 
         "XXXXXXXXXXXXXXXX"     when others;
 
-    with control_mux_b select out_mux_b <=
+    with ctrl_src_alu_b select out_mux_b <=
         rf2_data(15 downto 0)  when "00",
         ex_data(15 downto 0)   when "01",
         hi_data(15 downto 0)   when "11",
 
         "XXXXXXXXXXXXXXXX"     when others;
 
-    with control_alu select alu_result <=
+    with ctrl_alu select alu_out <=
         out_mux_a(15 downto 0)                             when "0000",
         out_mux_b(15 downto 0)                             when "0001",
 
@@ -74,9 +73,7 @@ begin
 
         "XXXXXXXXXXXXXXXX"                                 when others;
 
-    z_signal <= '1' when ieee.std_logic_unsigned."="(alu_result, "0000000000000000") else '0';
-    n_signal <= alu_result(15);
-
-    alu_out <= alu_result(15 downto 0);
+    z_signal <= '1' when ieee.std_logic_unsigned."="(alu_out, "0000000000000000") else '0';
+    n_signal <= alu_out(15);
 
 end behavior_alu;
