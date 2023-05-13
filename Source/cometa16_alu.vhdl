@@ -44,14 +44,12 @@ begin
     with ctrl_src_alu_a select out_mux_a <=
         rf1_data(15 downto 0)  when '0',
         ac_out(15 downto 0)    when '1',
-
         "XXXXXXXXXXXXXXXX"     when others;
 
     with ctrl_src_alu_b select out_mux_b <=
         rf2_data(15 downto 0)  when "00",
         ex_data(15 downto 0)   when "01",
         hi_data(15 downto 0)   when "11",
-
         "XXXXXXXXXXXXXXXX"     when others;
 
     with ctrl_alu select alu_out <=

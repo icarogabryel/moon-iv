@@ -36,6 +36,7 @@ entity cometa16_rf_registers is
         rf2_out : out std_logic_vector(15 downto 0)
 
     );
+
 end cometa16_rf_registers;
 
 architecture behavior_rf_registers of cometa16_rf_registers is

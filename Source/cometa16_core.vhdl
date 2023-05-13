@@ -1,13 +1,15 @@
--- || ****************************************************************** ||
--- ||                                                                    ||
--- || UNIVERSIDADE FEDERAL DO PIAUÍ - UFPI                               ||
--- || CENTRO DE CIÊNCIAS DA NATUREZA                                     ||
--- || DEPARTAMENTO DE COMPUTAÇÃO                                         ||
--- ||                                                                    ||
--- || Trabalho de Arquitetura de Computadores                            ||
--- || Computer for Every Task Architecture 16 Bits - COMETA 16           ||
--- ||                                                                    ||
--- || ****************************************************************** ||
+-- ||****************************************************************||
+-- ||                                                                ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                                  ||
+-- ||   NATURE SCIENCE CENTER                                        ||
+-- ||   COMPUTING DEPARTMENT                                         ||
+-- ||                                                                ||
+-- ||   Computer for Every Task Architecture 16 Bits Generation 2    ||
+-- ||   COMETA 16 G2                                                 ||
+-- ||                                                                ||
+-- ||   Developer: Icaro Gabryel de Araujo Silva                     ||
+-- ||                                                                ||
+-- ||****************************************************************||
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
