@@ -17,21 +17,21 @@ use ieee.std_logic_signed.all;
 
 entity cometa16_alu is
     port(
-        ctrl_alu:       in std_logic_vector(3 downto 0);
-        ctrl_src_alu_a: in std_logic;
-        ctrl_src_alu_b: in std_logic_vector(1 downto 0);
+        ctrl_alu:        in std_logic_vector(3 downto 0);
+        ctrl_src_alu_a:  in std_logic;
+        ctrl_src_alu_b:  in std_logic_vector(1 downto 0);
 
-        rf1_data:       in std_logic_vector(15 downto 0);
-        rf2_data:       in std_logic_vector(15 downto 0);
+        rf1_out:         in std_logic_vector(15 downto 0);
+        rf2_out:         in std_logic_vector(15 downto 0);
 
-        ac_out:        in std_logic_vector(15 downto 0);
-        ex_data:        in std_logic_vector(15 downto 0);
-        hi_data:        in std_logic_vector(15 downto 0);
+        ac_out:          in std_logic_vector(15 downto 0);
+        sign_extend_out: in std_logic_vector(15 downto 0);
+        hi_out:          in std_logic_vector(15 downto 0);
 
-        z_signal:      out std_logic;
-        n_signal:      out std_logic;
+        z_signal:        out std_logic;
+        n_signal:        out std_logic;
 
-        alu_out:       out std_logic_vector(15 downto 0)
+        alu_out:         out std_logic_vector(15 downto 0)
     );
 
 end cometa16_alu;
@@ -42,15 +42,15 @@ architecture behavior_alu of cometa16_alu is
 
 begin
     with ctrl_src_alu_a select out_mux_a <=
-        rf1_data(15 downto 0)  when '0',
-        ac_out(15 downto 0)    when '1',
-        "XXXXXXXXXXXXXXXX"     when others;
+        rf1_out(15 downto 0) when '0',
+        ac_out(15 downto 0)  when '1',
+        "XXXXXXXXXXXXXXXX"   when others;
 
     with ctrl_src_alu_b select out_mux_b <=
-        rf2_data(15 downto 0)  when "00",
-        ex_data(15 downto 0)   when "01",
-        hi_data(15 downto 0)   when "11",
-        "XXXXXXXXXXXXXXXX"     when others;
+        rf2_out(15 downto 0)         when "00",
+        sign_extend_out(15 downto 0) when "01",
+        hi_out(15 downto 0)         when "11",
+        "XXXXXXXXXXXXXXXX"   when others;
 
     with ctrl_alu select alu_out <=
         out_mux_a(15 downto 0)                             when "0000",

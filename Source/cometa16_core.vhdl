@@ -11,112 +11,119 @@
 -- ||                                                                ||
 -- ||****************************************************************||
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.std_logic_unsigned.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
 
-ENTITY ISA_datapath IS 
-    PORT (
-        clk_sig : IN std_logic;
-        reset_sig : IN std_logic
+entity cometa16_core is
+    port(
+        clk: in std_logic;
+        rst: in std_logic
+
+        main_mem_out: in std_logic_vector(63 downto 0);
+        pc_out: out std_logic_vector(15 downto 0);
     );
-END ISA_datapath;
 
-ARCHITECTURE bhv_datapath OF ISA_datapath is
+end cometa16_core;
 
-    SIGNAL dvc_BUS           : std_logic_vector(2 DOWNTO 0);
-    SIGNAL dvi_BUS           : std_logic_vector(1 DOWNTO 0);
-    SIGNAL SrcReg1Esc_BUS    : std_logic;
-    SIGNAL Reg1Esc_BUS       : std_logic;
-    SIGNAL SrcReg2Esc_BUS    : std_logic_vector(1 DOWNTO 0);
-    SIGNAL Reg2Esc_BUS       : std_logic;
-    SIGNAL SrcRLH_BUS        : std_logic;
-    SIGNAL EscRLH_BUS        : std_logic;
-    SIGNAL Push_BUS          : std_logic;
-    SIGNAL Pop_BUS           : std_logic;
-    SIGNAL Jump_BUS          : std_logic;
-    SIGNAL Extensor_BUS      : std_logic_vector(1 DOWNTO 0);
-    SIGNAL SrcAluA_BUS       : std_logic;
-    SIGNAL SrcAluB_BUS       : std_logic_vector(1 DOWNTO 0);
-    SIGNAL AluOP_BUS         : std_logic_vector(3 DOWNTO 0);
-    SIGNAL SH_BUS            : std_logic_vector(1 DOWNTO 0);
-    SIGNAL EscMem_BUS        : std_logic;
-    SIGNAL Saida_BUS         : std_logic;
+architecture behavior_core of cometa16_core is
+    signal ctrl_dvc: std_logic_vector(2 downto 0);
+    signal ctrl_dvi: std_logic_vector(1 downto 0);
 
-    COMPONENT ISA_controller IS
-        PORT (
+    signal ctrl_stack:       std_logic_vector(1 downto 0);
+    signal ctrl_wr_rf:       std_logic;
+    signal ctrl_src_rf:      std_logic;
+
+    signal ctrl_wr_ac:       std_logic;
+    signal ctrl_src_ac:      std_logic_vector(2 downto 0);
+
+    signal ctrl_wr_hilo:     std_logic;
+    signal ctrl_src_hilo:    std_logic_vector(1 downto 0);
+
+    signal ctrl_sign_extend: std_logic_vector(1 downto 0);
+
+    signal ctrl_src_alu_a:   std_logic;
+    signal ctrl_src_alu_b:   std_logic_vector(1 downto 0);
+    signal ctrl_alu:         std_logic_vector(3 downto 0);
+
+    signal ctrl_shifter:     std_logic_vector(1 downto 0);
+
+    component isA_controller is
+        port(
             CLK	          : in std_logic;
             RESET	      : in std_logic;
             
-            CODOP         : in std_logic_vector(5 DOWNTO 0);
+            CODOP         : in std_logic_vector(5 downto 0);
             
-            Dvc           : out std_logic_vector(2 DOWNTO 0);
-            Dvi           : out std_logic_vector(1 DOWNTO 0);
+            Dvc           : out std_logic_vector(2 downto 0);
+            Dvi           : out std_logic_vector(1 downto 0);
             SrcReg1Esc    : out std_logic;
             Reg1Esc       : out std_logic;
-            SrcReg2Esc	  : out std_logic_vector(1 DOWNTO 0);
+            SrcReg2Esc	  : out std_logic_vector(1 downto 0);
             Reg2Esc       : out std_logic;
             SrcRLH        : out std_logic;
             EscRLH        : out std_logic;
             Push          : out std_logic;
             Pop           : out std_logic;
             Jump          : out std_logic;
-            Extensor      : out std_logic_vector(1 DOWNTO 0);
+            Extensor      : out std_logic_vector(1 downto 0);
             SrcAluA       : out std_logic;
-            SrcAluB       : out std_logic_vector(1 DOWNTO 0);
-            AluOP         : out std_logic_vector(3 DOWNTO 0);
-            SH            : out std_logic_vector(1 DOWNTO 0);
+            SrcAluB       : out std_logic_vector(1 downto 0);
+            AluOP         : out std_logic_vector(3 downto 0);
+            SH            : out std_logic_vector(1 downto 0);
             EscMem        : out std_logic;
             Saida         : out std_logic
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL PC_Out_bus   : std_logic_vector(15 Downto 0);
-    SIGNAL PCmaisUm_bus : std_logic_vector(15 Downto 0);
+    signal pc_out: std_logic_vector(15 downto 0);
+    signal pc_plus_one: std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_pc IS
-        PORT (
-            clk              : in std_logic;
-            reset            : in std_logic;
+    component cometa16_pc is
+        port(
+            clk, rst:        in std_logic;
     
-            Z, N             : in std_logic;
-            DvC              : in std_logic_vector(2 downto 0);
-            DvI              : in std_logic_vector(1 downto 0);
+            z, n:            in std_logic;
     
-            rf1_lido         : in std_logic_vector(15 downto 0);
-            imm              : in std_logic_vector(9 downto 0);
-            Signal_Extension : in std_logic_vector(15 downto 0);
+            ctrl_dvc:        in std_logic_vector(2 downto 0);
+            ctrl_dvi:        in std_logic_vector(1 downto 0);
+
+            hit_out:         in std_logic;
+
+            rf1_out:         in std_logic_vector(15 downto 0);
+            ins_mux_out:     in std_logic_vector(16 downto 0);
+            sign_extend_out: in std_logic_vector(15 downto 0);
     
-            PC_Out           : out std_logic_vector(15 downto 0);
-            PCmaisUm         : out std_logic_vector(15 downto 0)
+            pc_out:          out std_logic_vector(15 downto 0);
+            pc_plus_one:     out std_logic_vector(15 downto 0)
+    
         );
-    END COMPONENT;
 
-    SIGNAL InstructionMemory_Output_BUS : std_logic_vector(15 Downto 0);
-    SIGNAL CODOP_bus                    : std_logic_vector(5 Downto 0);
-    SIGNAL rf1_bus                      : std_logic_vector(3 Downto 0);
-    SIGNAL rf2_bus                      : std_logic_vector(3 Downto 0);
-    
-    SIGNAL rd_bus                       : std_logic_vector(1 Downto 0);
-    
-    SIGNAL imm_bus                      : std_logic_vector(9 Downto 0);
-    SIGNAL imm_to_extension_bus         : std_logic_vector(7 Downto 0);
+    end component;
 
-    COMPONENT ISA_instruction_memory IS
-        PORT (
-            clk                      : IN std_logic;
-            reset                    : IN std_logic;
-            -- Entrada
-            PC_Output                : IN std_logic_vector(15 Downto 0);
-            -- Saida
-            InstructionMemory_Output : OUT std_logic_vector(15 Downto 0)
+    signal ins_mux: std_logic_vector(15 downto 0);
+    signal hit_out: std_logic;
+
+    component cometa16_instruction_memory is
+        port(
+            clk: in std_logic;
+            rst: in std_logic;
+    
+            pc_out: in std_logic_vector(15 downto 0);
+            main_mem_out: in std_logic_vector(63 downto 0);
+            ctrl_wr_ins_mem: in std_logic;
+    
+            ins_mux: out std_logic_vector(15 downto 0);
+            hit_out: out std_logic
+    
         );
-    END COMPONENT;
 
-    SIGNAL rf1_lido_bus : std_logic_vector(15 Downto 0);
-    SIGNAL rf2_lido_bus : std_logic_vector(15 Downto 0);
+    end component;
 
-    COMPONENT ISA_bank_registers_1 IS
+    signal rf1_lido_bus : std_logic_vector(15 downto 0);
+    signal rf2_lido_bus : std_logic_vector(15 downto 0);
+
+    component isA_bank_registers_1 is
         PORT(
             clk           : IN std_logic;
             reset         : IN std_logic;
@@ -130,47 +137,47 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             jump          : IN std_logic;
 
             -- Dados que podem ser escritos
-            pc_mais_um    : IN std_logic_vector(15 DOWNTO 0);
-            rd_lido       : IN std_logic_vector(15 DOWNTO 0);
+            pc_mais_um    : IN std_logic_vector(15 downto 0);
+            rd_lido       : IN std_logic_vector(15 downto 0);
 
             -- Endereco de rf1 e rf2
-            rf1_address   : IN std_logic_vector(3 DOWNTO 0);
-            rf2_address   : IN std_logic_vector(3 DOWNTO 0);
+            rf1_address   : IN std_logic_vector(3 downto 0);
+            rf2_address   : IN std_logic_vector(3 downto 0);
 
             -- Dados lidos
-            dado_lido_rf1 : OUT std_logic_vector(15 DOWNTO 0);
-            dado_lido_rf2 : OUT std_logic_vector(15 DOWNTO 0)
+            dado_lido_rf1 : OUT std_logic_vector(15 downto 0);
+            dado_lido_rf2 : OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL rd_lido_bus : std_logic_vector(15 DOWNTO 0);
+    signal rd_lido_bus : std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_bank_registers_2 IS
+    component isA_bank_registers_2 is
         PORT(
             clk              : IN std_logic;
             reset            : IN std_logic;
 
             -- Controle de leitura e controle do multiplexador
             EscReg2          : IN std_logic;
-            SrcReg2Esc       : IN std_logic_vector(1 DOWNTO 0);
+            SrcReg2Esc       : IN std_logic_vector(1 downto 0);
 
             -- Dados de escrita
-            saida_ula_ou_mem : IN std_logic_vector(15 DOWNTO 0);
+            saida_ula_ou_mem : IN std_logic_vector(15 downto 0);
             n_signal         : IN std_logic;
 
-            low_register	 : IN std_logic_vector(15 DOWNTO 0);
-		    high_register	 : IN std_logic_vector(15 DOWNTO 0);
+            low_register	 : IN std_logic_vector(15 downto 0);
+		    high_register	 : IN std_logic_vector(15 downto 0);
 
             -- Endereco de escrita/leitura e dado lido
-            rd_address       : IN std_logic_vector(1 DOWNTO 0);
+            rd_address       : IN std_logic_vector(1 downto 0);
             dado_lido        : OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL low_register_bus : std_logic_vector(15 DOWNTO 0);
-    SIGNAL high_register_bus : std_logic_vector(15 DOWNTO 0);
+    signal low_register_bus : std_logic_vector(15 downto 0);
+    signal high_register_bus : std_logic_vector(15 downto 0);
     
-    COMPONENT ISA_rlh IS
+    component isA_rlh is
         PORT(
             --Sinais clock e reset
             clk              : IN std_logic;
@@ -181,70 +188,70 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             SrcRLH           : IN std_logic;
 
             -- Entradas de dados
-            rf1_mais_high : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-            rd            : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+            rf1_mais_high : IN STD_LOGIC_VECTOR(15 downto 0);
+            rd            : IN STD_LOGIC_VECTOR(15 downto 0);
 
             -- Dados lidos
-            low_out       : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-            high_out      : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+            low_out       : OUT STD_LOGIC_VECTOR(15 downto 0);
+            high_out      : OUT STD_LOGIC_VECTOR(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL Extension_Signal_Bus : std_logic_vector(15 DOWNTO 0);
+    signal Extension_signal_Bus : std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_extension_signal IS
-        PORT ( 
-        Imm 			:IN std_logic_vector(7 DOWNTO 0);
-        Extensor_Input   	:IN std_logic_vector(1 DOWNTO 0);
-        Extension_Signal 	:OUT std_logic_vector(15 DOWNTO 0)
+    component isA_extension_signal is
+        port( 
+        Imm 			:IN std_logic_vector(7 downto 0);
+        Extensor_Input   	:IN std_logic_vector(1 downto 0);
+        Extension_signal 	:OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL Z_BUS : std_logic;
-    SIGNAL N_BUS : std_logic;
-    SIGNAL Ula_out_BUS : std_logic_vector(15 DOWNTO 0);
+    signal Z_BUS : std_logic;
+    signal N_BUS : std_logic;
+    signal Ula_out_BUS : std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_alu IS
-        PORT (
+    component isA_alu is
+        port(
             clock : IN std_logic;
             reset : IN std_logic;
             
             -- Sinais de controle
-            control_alu    : IN std_logic_vector(3 DOWNTO 0);
+            control_alu    : IN std_logic_vector(3 downto 0);
             control_amux_a : IN std_logic;
-            control_amux_b : IN std_logic_vector(1 DOWNTO 0);
+            control_amux_b : IN std_logic_vector(1 downto 0);
 
-            rf1_lido       : IN std_logic_vector(15 DOWNTO 0);
-            rf2_lido       : IN std_logic_vector(15 DOWNTO 0);
+            rf1_lido       : IN std_logic_vector(15 downto 0);
+            rf2_lido       : IN std_logic_vector(15 downto 0);
 
-            rd_signal      : IN std_logic_vector(15 DOWNTO 0);
-            ex_signal      : IN std_logic_vector(15 DOWNTO 0);
-            high_signal    : IN std_logic_vector(15 DOWNTO 0);
+            rd_signal      : IN std_logic_vector(15 downto 0);
+            ex_signal      : IN std_logic_vector(15 downto 0);
+            high_signal    : IN std_logic_vector(15 downto 0);
 
             -- Sinais z e N
             z              : OUT std_logic;
             n              : OUT std_logic;
 
             -- Saida da ula
-            alu_out        : OUT std_logic_vector(15 DOWNTO 0)
+            alu_out        : OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL saida_SH_BUS : std_logic_vector(15 DOWNTO 0);
+    signal saida_SH_BUS : std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_shifter IS
-        PORT ( 
-        ALU_Output   	 : IN std_logic_vector(15 DOWNTO 0);
-        Shift_Signal	 : IN std_logic_vector(3 DOWNTO 0);
-        SH_Input		 : IN std_logic_vector(1 DOWNTO 0);
-        SH_Output	     : OUT std_logic_vector(15 DOWNTO 0)
+    component isA_shifter is
+        port( 
+        ALU_Output   	 : IN std_logic_vector(15 downto 0);
+        Shift_signal	 : IN std_logic_vector(3 downto 0);
+        SH_Input		 : IN std_logic_vector(1 downto 0);
+        SH_Output	     : OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
-    SIGNAL out_Saida_BUS : std_logic_vector(15 Downto 0);
+    signal out_Saida_BUS : std_logic_vector(15 downto 0);
 
-    COMPONENT ISA_data_memory IS
-        PORT (
+    component isA_data_memory is
+        port(
             clk              : IN std_logic;
             reset            : IN std_logic;
 
@@ -255,31 +262,31 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             Amux            : IN std_logic;
 
             -- Saida da ula
-            saida_ula_endereco : IN std_logic_vector(15 DOWNTO 0);
+            saida_ula_endereco : IN std_logic_vector(15 downto 0);
 
             -- dado de escrita
-            dadoEsc : IN std_logic_vector(15 DOWNTO 0);
+            dadoEsc : IN std_logic_vector(15 downto 0);
             
             -- Endereco da ula e dado lido
             amux_dadolido_ula        : OUT std_logic_vector(15 downto 0)
         );
-    END COMPONENT;
+    end component;
 
     BEGIN
 
-    CODOP_bus                    <= InstructionMemory_Output_BUS(15 Downto 10);
-    rf1_bus                      <= InstructionMemory_Output_BUS(7 Downto 4);
-    rf2_bus                      <= InstructionMemory_Output_BUS(3 Downto 0);
+    CODOP_bus                    <= InstructionMemory_Output_BUS(15 downto 10);
+    rf1_bus                      <= InstructionMemory_Output_BUS(7 downto 4);
+    rf2_bus                      <= InstructionMemory_Output_BUS(3 downto 0);
     
-    rd_bus                       <= InstructionMemory_Output_BUS(9 Downto 8);
+    rd_bus                       <= InstructionMemory_Output_BUS(9 downto 8);
     
-    imm_bus                      <= InstructionMemory_Output_BUS(9 Downto 0);
-    imm_to_extension_bus         <= InstructionMemory_Output_BUS(7 Downto 0);
+    imm_bus                      <= InstructionMemory_Output_BUS(9 downto 0);
+    imm_to_extension_bus         <= InstructionMemory_Output_BUS(7 downto 0);
 
-    -- INSTANCIAS DOS COMPONENTES
+    -- INSTANCIAS DOS componentES
 
-    controller : ISA_controller
-        PORT MAP (
+    controller : isA_controller
+        portMAP (
             CLK           => clk_sig,
             RESET         => reset_sig,
             
@@ -304,8 +311,8 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             Saida         => Saida_BUS
         );
     
-    pc : ISA_pc
-        PORT MAP (
+    pc : isA_pc
+        portMAP (
             clk              => clk_sig,
             reset            => reset_sig,
 
@@ -316,15 +323,15 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
 
             rf1_lido         => rf1_lido_bus,                               -- gerado no rg1
             imm              => imm_bus, -- gerado no instruction memory
-            Signal_Extension => Extension_Signal_Bus,    -- gerado no signal extension
+            signal_Extension => Extension_signal_Bus,    -- gerado no signal extension
 
             PC_Out           => PC_Out_bus,
             PCmaisUm         => PCmaisUm_bus
 
         );
 
-    instruction_memory : ISA_instruction_memory
-        PORT MAP (
+    instruction_memory : isA_instruction_memory
+        portMAP (
             clk                      => clk_sig,
             reset                    => reset_sig,
 
@@ -332,8 +339,8 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             InstructionMemory_Output => InstructionMemory_Output_BUS
         );
 
-    bank_register_1 : ISA_bank_registers_1
-        PORT MAP(
+    bank_register_1 : isA_bank_registers_1
+        portMAP(
             clk                      => clk_sig,
             reset                    => reset_sig, 
         
@@ -356,8 +363,8 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             dado_lido_rf2 => rf2_lido_bus
         );
 
-    bank_register_2 : ISA_bank_registers_2
-        PORT MAP(
+    bank_register_2 : isA_bank_registers_2
+        portMAP(
             clk          => CLK_Sig,
             reset        => Reset_Sig,
 
@@ -375,8 +382,8 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             dado_lido         => RD_LIDO_BUS
         );
 
-    rlh : ISA_rlh
-        PORT MAP(
+    rlh : isA_rlh
+        portMAP(
             clk           => CLK_Sig,
             reset         => Reset_Sig,
 
@@ -390,15 +397,15 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             high_out => high_register_bus
         );
 
-    Extension_Signal : ISA_Extension_Signal
-        PORT MAP(
+    Extension_signal : isA_Extension_signal
+        portMAP(
             Imm              => imm_to_extension_bus,
             Extensor_input   => Extensor_bus,
-            Extension_Signal => Extension_Signal_bus
+            Extension_signal => Extension_signal_bus
         );
 
-    alu : ISA_alu
-        PORT MAP(
+    alu : isA_alu
+        portMAP(
 
             clock => clk_sig,
             reset => reset_sig,
@@ -411,7 +418,7 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             rf2_lido       => rf2_lido_bus, -- gerado em br1
 
             rd_signal      => rd_lido_bus,  -- gerado em br2
-            ex_signal      => Extension_Signal_bus, -- gerado em extension_signal
+            ex_signal      => Extension_signal_bus, -- gerado em extension_signal
             high_signal    => high_register_bus, -- gerado em rlh;
 
             z              => Z_BUS,
@@ -420,16 +427,16 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             alu_out        => Ula_out_BUS
         );
 
-    sh : ISA_shifter
-        PORT MAP(
+    sh : isA_shifter
+        portMAP(
             ALU_Output   	 => ula_out_bus,
-            Shift_Signal	 => rf2_bus,
+            Shift_signal	 => rf2_bus,
             SH_Input		 => sh_bus,
             SH_Output	     => saida_sh_bus
         );
 
-    data_memory : ISA_data_memory
-        PORT MAP(
+    data_memory : isA_data_memory
+        portMAP(
             clk          => CLK_Sig,
             reset        => Reset_Sig,
             
@@ -441,4 +448,4 @@ ARCHITECTURE bhv_datapath OF ISA_datapath is
             amux_dadolido_ula  => out_saida_BUS
         );
 
-END bhv_datapath;
+end bhv_datapath;

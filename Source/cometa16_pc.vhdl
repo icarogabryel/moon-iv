@@ -16,13 +16,15 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
 entity cometa16_pc is
-    port (
+    port(
         clk, rst: in std_logic;
 
         z, n:            in std_logic;
 
         ctrl_dvc:        in std_logic_vector(2 downto 0);
         ctrl_dvi:        in std_logic_vector(1 downto 0);
+
+        hit_out:      in std_logic;
 
         rf1_out:         in std_logic_vector(15 downto 0);
         ins_mux_out:     in std_logic_vector(16 downto 0);
@@ -66,7 +68,7 @@ begin
         if rst = '1' then
             pc_register <= "0000000000000000";
         
-        elsif (clk'event and clk ='1') then
+        elsif ((clk'event and clk ='1') and (hit_out = '1')) then
             pc_reg <= dvi_mux;
         
         end if;

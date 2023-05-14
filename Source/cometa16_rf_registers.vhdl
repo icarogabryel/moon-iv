@@ -20,10 +20,10 @@ entity cometa16_rf_registers is
         clk: in std_logic;
         rst: in std_logic;
 
-        ctrl_wr_rf: IN std_logic;
-        ctrl_src_rf: IN std_logic;
+        ctrl_wr_rf: in std_logic;
+        ctrl_src_rf: in std_logic;
 
-        ctrl_stack: in std_logic_vector(1 downto 0);
+        ctrl_stk:  in std_logic_vector(1 downto 0);
         ctrl_link: in std_logic;
 
         pc_plus_one: in std_logic_vector(15 downto 0);
@@ -47,7 +47,7 @@ architecture behavior_rf_registers of cometa16_rf_registers is
 	signal wr_adrr: std_logic_vector(3 downto 0);
 
 begin
-	with ctrl_stack select rf1_out <=
+	with ctrl_stk select rf1_out <=
 		rf_registers(conv_integer(rf1_addr)) when "00",
 		rf_registers(14)                     when "01",
 		rf_registers(14) - 1                 when "10",

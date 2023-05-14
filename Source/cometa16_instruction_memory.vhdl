@@ -21,10 +21,10 @@ entity cometa16_instruction_memory is
         rst: in std_logic;
 
         pc_out: in std_logic_vector(15 downto 0);
-        main_mem_data_read: in std_logic_vector(63 downto 0);
+        main_mem_out: in std_logic_vector(63 downto 0);
         ctrl_wr_ins_mem: in std_logic;
 
-        ins_mux_out: out std_logic_vector(15 downto 0);
+        ins_mux: out std_logic_vector(15 downto 0);
         hit_out: out std_logic
 
     );
@@ -55,7 +55,7 @@ begin
     hit_out <= hit_signal;
 
     with hit_signal select
-        ins_mux_out <=
+        ins_mux <=
             "0000000000000000"             when '0',
             ins_mem_data_read(15 downto 0) when '1',
             "XXXXXXXXXXXXXXXX"             when others;
@@ -82,10 +82,10 @@ begin
             instruction_memory(3, 3)  <= "00000000000000000000000000000";
         
         elsif ((clk'event and clk = '1') and (ctrl_wr_ins_mem = '1')) then
-            instruction_memory((conv_integer(pc_out)/4) mod 4, 0) <= '1' & pc_out(15 downto 4) & main_mem_data_read(63 downto 48);
-            instruction_memory((conv_integer(pc_out)/4) mod 4, 1) <= '1' & pc_out(15 downto 4) & main_mem_data_read(47 downto 32);
-            instruction_memory((conv_integer(pc_out)/4) mod 4, 2) <= '1' & pc_out(15 downto 4) & main_mem_data_read(31 downto 16);
-            instruction_memory((conv_integer(pc_out)/4) mod 4, 3) <= '1' & pc_out(15 downto 4) & main_mem_data_read(15 downto 0);
+            instruction_memory((conv_integer(pc_out)/4) mod 4, 0) <= '1' & pc_out(15 downto 4) & main_mem_out(63 downto 48);
+            instruction_memory((conv_integer(pc_out)/4) mod 4, 1) <= '1' & pc_out(15 downto 4) & main_mem_out(47 downto 32);
+            instruction_memory((conv_integer(pc_out)/4) mod 4, 2) <= '1' & pc_out(15 downto 4) & main_mem_out(31 downto 16);
+            instruction_memory((conv_integer(pc_out)/4) mod 4, 3) <= '1' & pc_out(15 downto 4) & main_mem_out(15 downto 0);
 
         end if;
 	
