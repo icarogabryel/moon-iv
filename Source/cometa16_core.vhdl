@@ -27,10 +27,10 @@ entity cometa16_core is
 end cometa16_core;
 
 architecture behavior_core of cometa16_core is
-    signal ctrl_dvc: std_logic_vector(2 downto 0);
-    signal ctrl_dvi: std_logic_vector(1 downto 0);
+    signal ctrl_dvc:         std_logic_vector(2 downto 0);
+    signal ctrl_dvi:         std_logic_vector(1 downto 0);
 
-    signal ctrl_stack:       std_logic_vector(1 downto 0);
+    signal ctrl_stk:         std_logic_vector(1 downto 0);
     signal ctrl_wr_rf:       std_logic;
     signal ctrl_src_rf:      std_logic;
 
@@ -48,32 +48,33 @@ architecture behavior_core of cometa16_core is
 
     signal ctrl_shifter:     std_logic_vector(1 downto 0);
 
-    component isA_controller is
+    component cometa16_controller is
         port(
-            CLK	          : in std_logic;
-            RESET	      : in std_logic;
-            
-            CODOP         : in std_logic_vector(5 downto 0);
-            
-            Dvc           : out std_logic_vector(2 downto 0);
-            Dvi           : out std_logic_vector(1 downto 0);
-            SrcReg1Esc    : out std_logic;
-            Reg1Esc       : out std_logic;
-            SrcReg2Esc	  : out std_logic_vector(1 downto 0);
-            Reg2Esc       : out std_logic;
-            SrcRLH        : out std_logic;
-            EscRLH        : out std_logic;
-            Push          : out std_logic;
-            Pop           : out std_logic;
-            Jump          : out std_logic;
-            Extensor      : out std_logic_vector(1 downto 0);
-            SrcAluA       : out std_logic;
-            SrcAluB       : out std_logic_vector(1 downto 0);
-            AluOP         : out std_logic_vector(3 downto 0);
-            SH            : out std_logic_vector(1 downto 0);
-            EscMem        : out std_logic;
-            Saida         : out std_logic
+            ins_mux:          in std_logic_vector(15 downto 0);
+    
+            ctrl_dvc:         out std_logic_vector(2 downto 0);
+            ctrl_dvi:         out std_logic_vector(1 downto 0);
+    
+            ctrl_stk:         out std_logic_vector(1 downto 0);
+            ctrl_wr_rf:       out std_logic;
+            ctrl_src_rf:      out std_logic;
+        
+            ctrl_wr_ac:       out std_logic;
+            ctrl_src_ac:      out std_logic_vector(2 downto 0);
+        
+            ctrl_wr_hilo:     out std_logic;
+            ctrl_src_hilo:    out std_logic_vector(1 downto 0);
+        
+            ctrl_sign_extend: out std_logic_vector(1 downto 0);
+        
+            ctrl_src_alu_a:   out std_logic;
+            ctrl_src_alu_b:   out std_logic_vector(1 downto 0);
+            ctrl_alu:         out std_logic_vector(3 downto 0);
+        
+            ctrl_shifter:     out std_logic_vector(1 downto 0)
+    
         );
+
     end component;
 
     signal pc_out: std_logic_vector(15 downto 0);
@@ -120,57 +121,52 @@ architecture behavior_core of cometa16_core is
 
     end component;
 
-    signal rf1_lido_bus : std_logic_vector(15 downto 0);
-    signal rf2_lido_bus : std_logic_vector(15 downto 0);
+    signal rf1_out: std_logic_vector(15 downto 0);
+    signal rf2_out: std_logic_vector(15 downto 0);
 
-    component isA_bank_registers_1 is
-        PORT(
-            clk           : IN std_logic;
-            reset         : IN std_logic;
-
-            -- Controle de leitura e controle do multiplexador
-            EscReg1       : IN std_logic;
-            SrcReg1Esc    : IN std_logic;
-
-            pop		      : IN std_logic;
-            push          : IN std_logic;
-            jump          : IN std_logic;
-
-            -- Dados que podem ser escritos
-            pc_mais_um    : IN std_logic_vector(15 downto 0);
-            rd_lido       : IN std_logic_vector(15 downto 0);
-
-            -- Endereco de rf1 e rf2
-            rf1_address   : IN std_logic_vector(3 downto 0);
-            rf2_address   : IN std_logic_vector(3 downto 0);
-
-            -- Dados lidos
-            dado_lido_rf1 : OUT std_logic_vector(15 downto 0);
-            dado_lido_rf2 : OUT std_logic_vector(15 downto 0)
+    component cometa16_rf_registers is
+        port(
+            clk: in std_logic;
+            rst: in std_logic;
+    
+            ctrl_wr_rf: in std_logic;
+            ctrl_src_rf: in std_logic;
+    
+            ctrl_stk:  in std_logic_vector(1 downto 0);
+            ctrl_link: in std_logic;
+    
+            pc_plus_one: in std_logic_vector(15 downto 0);
+            rd_bank_reg_out: in std_logic_vector(15 downto 0);
+    
+            rf1_addr: in std_logic_vector(3 downto 0);
+            rf2_addr: in std_logic_vector(3 downto 0);
+    
+            rf1_out : out std_logic_vector(15 downto 0);
+            rf2_out : out std_logic_vector(15 downto 0)
+    
         );
+    
     end component;
 
-    signal rd_lido_bus : std_logic_vector(15 downto 0);
+    signal rd_lido_bus: std_logic_vector(15 downto 0);
 
-    component isA_bank_registers_2 is
-        PORT(
-            clk              : IN std_logic;
-            reset            : IN std_logic;
-
-            -- Controle de leitura e controle do multiplexador
-            EscReg2          : IN std_logic;
-            SrcReg2Esc       : IN std_logic_vector(1 downto 0);
-
-            -- Dados de escrita
-            saida_ula_ou_mem : IN std_logic_vector(15 downto 0);
-            n_signal         : IN std_logic;
-
-            low_register	 : IN std_logic_vector(15 downto 0);
-		    high_register	 : IN std_logic_vector(15 downto 0);
-
-            -- Endereco de escrita/leitura e dado lido
-            rd_address       : IN std_logic_vector(1 downto 0);
-            dado_lido        : OUT std_logic_vector(15 downto 0)
+    component cometa16_ac_registers is
+        port(
+            clk: in std_logic;
+            rst: in std_logic;
+    
+            ctrl_wr_ac:   in std_logic;
+            ctrl_src_ac:  in std_logic_vector(2 downto 0);
+    
+            alu_out:      in std_logic_vector(15 downto 0);
+            data_mem_out: in std_logic_vector(15 downto 0);
+            n_signal:     in std_logic;
+            hi_reg:       in std_logic_vector(15 downto 0);
+            lo_reg:       in std_logic_vector(15 downto 0);
+    
+            ac_addr:      in std_logic_vector(1 downto 0);
+            ac_out:       out std_logic_vector(15 downto 0)
+    
         );
     end component;
 
@@ -448,4 +444,4 @@ architecture behavior_core of cometa16_core is
             amux_dadolido_ula  => out_saida_BUS
         );
 
-end bhv_datapath;
+end behavior_core;

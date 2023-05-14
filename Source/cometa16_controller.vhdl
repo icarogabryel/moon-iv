@@ -19,7 +19,7 @@ use work.opcodes.all;
 
 entity cometa16_controller is
     port(
-        ins_mux: in std_logic_vector(15 downto 0);
+        ins_mux:          in std_logic_vector(15 downto 0);
 
         ctrl_dvc:         out std_logic_vector(2 downto 0);
         ctrl_dvi:         out std_logic_vector(1 downto 0);
