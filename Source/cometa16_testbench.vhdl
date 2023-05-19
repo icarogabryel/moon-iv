@@ -24,11 +24,11 @@ architecture behavior_testbench of cometa16_testbench is
     signal clk: std_logic;
     signal rst: std_logic;
 
-    component cometa16_datapath is
+    component cometa16_core is
         port(
             clk: in std_logic;
             rst: in std_logic
-
+            
         );
     
     end component;

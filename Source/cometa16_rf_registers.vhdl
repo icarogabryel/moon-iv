@@ -24,7 +24,6 @@ entity cometa16_rf_registers is
         ctrl_src_rf: in std_logic;
 
         ctrl_stk:  in std_logic_vector(1 downto 0);
-        ctrl_link: in std_logic;
 
         pc_plus_one: in std_logic_vector(15 downto 0);
         rd_bank_reg_out: in std_logic_vector(15 downto 0);
@@ -54,11 +53,6 @@ begin
 		"XXXXXXXXXXXXXXXX"                   when others;
 
 	rf2_out <= rf_registers(conv_integer(rf2_addr));
-
-	with ctrl_link select wr_adrr <=
-		rf1_addr(3 downto 0) when '0',
-		"1111"               when '1',
-		"XXXX"               when others;
 
 	with ctrl_src_rf select src_rf_mux <=
 		pc_plus_one(15 downto 0)     when '0',

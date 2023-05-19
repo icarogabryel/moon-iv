@@ -19,7 +19,8 @@ entity cometa16_pc is
     port(
         clk, rst: in std_logic;
 
-        z, n:            in std_logic;
+        z_signal         in std_logic;
+        n_signal:        in std_logic;
 
         ctrl_dvc:        in std_logic_vector(2 downto 0);
         ctrl_dvi:        in std_logic_vector(1 downto 0);
@@ -44,12 +45,12 @@ architecture behavior_pc of cometa16_pc is
 
 begin
     with ctrl_dvc select take <=
-        '0'                 when "000",
-        z                   when "001",
-        not z               when "010",
-        n                   when "011",
-        (not Z) and (not N) when "100",
-        'X'                 when others;
+        '0'                               when "000",
+        z_signal                          when "001",
+        not z_signal                      when "010",
+        n_signal                          when "011",
+        (not Z_signal) and (not N_signal) when "100",
+        'X'                               when others;
 
     with take select dvc_mux <=
         pc_plus_one                   when '0',
