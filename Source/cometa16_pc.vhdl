@@ -19,16 +19,16 @@ entity cometa16_pc is
     port(
         clk, rst: in std_logic;
 
-        z_signal         in std_logic;
+        z_signal:        in std_logic;
         n_signal:        in std_logic;
 
         ctrl_dvc:        in std_logic_vector(2 downto 0);
         ctrl_dvi:        in std_logic_vector(1 downto 0);
 
-        hit_out:      in std_logic;
+        hit_out:         in std_logic;
 
         rf1_out:         in std_logic_vector(15 downto 0);
-        ins_mux_out:     in std_logic_vector(16 downto 0);
+        ins_mux:         in std_logic_vector(15 downto 0);
         sign_extend_out: in std_logic_vector(15 downto 0);
 
         pc_out:          out std_logic_vector(15 downto 0);
@@ -54,20 +54,20 @@ begin
 
     with take select dvc_mux <=
         pc_plus_one                   when '0',
-        sign_extend_out + pc_plus_one when '1';
+        sign_extend_out + pc_plus_one when '1',
         "XXXXXXXXXXXXXXXX"            when others;
 
     with ctrl_dvi select dvi_mux <=
-        dvc_mux                                        when "00",
-        pc_reg(15 downto 10) & ins_mux_out(9 downto 0) when "01",
-        rf1_out                                        when '11';
-        "XXXXXXXXXXXXXXXX"                             when others;
+        dvc_mux                                    when "00",
+        pc_reg(15 downto 10) & ins_mux(9 downto 0) when "01",
+        rf1_out                                    when "11",
+        "XXXXXXXXXXXXXXXX"                         when others;
 
     write_pc_reg: process(clk, rst, dvi_mux)
     
     begin
-        if rst = '1' then
-            pc_register <= "0000000000000000";
+        if (rst = '1') then
+            pc_reg <= "0000000000000000";
         
         elsif ((clk'event and clk ='1') and (hit_out = '1')) then
             pc_reg <= dvi_mux;

@@ -26,8 +26,8 @@ entity cometa16_ac_registers is
         alu_out:      in std_logic_vector(15 downto 0);
         data_mem_out: in std_logic_vector(15 downto 0);
         n_signal:     in std_logic;
-        hi_reg:       in std_logic_vector(15 downto 0);
-        lo_reg:       in std_logic_vector(15 downto 0);
+        hi_out:       in std_logic_vector(15 downto 0);
+        lo_out:       in std_logic_vector(15 downto 0);
 
         ac_addr:      in std_logic_vector(1 downto 0);
         ac_out:       out std_logic_vector(15 downto 0)
@@ -47,23 +47,23 @@ begin
         alu_out                      when "000",
         data_mem_out                 when "001",
         "000000000000000" & n_signal when "010",
-        lo_reg                       when "011",
-        hi_reg                       when "100",
-        "0000000000000000"           when others;
+        lo_out                       when "011",
+        hi_out                       when "100",
+        "XXXXXXXXXXXXXXXX"           when others;
 
-    ac_out <= ac_register(conv_integer(rd_addr(1 downto 0)))(15 downto 0);
+    ac_out <= ac_register(conv_integer(ac_addr(1 downto 0)))(15 downto 0);
 
     wr_ac_regiters: process(clk, rst, ctrl_wr_ac)
 
     begin
-        if reset = '1' then
+        if (rst = '1') then
             ac_register(0) <= "0000000000000000";
             ac_register(1) <= "0000000000000000";
             ac_register(2) <= "0000000000000000";
             ac_register(3) <= "0000000000000000";
         
         elsif ((clk'event and clk ='1') and (ctrl_wr_ac = '1')) then
-            ac_register(conv_integer(rd_addr(1 downto 0))) <= src_ac_mux;
+            ac_register(conv_integer(ac_addr(1 downto 0))) <= src_ac_mux;
 
         end if;
             

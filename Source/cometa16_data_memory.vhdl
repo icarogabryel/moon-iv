@@ -60,7 +60,7 @@ begin
             memory_data(15) <= "0000000000000000";
 
         elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1')) then
-            memory_data(conv_integer(saida_ula_endereco(15 downto 0))) <= dadoEsc;
+            memory_data(conv_integer(alu_out(15 downto 0))) <= ac_out;
 
         end if;
 			

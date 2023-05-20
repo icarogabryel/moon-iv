@@ -34,9 +34,9 @@ architecture behavior_testbench of cometa16_testbench is
     end component;
 
 begin
-    dut: cometa16_datapath
+    dut: cometa16_core
         port map(
-            clk=> clk
+            clk=> clk,
             rst => rst
         );
 
@@ -46,7 +46,7 @@ begin
         clk <= '0';
         wait for clk_period/2;
 
-        clk_signal  <= '1';
+        clk <= '1';
         clk_count <= clk_count + 1;
         wait for clk_period/2;
 
@@ -61,13 +61,13 @@ begin
     reset_process: process
     
     begin
-        reset_signal <= '0';
+        rst <= '0';
         wait for 10 ns;
 
-        reset_signal <= '1';
+        rst <= '1';
         wait for 30 ns;
 
-        reset_signal <= '0';
+        rst <= '0';
         wait;
     
     end process reset_process;

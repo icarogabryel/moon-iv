@@ -48,9 +48,11 @@ architecture behavior_core of cometa16_core is
 
     signal ctrl_shifter:     std_logic_vector(1 downto 0);
 
+    signal ctrl_wr_data_mem: std_logic;
+
     component cometa16_controller is
         port(
-            ins_mux:          in std_logic_vector(15 downto 0);
+            opcode:           in std_logic_vector(5 downto 0);
     
             ctrl_dvc:         out std_logic_vector(2 downto 0);
             ctrl_dvi:         out std_logic_vector(1 downto 0);
@@ -71,7 +73,9 @@ architecture behavior_core of cometa16_core is
             ctrl_src_alu_b:   out std_logic_vector(1 downto 0);
             ctrl_alu:         out std_logic_vector(3 downto 0);
         
-            ctrl_shifter:     out std_logic_vector(1 downto 0)
+            ctrl_shifter:     out std_logic_vector(1 downto 0);
+
+            ctrl_wr_data_mem: out std_logic
     
         );
 
@@ -84,7 +88,7 @@ architecture behavior_core of cometa16_core is
         port(
             clk, rst:        in std_logic;
     
-            z_signal         in std_logic;
+            z_signal:        in std_logic;
             n_signal:        in std_logic;
     
             ctrl_dvc:        in std_logic_vector(2 downto 0);
@@ -93,7 +97,7 @@ architecture behavior_core of cometa16_core is
             hit_out:         in std_logic;
 
             rf1_out:         in std_logic_vector(15 downto 0);
-            ins_mux_out:     in std_logic_vector(16 downto 0);
+            ins_mux:         in std_logic_vector(15 downto 0);
             sign_extend_out: in std_logic_vector(15 downto 0);
     
             pc_out:          out std_logic_vector(15 downto 0);
@@ -130,29 +134,35 @@ architecture behavior_core of cometa16_core is
             clk: in std_logic;
             rst: in std_logic;
 
-            ins_addr:        in std_logic_vector(15 downto 0);
-            rd_time:         out std_logic_vector(9 downto 0);
-            main_mem_out:       out std_logic_vector(63 downto 0)
+            pc_out:       in std_logic_vector(15 downto 0);
+            rd_time:      out std_logic_vector(9 downto 0);
+            main_mem_out: out std_logic_vector(63 downto 0)
 
         );
 
     end component;
 
-    signal ctrl_ins_mem_wr: std_logic;
+    signal ctrl_wr_ins_mem: std_logic;
 
     component cometa16_miss_penalty_unit is
         port(
             clk: in std_logic;
             rst: in std_logic;
 
-            hit: in std_logic;
+            hit_out: in std_logic;
             rd_time: in std_logic_vector(9 downto 0);
 
-            ctrl_ins_mem_wr: out std_logic
+            ctrl_wr_ins_mem: out std_logic
 
         );
 
     end component;
+
+    signal opcode:   std_logic_vector(5 downto 0);
+    signal ac_addr:  std_logic_vector(1 downto 0);
+    signal rf1_addr: std_logic_vector(3 downto 0);
+    signal rf2_addr: std_logic_vector(3 downto 0);
+    signal imm:      std_logic_vector(7 downto 0);
 
     signal rf1_out: std_logic_vector(15 downto 0);
     signal rf2_out: std_logic_vector(15 downto 0);
@@ -168,7 +178,7 @@ architecture behavior_core of cometa16_core is
             ctrl_stk:  in std_logic_vector(1 downto 0);
     
             pc_plus_one: in std_logic_vector(15 downto 0);
-            rd_bank_reg_out: in std_logic_vector(15 downto 0);
+            ac_out: in std_logic_vector(15 downto 0);
     
             rf1_addr: in std_logic_vector(3 downto 0);
             rf2_addr: in std_logic_vector(3 downto 0);
@@ -193,8 +203,8 @@ architecture behavior_core of cometa16_core is
             alu_out:      in std_logic_vector(15 downto 0);
             data_mem_out: in std_logic_vector(15 downto 0);
             n_signal:     in std_logic;
-            hi_reg:       in std_logic_vector(15 downto 0);
-            lo_reg:       in std_logic_vector(15 downto 0);
+            hi_out:       in std_logic_vector(15 downto 0);
+            lo_out:       in std_logic_vector(15 downto 0);
     
             ac_addr:      in std_logic_vector(1 downto 0);
             ac_out:       out std_logic_vector(15 downto 0)
@@ -295,9 +305,15 @@ architecture behavior_core of cometa16_core is
     end component;
 
 begin
+    opcode   <= ins_mux(15 downto 10);
+    ac_addr  <= ins_mux(9 downto 8);
+    rf1_addr <= ins_mux(7 downto 4);
+    rf2_addr <= ins_mux(3 downto 0);
+    imm      <= ins_mux(7 downto 0);
+
     controller: cometa16_controller
         port map(
-            ins_mux          => ins_mux,
+            opcode          => opcode,
     
             ctrl_dvc         => ctrl_dvc,
             ctrl_dvi         => ctrl_dvi,
@@ -335,7 +351,7 @@ begin
             hit_out => hit_out,
 
             rf1_out => rf1_out,
-            ins_mux_out => ins_mux_out,
+            ins_mux => ins_mux,
             sign_extend_out => sign_extend_out,
     
             pc_out => pc_out,
@@ -362,7 +378,7 @@ begin
             clk => clk,
             rst => rst,
 
-            ins_addr => ins_addr,
+            pc_out => pc_out,
             rd_time => rd_time,
             main_mem_out => main_mem_out
 
@@ -373,9 +389,9 @@ begin
             clk => clk,
             rst => rst,
 
-            hit => hit,
+            hit_out => hit_out,
             rd_time => rd_time,
-            ctrl_ins_mem_wr => ctrl_ins_mem_wr
+            ctrl_wr_ins_mem => ctrl_wr_ins_mem
 
         );
 
@@ -390,7 +406,7 @@ begin
             ctrl_stk => ctrl_stk,
 
             pc_plus_one => pc_plus_one,
-            rd_bank_reg_out => rd_bank_reg_out,
+            ac_out => ac_out,
             rf1_addr => rf1_addr,
             rf2_addr => rf2_addr,
 
@@ -399,7 +415,7 @@ begin
 
         );
 
-    ac_register: cometa16_ac_register
+    ac_registers: cometa16_ac_registers
         port map(
             clk => clk,
             rst => rst,
@@ -410,8 +426,8 @@ begin
             alu_out => alu_out,
             data_mem_out => data_mem_out,
             n_signal => n_signal,
-            hi_reg => hi_reg,
-            lo_reg => lo_reg,
+            hi_out => hi_out,
+            lo_out => lo_out,
 
             ac_addr => ac_addr,
             ac_out => ac_out
@@ -466,7 +482,7 @@ begin
     shifter: cometa16_shifter
         port map(
             ctrl_shifter => ctrl_shifter,
-            shamt => shamt,
+            shamt => rf2_addr,
 
             alu_out => alu_out,
 
@@ -476,13 +492,13 @@ begin
 
     data_memory: cometa16_data_memory
         port map(
-            clk => clk;
-            rst => rst;
+            clk => clk,
+            rst => rst,
 
-            ctrl_wr_data_mem => ctrl_wr_data_mem;
+            ctrl_wr_data_mem => ctrl_wr_data_mem,
 
-            alu_out => alu_out;
-            ac_out => ac_out;
+            alu_out => alu_out,
+            ac_out => ac_out,
 
             data_mem_out => data_mem_out
 

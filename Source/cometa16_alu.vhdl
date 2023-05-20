@@ -49,8 +49,8 @@ begin
     with ctrl_src_alu_b select out_mux_b <=
         rf2_out(15 downto 0)         when "00",
         sign_extend_out(15 downto 0) when "01",
-        hi_out(15 downto 0)         when "11",
-        "XXXXXXXXXXXXXXXX"   when others;
+        hi_out(15 downto 0)          when "11",
+        "XXXXXXXXXXXXXXXX"           when others;
 
     with ctrl_alu select alu_out <=
         out_mux_a(15 downto 0)                             when "0000",

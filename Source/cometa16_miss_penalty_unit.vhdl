@@ -20,10 +20,10 @@ entity cometa16_miss_penalty_unit is
         clk: in std_logic;
         rst: in std_logic;
 
-        hit: in std_logic;
+        hit_out: in std_logic;
         rd_time: in std_logic_vector(9 downto 0);
 
-        ctrl_ins_mem_wr: out std_logic
+        ctrl_wr_ins_mem: out std_logic
 
     );
 
@@ -41,7 +41,7 @@ begin
         if (rst = '1') then
             miss_penalty <= (conv_integer(rd_time) / clk_period) + 1;
             
-        elsif ((not hit = '1') and (clk'event and clk = '1')) then
+        elsif ((not hit_out = '1') and (clk'event and clk = '1')) then
             cont <= cont + 1;
             
             if (cont = miss_penalty) then
@@ -50,10 +50,10 @@ begin
             end if;
             
             if ((cont + 1) = miss_penalty) then
-                ctrl_ins_mem_wr <= '1';
+                ctrl_wr_ins_mem <= '1';
                 
             else
-                ctrl_ins_mem_wr <= '0';
+                ctrl_wr_ins_mem <= '0';
                 
             end if;
 

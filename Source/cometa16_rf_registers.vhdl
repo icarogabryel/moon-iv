@@ -26,7 +26,7 @@ entity cometa16_rf_registers is
         ctrl_stk:  in std_logic_vector(1 downto 0);
 
         pc_plus_one: in std_logic_vector(15 downto 0);
-        rd_bank_reg_out: in std_logic_vector(15 downto 0);
+        ac_out: in std_logic_vector(15 downto 0);
 
         rf1_addr: in std_logic_vector(3 downto 0);
         rf2_addr: in std_logic_vector(3 downto 0);
@@ -56,15 +56,15 @@ begin
 
 	with ctrl_src_rf select src_rf_mux <=
 		pc_plus_one(15 downto 0)     when '0',
-		rd_bank_reg_out(15 downto 0) when '1',
+		ac_out(15 downto 0) when '1',
 		"XXXXXXXXXXXXXXXX"           when others;
 
 	wr_rf_registers: process(clk, rst, ctrl_wr_rf)
 
 	begin
-		if rst = '1' then
-			rf_registers(0)  <= "0000000000000000"; -- rf0 
-			rf_registers(1)  <= "0000000000000000"; -- rf1
+		if (rst = '1') then
+			rf_registers(0)  <= "0000000000000001"; -- rf0 
+			rf_registers(1)  <= "0000000000000011"; -- rf1
 			rf_registers(2)  <= "0000000000000000"; -- rf2 
 			rf_registers(3)  <= "0000000000000000"; -- rf3
 			rf_registers(4)  <= "0000000000000000"; -- rf4
@@ -80,13 +80,13 @@ begin
 			rf_registers(14) <= "0000000000000000"; -- sp
 			rf_registers(15) <= "0000000000000000"; -- link
 
-		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (stack = "00")) then
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (ctrl_stk = "00")) then
 			rf_registers(conv_integer(wr_adrr)) <= src_rf_mux;
 
-		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (stack = "01")) then -- pop
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (ctrl_stk = "01")) then -- pop
 			rf_registers(14) <= rf_registers(14) + 1;
 
-		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (stack = "10")) then -- push
+		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (ctrl_stk = "10")) then -- push
 			rf_registers(14) <= rf_registers(14) - 1;
 
 		end if;

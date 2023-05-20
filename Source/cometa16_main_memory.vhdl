@@ -21,9 +21,9 @@ entity cometa16_main_memory is
         clk: in std_logic;
         rst: in std_logic;
 
-        ins_addr:        in std_logic_vector(15 downto 0);
-        rd_time:         out std_logic_vector(9 downto 0);
-        main_mem_out:       out std_logic_vector(63 downto 0)
+        pc_out:       in std_logic_vector(15 downto 0);
+        rd_time:      out std_logic_vector(9 downto 0);
+        main_mem_out: out std_logic_vector(63 downto 0)
 
     );
 
@@ -66,10 +66,10 @@ architecture behavior_main_memory of cometa16_main_memory is
 
 begin
     main_mem_out <=
-        main_memory(conv_integer(ins_addr)/4, 0) &
-        main_memory(conv_integer(ins_addr)/4, 1) &
-        main_memory(conv_integer(ins_addr)/4, 2) &
-        main_memory(conv_integer(ins_addr)/4, 3);
+        main_memory(conv_integer(pc_out)/4, 0) &
+        main_memory(conv_integer(pc_out)/4, 1) &
+        main_memory(conv_integer(pc_out)/4, 2) &
+        main_memory(conv_integer(pc_out)/4, 3);
 
     rd_time <= rd_time_reg(9 downto 0);
 

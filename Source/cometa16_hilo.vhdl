@@ -58,7 +58,7 @@ begin
     wr_hilo: process(clk, rst, ctrl_wr_hilo)
 
     begin
-        if (reset = '1') then
+        if (rst = '1') then
             low_register <= "0000000000000000";
             high_register <= "0000000000000000";
 
