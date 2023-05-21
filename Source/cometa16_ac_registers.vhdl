@@ -38,7 +38,7 @@ end cometa16_ac_registers;
 
 architecture behavior_ac_registers of cometa16_ac_registers is
     type registers is array(0 to 3) of std_logic_vector(15 downto 0);
-    signal ac_register: registers;
+    signal ac_registers: registers;
 
     signal src_ac_mux : std_logic_vector(15 downto 0);
 
@@ -51,19 +51,19 @@ begin
         hi_out                       when "100",
         "XXXXXXXXXXXXXXXX"           when others;
 
-    ac_out <= ac_register(conv_integer(ac_addr(1 downto 0)))(15 downto 0);
+    ac_out <= ac_registers(conv_integer(ac_addr(1 downto 0)))(15 downto 0);
 
     wr_ac_regiters: process(clk, rst, ctrl_wr_ac)
 
     begin
         if (rst = '1') then
-            ac_register(0) <= "0000000000000000";
-            ac_register(1) <= "0000000000000000";
-            ac_register(2) <= "0000000000000000";
-            ac_register(3) <= "0000000000000000";
+            ac_registers(0) <= "0000000000000000";
+            ac_registers(1) <= "0000000000000000";
+            ac_registers(2) <= "0000000000000000";
+            ac_registers(3) <= "0000000000000000";
         
         elsif ((clk'event and clk ='1') and (ctrl_wr_ac = '1')) then
-            ac_register(conv_integer(ac_addr(1 downto 0))) <= src_ac_mux;
+            ac_registers(conv_integer(ac_addr(1 downto 0))) <= src_ac_mux;
 
         end if;
             
