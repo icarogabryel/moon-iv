@@ -22,7 +22,7 @@ entity cometa16_inst_mem is
 
         pc_out: in std_logic_vector(15 downto 0);
         main_mem_out: in std_logic_vector(63 downto 0);
-        css_wr_ins_mem: in std_logic;
+        css_out: in std_logic_vector(64 downto 0);
 
         inst_mem_out: out std_logic_vector(15 downto 0);
         inst_hit_out: out std_logic

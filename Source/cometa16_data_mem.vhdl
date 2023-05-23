@@ -30,7 +30,7 @@ entity cometa16_data_mem is
         
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)
-        data_mem_to_css: out std_logic_vector(63 downto 0)
+        data_mem_to_css: out std_logic_vector(64 downto 0)
 
     );
 
@@ -44,6 +44,13 @@ architecture behavior_data_mem of cometa16_data_mem is
 
 begin
     data_mem_out <= memory_data(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)));
+    
+    data_mem_to_css <=
+        '1'                                  &
+        data_mem(conv_integer(alu_out)/4, 0) &
+        data_mem(conv_integer(alu_out)/4, 1) &
+        data_mem(conv_integer(alu_out)/4, 2) &
+        data_mem(conv_integer(alu_out)/4, 3);
     
     hit_process: process (clk, rst)
     
@@ -65,8 +72,8 @@ begin
 
     begin
         if (rst = '1') then
-            memory_data(0)  <= "0000000000000000";  
-            memory_data(1)  <= "0000000000000000"; 
+            data_mem(0)  <= "0000000000000000";  
+            data_mem(1)  <= "0000000000000000"; 
             memory_data(2)  <= "0000000000000000"; 
             memory_data(3)  <= "0000000000000000"; 
             memory_data(4)  <= "0000000000000000"; 
