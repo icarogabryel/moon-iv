@@ -12,3 +12,6 @@ COMPUTING DEPARTMENT
 First generation of this architecture is registered in INPI (National Institute of Industrial Property) under the number BR 51 2023 000286 0.
 
 COMETA 16 G2 is as 16 Bit, unicycle computer designed for general purpose.
+
+12 bits label
+data mem with modivied bit
