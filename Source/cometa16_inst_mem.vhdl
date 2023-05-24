@@ -5,7 +5,7 @@
 -- ||   COMPUTING DEPARTMENT                                    ||
 -- ||                                                           ||
 -- ||   Computer for Every Task Architecture 16 Bits Mark II    ||
--- ||   COMETA 16 MK II                                         ||
+-- ||   COMETA 16 II                                            ||
 -- ||                                                           ||
 -- ||   Developer: Icaro Gabryel de Araujo Silva                ||
 -- ||                                                           ||

@@ -27,11 +27,12 @@ entity cometa16_data_mem is
         ac_out: in std_logic_vector(15 downto 0);
 
         css_out: in std_logic_vector(64 downto 0);
-        
+        ccs_wr_mem: in std_logic;
+
         ctrl_wr_main_mem: out std_logic;
+        data_mem_to_css: out std_logic_vector(64 downto 0);
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)
-        data_mem_to_css: out std_logic_vector(64 downto 0)
 
     );
 
@@ -95,28 +96,36 @@ begin
 
     begin
         if (rst = '1') then
-            data_mem(0)  <= "0000000000000000"; 
-            data_mem(1)  <= "0000000000000000";
-            data_mem(2)  <= "0000000000000000";
-            data_mem(3)  <= "0000000000000000";
-            data_mem(4)  <= "0000000000000000";
-            data_mem(5)  <= "0000000000000000";
-            data_mem(6)  <= "0000000000000000";
-            data_mem(7)  <= "0000000000000000"; 
-            data_mem(8)  <= "0000000000000000"; 
-            data_mem(9)  <= "0000000000000000";  
-            data_mem(10) <= "0000000000000000";
-            data_mem(11) <= "0000000000000000"; 
-            data_mem(12) <= "0000000000000000"; 
-            data_mem(13) <= "0000000000000000"; 
-            data_mem(14) <= "0000000000000000"; 
-            data_mem(15) <= "0000000000000000";
+            data_mem(0)  <= "000000000000000000000000000000";
+            data_mem(1)  <= "000000000000000000000000000000";
+            data_mem(2)  <= "000000000000000000000000000000";
+            data_mem(3)  <= "000000000000000000000000000000";
+            data_mem(4)  <= "000000000000000000000000000000";
+            data_mem(5)  <= "000000000000000000000000000000";
+            data_mem(6)  <= "000000000000000000000000000000";
+            data_mem(7)  <= "000000000000000000000000000000";
+            data_mem(8)  <= "000000000000000000000000000000";
+            data_mem(9)  <= "000000000000000000000000000000";
+            data_mem(10) <= "000000000000000000000000000000";
+            data_mem(11) <= "000000000000000000000000000000";
+            data_mem(12) <= "000000000000000000000000000000";
+            data_mem(13) <= "000000000000000000000000000000";
+            data_mem(14) <= "000000000000000000000000000000";
+            data_mem(15) <= "000000000000000000000000000000";
 
-        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1')) then -- todo: wr ctrl, label, modified bit
-            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0))) <= ac_out;
+        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1' and hit_signal = 1)) then
+            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(29) <= '1';
+            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(15 downto 0) <= ac_out;
+            
+        -- write block from css to data memory
+        elsif ((clk'event and clk = '1') and (ccs_wr_mem = '1')) then
+            inst_mem((conv_integer(alu_out)/4) mod 4, 0) <= '0' & '1' & alu_out(15 downto 4) & css_out(63 downto 48);
+            inst_mem((conv_integer(alu_out)/4) mod 4, 1) <= '0' & '1' & alu_out(15 downto 4) & css_out(47 downto 32);
+            inst_mem((conv_integer(alu_out)/4) mod 4, 2) <= '0' & '1' & alu_out(15 downto 4) & css_out(31 downto 16);
+            inst_mem((conv_integer(alu_out)/4) mod 4, 3) <= '0' & '1' & alu_out(15 downto 4) & css_out(15 downto 0);
 
         end if;
 
-	end process wr_data_mem_process;
+    end process wr_data_mem_process;
 
 end behavior_data_mem;
