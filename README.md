@@ -15,3 +15,6 @@ COMETA 16 G2 is as 16 Bit, unicycle computer designed for general purpose.
 
 12 bits label
 data mem with modivied bit
+
+Check if any word in the block is modified and if the is the bock is being written.
+    -- If so, the block is written back to the memory.
