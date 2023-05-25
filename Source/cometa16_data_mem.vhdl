@@ -30,7 +30,7 @@ entity cometa16_data_mem is
         ccs_wr_mem: in std_logic;
 
         ctrl_wr_main_mem: out std_logic;
-        data_mem_to_css: out std_logic_vector(64 downto 0);
+        data_mem_to_css: out std_logic_vector(63 downto 0);
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)
 
@@ -43,7 +43,6 @@ architecture behavior_data_mem of cometa16_data_mem is
     signal data_mem: memory;
 
     signal hit_signal: std_logic;
-    signal ctrl_wr_main_mem: std_logic;
 
 begin
     -- Read the data memory and send the data to the ac registers
@@ -65,10 +64,10 @@ begin
     -- Send the block to the main memory and use the "write in data memory" control signal
     -- to enable the written in the main.
     data_mem_to_css <=
-        data_mem(conv_integer(alu_out)/4, 0) &
-        data_mem(conv_integer(alu_out)/4, 1) &
-        data_mem(conv_integer(alu_out)/4, 2) &
-        data_mem(conv_integer(alu_out)/4, 3);
+        data_mem(conv_integer(alu_out)/4, 0)(15 downto 0) &
+        data_mem(conv_integer(alu_out)/4, 1)(15 downto 0) &
+        data_mem(conv_integer(alu_out)/4, 2)(15 downto 0) &
+        data_mem(conv_integer(alu_out)/4, 3)(15 downto 0);
     
     hit_process: process (clk, rst)
     
