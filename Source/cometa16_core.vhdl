@@ -499,16 +499,23 @@ begin
 
         );
 
-    data_memory: cometa16_data_memory
+    data_mem: cometa16_data_mem
         port map(
             clk => clk,
             rst => rst,
 
             ctrl_wr_data_mem => ctrl_wr_data_mem,
+            ctrl_data_mem_use => ctrl_data_mem_use,
 
             alu_out => alu_out,
             ac_out => ac_out,
 
+            css_out => main_mem_to_data,
+            ccs_wr_mem => css_wr_data_mem,
+
+            ctrl_wr_main_mem => ctrl_wr_main_mem,
+            data_mem_to_css => data_mem_to_css,
+            data_hit_out => data_hit_out,
             data_mem_out => data_mem_out
 
         );
