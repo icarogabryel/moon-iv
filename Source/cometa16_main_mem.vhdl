@@ -28,7 +28,7 @@ entity cometa16_main_mem is
         data_hit:     in std_logic;
 
         ctrl_wr_main_mem: in std_logic;
-        data_mem_to_css: in std_logic_vector(15 downto 0);
+        data_mem_to_css: in std_logic_vector(63 downto 0);
 
         main_mem_to_inst: out std_logic_vector(63 downto 0);
         main_mem_to_data: out std_logic_vector(63 downto 0);
@@ -44,6 +44,9 @@ end cometa16_main_mem;
 architecture behavior_main_mem of cometa16_main_mem is
     type memory is array(0 to 63, 0 to 3) of std_logic_vector(15 downto 0);
     signal main_mem: memory;
+
+    signal rd_addr: std_logic_vector(15 downto 0);
+    signal wr_cache_mem: std_logic;
 
     signal main_mem_out: std_logic_vector(63 downto 0);
     signal ctrl_rd_main_mem: std_logic;
@@ -104,15 +107,17 @@ begin
     
     end process rd_main_memory;
 
-    -- 1 to 2 demux
+    -- 2 to 4 demux
     main_mem_to_inst <= main_mem_out when data_hit = '1' else (others => '0');
     main_mem_to_data <= main_mem_out when data_hit = '0' else (others => '0');
+    css_wr_inst_mem <= wr_cache_mem when data_hit = '1' else '0';
+    css_wr_data_mem <= wr_cache_mem when data_hit = '0' else '0';
 
     wr_main_memory: process(clk, rst, ctrl_wr_main_mem)
     
     begin
         if (rst = '1') then
-            main_mem <= read_main_memory_file("memories/main_memmory.txt");
+            main_mem <= read_main_memory_file("memories/main_mem.txt");
 
         -- writing in main memory
         elsif (clk'event and clk = '1') and (ctrl_wr_main_mem = '1') then

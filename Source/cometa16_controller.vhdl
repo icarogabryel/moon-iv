@@ -42,7 +42,8 @@ entity cometa16_controller is
     
         ctrl_shifter:     out std_logic_vector(1 downto 0);
 
-        ctrl_wr_data_mem: out std_logic
+        ctrl_wr_data_mem: out std_logic;
+        ctrl_data_mem_use: out std_logic
 
     );
 
@@ -79,6 +80,7 @@ begin
             ctrl_shifter     <= "00";
 
             ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
 
             when add_opcode =>
 
@@ -104,6 +106,7 @@ begin
             ctrl_shifter     <= "00";
 
             ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
 
             when others =>
 

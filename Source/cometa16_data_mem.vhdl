@@ -26,7 +26,7 @@ entity cometa16_data_mem is
         alu_out: in std_logic_vector(15 downto 0);
         ac_out: in std_logic_vector(15 downto 0);
 
-        css_out: in std_logic_vector(64 downto 0);
+        css_out: in std_logic_vector(63 downto 0);
         ccs_wr_mem: in std_logic;
 
         ctrl_wr_main_mem: out std_logic;
@@ -43,10 +43,12 @@ architecture behavior_data_mem of cometa16_data_mem is
     signal data_mem: memory;
 
     signal hit_signal: std_logic;
+    signal data_mem_data_read: std_logic_vector(29 downto 0);
 
 begin
     -- Read the data memory and send the data to the ac registers
-    data_mem_out <= data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(15 downto 0);
+    data_mem_data_read <= data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)));
+    data_mem_out <= data_mem_data_read(15 downto 0);
     
     -- "write in maim memory" control signal check if any word in the block
     -- is modified (29 is modified bit) and if the bock is being substituted. If so, the
@@ -75,7 +77,7 @@ begin
         -- check if the label of the address is the same as the label of the
         -- data memory block and if the block is valid. If so, the hit signal
         -- is activated.
-        if ((alu_out(15 downto 4) = data_mem_out(27 downto 16)) and (data_mem_out(28) = '1')) then
+        if ((alu_out(15 downto 4) = data_mem_data_read(27 downto 16)) and (data_mem_data_read(28) = '1')) then
             hit_signal <= '1';
         else
             hit_signal <= '0';
@@ -86,6 +88,7 @@ begin
     -- check if the data memory is being read. If so, the hit signal is send.
     -- If not, the hit signal is always set '1' to not stop pc when the alu exit
     -- point to a invalid address or a modified block.
+
     with ctrl_data_mem_use select data_hit_out <=
         '1'        when '0',
         hit_signal when '1',
@@ -95,33 +98,33 @@ begin
 
     begin
         if (rst = '1') then
-            data_mem(0)  <= "000000000000000000000000000000";
-            data_mem(1)  <= "000000000000000000000000000000";
-            data_mem(2)  <= "000000000000000000000000000000";
-            data_mem(3)  <= "000000000000000000000000000000";
-            data_mem(4)  <= "000000000000000000000000000000";
-            data_mem(5)  <= "000000000000000000000000000000";
-            data_mem(6)  <= "000000000000000000000000000000";
-            data_mem(7)  <= "000000000000000000000000000000";
-            data_mem(8)  <= "000000000000000000000000000000";
-            data_mem(9)  <= "000000000000000000000000000000";
-            data_mem(10) <= "000000000000000000000000000000";
-            data_mem(11) <= "000000000000000000000000000000";
-            data_mem(12) <= "000000000000000000000000000000";
-            data_mem(13) <= "000000000000000000000000000000";
-            data_mem(14) <= "000000000000000000000000000000";
-            data_mem(15) <= "000000000000000000000000000000";
+            data_mem(0, 0)  <= "000000000000000000000000000000";
+            data_mem(0, 1)  <= "000000000000000000000000000000";
+            data_mem(0, 2)  <= "000000000000000000000000000000";
+            data_mem(0, 3)  <= "000000000000000000000000000000";
+            data_mem(1, 0)  <= "000000000000000000000000000000";
+            data_mem(1, 1)  <= "000000000000000000000000000000";
+            data_mem(1, 2)  <= "000000000000000000000000000000";
+            data_mem(1, 3)  <= "000000000000000000000000000000";
+            data_mem(2, 0)  <= "000000000000000000000000000000";
+            data_mem(2, 1)  <= "000000000000000000000000000000";
+            data_mem(2, 2) <= "000000000000000000000000000000";
+            data_mem(2, 3) <= "000000000000000000000000000000";
+            data_mem(3, 0) <= "000000000000000000000000000000";
+            data_mem(3, 1) <= "000000000000000000000000000000";
+            data_mem(3, 2) <= "000000000000000000000000000000";
+            data_mem(3, 3) <= "000000000000000000000000000000";
 
-        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1' and hit_signal = 1)) then
+        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1' and hit_signal = '1')) then
             data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(29) <= '1';
             data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(15 downto 0) <= ac_out;
             
         -- write block from css to data memory
         elsif ((clk'event and clk = '1') and (ccs_wr_mem = '1')) then
-            inst_mem((conv_integer(alu_out)/4) mod 4, 0) <= '0' & '1' & alu_out(15 downto 4) & css_out(63 downto 48);
-            inst_mem((conv_integer(alu_out)/4) mod 4, 1) <= '0' & '1' & alu_out(15 downto 4) & css_out(47 downto 32);
-            inst_mem((conv_integer(alu_out)/4) mod 4, 2) <= '0' & '1' & alu_out(15 downto 4) & css_out(31 downto 16);
-            inst_mem((conv_integer(alu_out)/4) mod 4, 3) <= '0' & '1' & alu_out(15 downto 4) & css_out(15 downto 0);
+            data_mem((conv_integer(alu_out)/4) mod 4, 0) <= '0' & '1' & alu_out(15 downto 4) & css_out(63 downto 48);
+            data_mem((conv_integer(alu_out)/4) mod 4, 1) <= '0' & '1' & alu_out(15 downto 4) & css_out(47 downto 32);
+            data_mem((conv_integer(alu_out)/4) mod 4, 2) <= '0' & '1' & alu_out(15 downto 4) & css_out(31 downto 16);
+            data_mem((conv_integer(alu_out)/4) mod 4, 3) <= '0' & '1' & alu_out(15 downto 4) & css_out(15 downto 0);
 
         end if;
 
