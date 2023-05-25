@@ -17,7 +17,8 @@ use ieee.std_logic_unsigned.all;
 
 entity cometa16_pc is
     port(
-        clk, rst: in std_logic;
+        clk: in std_logic;
+        rst: in std_logic;
 
         z_signal:        in std_logic;
         n_signal:        in std_logic;
@@ -27,7 +28,7 @@ entity cometa16_pc is
         ctrl_wr_pc:      in std_logic;
 
         rf1_out:         in std_logic_vector(15 downto 0);
-        ins_mux:         in std_logic_vector(15 downto 0);
+        inst_mem_out:    in std_logic_vector(15 downto 0);
         sign_extend_out: in std_logic_vector(15 downto 0);
 
         pc_out:          out std_logic_vector(15 downto 0);
@@ -57,10 +58,10 @@ begin
         "XXXXXXXXXXXXXXXX"            when others;
 
     with ctrl_dvi select dvi_mux <=
-        dvc_mux                                    when "00",
-        pc_reg(15 downto 10) & ins_mux(9 downto 0) when "01",
-        rf1_out                                    when "11",
-        "XXXXXXXXXXXXXXXX"                         when others;
+        dvc_mux                                         when "00",
+        pc_reg(15 downto 10) & inst_mem_out(9 downto 0) when "01",
+        rf1_out                                         when "11",
+        "XXXXXXXXXXXXXXXX"                              when others;
 
     write_pc_reg: process(clk, rst, dvi_mux)
     

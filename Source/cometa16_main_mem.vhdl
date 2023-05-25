@@ -32,7 +32,8 @@ entity cometa16_main_mem is
 
         main_mem_to_inst: out std_logic_vector(63 downto 0);
         main_mem_to_data: out std_logic_vector(63 downto 0);
-        wr_cache_mem:  out std_logic;
+        css_wr_inst_mem: out std_logic;
+        css_wr_data_mem: out std_logic;
 
         ctrl_wr_pc:   out std_logic
 

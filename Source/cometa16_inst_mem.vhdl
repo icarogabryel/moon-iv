@@ -22,7 +22,7 @@ entity cometa16_inst_mem is
 
         pc_out: in std_logic_vector(15 downto 0);
         main_mem_out: in std_logic_vector(63 downto 0);
-        css_out: in std_logic_vector(64 downto 0);
+        css_wr_inst_mem: in std_logic;
 
         inst_mem_out: out std_logic_vector(15 downto 0);
         inst_hit_out: out std_logic
@@ -80,7 +80,7 @@ begin
             inst_mem(3, 2)  <= "00000000000000000000000000000";
             inst_mem(3, 3)  <= "00000000000000000000000000000";
         
-        elsif ((clk'event and clk = '1') and (css_wr_ins_mem = '1')) then
+        elsif ((clk'event and clk = '1') and (css_wr_inst_mem = '1')) then
             inst_mem((conv_integer(pc_out)/4) mod 4, 0) <= '1' & pc_out(15 downto 4) & main_mem_out(63 downto 48);
             inst_mem((conv_integer(pc_out)/4) mod 4, 1) <= '1' & pc_out(15 downto 4) & main_mem_out(47 downto 32);
             inst_mem((conv_integer(pc_out)/4) mod 4, 2) <= '1' & pc_out(15 downto 4) & main_mem_out(31 downto 16);

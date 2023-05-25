@@ -21,7 +21,7 @@ entity cometa16_data_mem is
         rst: in std_logic;
 
         ctrl_wr_data_mem: in std_logic;
-        ctrl_rd_data_mem: in std_logic;
+        ctrl_data_mem_use: in std_logic;
 
         alu_out: in std_logic_vector(15 downto 0);
         ac_out: in std_logic_vector(15 downto 0);
@@ -86,7 +86,7 @@ begin
     -- check if the data memory is being read. If so, the hit signal is send.
     -- If not, the hit signal is always set '1' to not stop pc when the alu exit
     -- point to a invalid address or a modified block.
-    with ctrl_rd_data_mem select data_hit_out <=
+    with ctrl_data_mem_use select data_hit_out <=
         '1'        when '0',
         hit_signal when '1',
         'X'        when others;

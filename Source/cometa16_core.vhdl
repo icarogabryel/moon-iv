@@ -86,73 +86,71 @@ architecture behavior_core of cometa16_core is
 
     component cometa16_pc is
         port(
-            clk, rst:        in std_logic;
-    
+            clk, rst: in std_logic;
+
             z_signal:        in std_logic;
             n_signal:        in std_logic;
-    
+
             ctrl_dvc:        in std_logic_vector(2 downto 0);
             ctrl_dvi:        in std_logic_vector(1 downto 0);
-
-            hit_out:         in std_logic;
+            ctrl_wr_pc:      in std_logic;
 
             rf1_out:         in std_logic_vector(15 downto 0);
-            ins_mux:         in std_logic_vector(15 downto 0);
+            inst_mem_out:    in std_logic_vector(15 downto 0);
             sign_extend_out: in std_logic_vector(15 downto 0);
-    
+
             pc_out:          out std_logic_vector(15 downto 0);
             pc_plus_one:     out std_logic_vector(15 downto 0)
-    
+
         );
 
     end component;
 
-    signal ins_mux: std_logic_vector(15 downto 0);
-    signal hit_out: std_logic;
+    signal inst_mem_out: std_logic_vector(15 downto 0);
+    signal inst_hit_out: std_logic;
 
-    component cometa16_instruction_memory is
+    component cometa16_inst_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
-    
+
             pc_out: in std_logic_vector(15 downto 0);
             main_mem_out: in std_logic_vector(63 downto 0);
-            ctrl_wr_ins_mem: in std_logic;
-    
-            ins_mux: out std_logic_vector(15 downto 0);
-            hit_out: out std_logic
-    
+            css_wr_inst_mem: in std_logic;
+
+            inst_mem_out: out std_logic_vector(15 downto 0);
+            inst_hit_out: out std_logic
+
         );
 
     end component;
-    
-    signal rd_time: std_logic_vector(9 downto 0);
-    signal main_mem_out: std_logic_vector(63 downto 0);
 
-    component cometa16_main_memory is
+    signal main_mem_to_inst: std_logic_vector(63 downto 0);
+    signal main_mem_to_data: std_logic_vector(63 downto 0);
+    signal wr_cache_mem: std_logic;
+    signal css_wr_inst_mem: std_logic;
+    signal css_wr_data_mem: std_logic;
+
+    component cometa16_main_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
 
             pc_out:       in std_logic_vector(15 downto 0);
-            rd_time:      out std_logic_vector(9 downto 0);
-            main_mem_out: out std_logic_vector(63 downto 0)
+            alu_out:      in std_logic_vector(15 downto 0);
+            
+            inst_hit:     in std_logic;
+            data_hit:     in std_logic;
 
-        );
+            ctrl_wr_main_mem: in std_logic;
+            data_mem_to_css: in std_logic_vector(15 downto 0);
 
-    end component;
+            main_mem_to_inst: out std_logic_vector(63 downto 0);
+            main_mem_to_data: out std_logic_vector(63 downto 0);
+            css_wr_inst_mem:  out std_logic;
+            css_wr_data_mem:  out std_logic;
 
-    signal ctrl_wr_ins_mem: std_logic;
-
-    component cometa16_miss_penalty_unit is
-        port(
-            clk: in std_logic;
-            rst: in std_logic;
-
-            hit_out: in std_logic;
-            rd_time: in std_logic_vector(9 downto 0);
-
-            ctrl_wr_ins_mem: out std_logic
+            ctrl_wr_pc:   out std_logic
 
         );
 
@@ -218,17 +216,17 @@ architecture behavior_core of cometa16_core is
     
     component cometa16_hilo is
         port(
-        clk: in std_logic;
-        rst: in std_logic;
+            clk: in std_logic;
+            rst: in std_logic;
 
-        ctrl_wr_hilo:  in std_logic;
-        ctrl_src_hilo: in std_logic_vector(1 downto 0);
+            ctrl_wr_hilo:  in std_logic;
+            ctrl_src_hilo: in std_logic_vector(1 downto 0);
 
-        alu_out:       in std_logic_vector(15 downto 0);
-        ac_out:        in std_logic_vector(15 downto 0);
+            alu_out:       in std_logic_vector(15 downto 0);
+            ac_out:        in std_logic_vector(15 downto 0);
 
-        lo_out:        out std_logic_vector(15 downto 0);
-        hi_out:        out std_logic_vector(15 downto 0)
+            lo_out:        out std_logic_vector(15 downto 0);
+            hi_out:        out std_logic_vector(15 downto 0)
 
         );
 
@@ -238,10 +236,10 @@ architecture behavior_core of cometa16_core is
 
     component cometa16_sign_extend is
         port(
-        ctrl_sign_extend: in std_logic_vector(1 downto 0);
-        imm:              in std_logic_vector(7 downto 0);
+            ctrl_sign_extend: in std_logic_vector(1 downto 0);
+            imm:              in std_logic_vector(7 downto 0);
 
-        sign_extend_out:  out std_logic_vector(15 downto 0)
+            sign_extend_out:  out std_logic_vector(15 downto 0)
 
         );
 
@@ -286,18 +284,28 @@ architecture behavior_core of cometa16_core is
 
     end component;
 
+    signal ctrl_wr_main_mem: std_logic;
+    signal data_mem_to_css: std_logic_vector(63 downto 0);
+    signal data_hit_out: std_logic;
     signal data_mem_out: std_logic_vector(15 downto 0);
 
-    component cometa16_data_memory is
+    component cometa16_data_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
 
             ctrl_wr_data_mem: in std_logic;
+            ctrl_data_mem_use: in std_logic;
 
             alu_out: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
 
+            css_out: in std_logic_vector(64 downto 0);
+            ccs_wr_mem: in std_logic;
+
+            ctrl_wr_main_mem: out std_logic;
+            data_mem_to_css: out std_logic_vector(63 downto 0);
+            data_hit_out: out std_logic;
             data_mem_out: out std_logic_vector(15 downto 0)
 
         );
@@ -345,53 +353,54 @@ begin
 
             z_signal => z_signal,
             n_signal => n_signal,
-    
+
             ctrl_dvc => ctrl_dvc,
             ctrl_dvi => ctrl_dvi,
-            hit_out => hit_out,
+            ctrl_wr_pc => ctrl_wr_pc,
 
             rf1_out => rf1_out,
-            ins_mux => ins_mux,
+            inst_mem_out => inst_mem_out,
             sign_extend_out => sign_extend_out,
-    
+
             pc_out => pc_out,
-            pc_plus_one => pc_plus_one
-    
+            pc_plus_one => pc_plus_one,
+
         );
 
-    instruction_memory: cometa16_instruction_memory
+    inst_mem: cometa16_inst_mem
         port map(
             clk => clk,
             rst => rst,
 
-            pc_out => pc_out,
-            main_mem_out => main_mem_out,
-            ctrl_wr_ins_mem => ctrl_wr_ins_mem,
+            pc_out => pc_out;
+            main_mem_out => main_mem_to_inst,
+            css_wr_inst_mem => css_wr_inst_mem,
 
-            ins_mux => ins_mux,
-            hit_out => hit_out
-
-        );
-
-    main_memory: cometa16_main_memory
-        port map(
-            clk => clk,
-            rst => rst,
-
-            pc_out => pc_out,
-            rd_time => rd_time,
-            main_mem_out => main_mem_out
+            inst_mem_out => inst_mem_out,
+            inst_hit_out => inst_hit_out
 
         );
 
-    miss_penalty_unit: cometa16_miss_penalty_unit
-        port map(
-            clk => clk,
+    main_mem: cometa16_main_mem
+        port(
+            clk => clok
             rst => rst,
 
-            hit_out => hit_out,
-            rd_time => rd_time,
-            ctrl_wr_ins_mem => ctrl_wr_ins_mem
+            pc_out => pc_out
+            alu_out => alu_out,
+            
+            inst_hit => inst_hit_out,
+            data_hit => data_hit_out,
+
+            ctrl_wr_main_mem => ctrl_wr_main_mem,
+            data_mem_to_css => data_mem_to_css,
+
+            main_mem_to_inst => main_mem_to_inst,
+            main_mem_to_data => main_mem_to_data,
+            css_wr_inst_mem => css_wr_inst_mem,
+            css_wr_data_mem => css_wr_data_mem
+
+            ctrl_wr_pc => ctrl_wr_pc
 
         );
 
