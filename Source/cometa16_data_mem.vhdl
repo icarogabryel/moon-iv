@@ -26,11 +26,15 @@ entity cometa16_data_mem is
         alu_out: in std_logic_vector(15 downto 0);
         ac_out: in std_logic_vector(15 downto 0);
 
-        css_out: in std_logic_vector(63 downto 0);
-        ccs_wr_mem: in std_logic;
+        -- Recive the block from main memory
+        main_mem_to_data: in std_logic_vector(63 downto 0);  --css_out
+        ctrl_wr_data_mem_from_main: in std_logic; -- ccs_wr_mem
 
+        -- Send the block to main memory
         ctrl_wr_main_mem: out std_logic;
-        data_mem_to_css: out std_logic_vector(63 downto 0);
+        main_mem_wr_addr: out std_logic_vector(15 downto 0); --wr_addr
+        data_mem_bk_out: out std_logic_vector(63 downto 0); --data_mem_to_css
+
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)
 
@@ -55,21 +59,23 @@ begin
     -- modified block is written back to the memory at the same moment the
     -- "write in data memory" control signal is activated.
     ctrl_wr_main_mem <=
-        ctrl_wr_data_mem and
+        ctrl_wr_data_mem_from_main and
         (
-        data_mem(conv_integer(alu_out)/4, 0)(29) or
-        data_mem(conv_integer(alu_out)/4, 1)(29) or
-        data_mem(conv_integer(alu_out)/4, 2)(29) or
-        data_mem(conv_integer(alu_out)/4, 3)(29)
+            data_mem(conv_integer(alu_out(3 downto 2)), 0)(29) or
+            data_mem(conv_integer(alu_out(3 downto 2)), 1)(29) or
+            data_mem(conv_integer(alu_out(3 downto 2)), 2)(29) or
+            data_mem(conv_integer(alu_out(3 downto 2)), 3)(29)
         );
     
     -- Send the block to the main memory and use the "write in data memory" control signal
     -- to enable the written in the main.
-    data_mem_to_css <=
-        data_mem(conv_integer(alu_out)/4, 0)(15 downto 0) &
-        data_mem(conv_integer(alu_out)/4, 1)(15 downto 0) &
-        data_mem(conv_integer(alu_out)/4, 2)(15 downto 0) &
-        data_mem(conv_integer(alu_out)/4, 3)(15 downto 0);
+    data_mem_bk_out <=
+        data_mem(conv_integer(alu_out(3 downto 2)), 0)(15 downto 0) &
+        data_mem(conv_integer(alu_out(3 downto 2)), 1)(15 downto 0) &
+        data_mem(conv_integer(alu_out(3 downto 2)), 2)(15 downto 0) &
+        data_mem(conv_integer(alu_out(3 downto 2)), 3)(15 downto 0);
+
+    main_mem_wr_addr <= data_mem_data_read(27 downto 16) & alu_out(3 downto 0);
     
     hit_process: process (clk, rst)
     
@@ -87,7 +93,7 @@ begin
     
     -- check if the data memory is being read. If so, the hit signal is send.
     -- If not, the hit signal is always set '1' to not stop pc when the alu exit
-    -- point to a invalid address or a modified block.
+    -- point to a invalid address or a modified block./
 
     with ctrl_data_mem_use select data_hit_out <=
         '1'        when '0',
@@ -98,16 +104,16 @@ begin
 
     begin
         if (rst = '1') then
-            data_mem(0, 0)  <= "000000000000000000000000000000";
-            data_mem(0, 1)  <= "000000000000000000000000000000";
-            data_mem(0, 2)  <= "000000000000000000000000000000";
-            data_mem(0, 3)  <= "000000000000000000000000000000";
-            data_mem(1, 0)  <= "000000000000000000000000000000";
-            data_mem(1, 1)  <= "000000000000000000000000000000";
-            data_mem(1, 2)  <= "000000000000000000000000000000";
-            data_mem(1, 3)  <= "000000000000000000000000000000";
-            data_mem(2, 0)  <= "000000000000000000000000000000";
-            data_mem(2, 1)  <= "000000000000000000000000000000";
+            data_mem(0, 0) <= "000000000000000000000000000000";
+            data_mem(0, 1) <= "000000000000000000000000000000";
+            data_mem(0, 2) <= "000000000000000000000000000000";
+            data_mem(0, 3) <= "000000000000000000000000000000";
+            data_mem(1, 0) <= "000000000000000000000000000000";
+            data_mem(1, 1) <= "000000000000000000000000000000";
+            data_mem(1, 2) <= "000000000000000000000000000000";
+            data_mem(1, 3) <= "000000000000000000000000000000";
+            data_mem(2, 0) <= "000000000000000000000000000000";
+            data_mem(2, 1) <= "000000000000000000000000000000";
             data_mem(2, 2) <= "000000000000000000000000000000";
             data_mem(2, 3) <= "000000000000000000000000000000";
             data_mem(3, 0) <= "000000000000000000000000000000";
@@ -115,16 +121,16 @@ begin
             data_mem(3, 2) <= "000000000000000000000000000000";
             data_mem(3, 3) <= "000000000000000000000000000000";
 
-        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1' and hit_signal = '1')) then
-            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(29) <= '1';
-            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(15 downto 0) <= ac_out;
-            
+        elsif ((clk'event and clk = '1') and (ctrl_wr_data_mem = '1') and (hit_signal = '1')) then
+            data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0))) <= '1' & data_mem(conv_integer(alu_out(3 downto 2)), conv_integer(alu_out(1 downto 0)))(28 downto 16) & ac_out(15 downto 0);
+        end if;
+        
         -- write block from css to data memory
-        elsif ((clk'event and clk = '1') and (ccs_wr_mem = '1')) then
-            data_mem((conv_integer(alu_out)/4) mod 4, 0) <= '0' & '1' & alu_out(15 downto 4) & css_out(63 downto 48);
-            data_mem((conv_integer(alu_out)/4) mod 4, 1) <= '0' & '1' & alu_out(15 downto 4) & css_out(47 downto 32);
-            data_mem((conv_integer(alu_out)/4) mod 4, 2) <= '0' & '1' & alu_out(15 downto 4) & css_out(31 downto 16);
-            data_mem((conv_integer(alu_out)/4) mod 4, 3) <= '0' & '1' & alu_out(15 downto 4) & css_out(15 downto 0);
+        if ((clk'event and clk = '1') and (ctrl_wr_data_mem_from_main = '1')) then
+            data_mem(conv_integer(alu_out(3 downto 2)), 0) <= '0' & '1' & alu_out(15 downto 4) & main_mem_to_data(63 downto 48);
+            data_mem(conv_integer(alu_out(3 downto 2)), 1) <= '0' & '1' & alu_out(15 downto 4) & main_mem_to_data(47 downto 32);
+            data_mem(conv_integer(alu_out(3 downto 2)), 2) <= '0' & '1' & alu_out(15 downto 4) & main_mem_to_data(31 downto 16);
+            data_mem(conv_integer(alu_out(3 downto 2)), 3) <= '0' & '1' & alu_out(15 downto 4) & main_mem_to_data(15 downto 0);
 
         end if;
 

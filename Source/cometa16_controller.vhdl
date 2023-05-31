@@ -108,6 +108,32 @@ begin
             ctrl_wr_data_mem <= '0';
             ctrl_data_mem_use <= '0';
 
+            when swr_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '0';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0000";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '1';
+            ctrl_data_mem_use <= '1';
+
             when others =>
 
             ctrl_dvc         <= "XXX";
@@ -132,6 +158,7 @@ begin
             ctrl_shifter     <= "XX";
 
             ctrl_wr_data_mem <= 'X';
+            ctrl_data_mem_use <= 'X';
 
         end case;
 

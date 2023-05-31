@@ -65,16 +65,19 @@ begin
 		if (rst = '1') then
 			rf_registers(0)  <= "0000000000000001"; -- rf0 
 			rf_registers(1)  <= "0000000000000011"; -- rf1
-			rf_registers(2)  <= "0000000000000000"; -- rf2 
-			rf_registers(3)  <= "0000000000000000"; -- rf3
+			rf_registers(2)  <= "0000000000001000"; -- rf2 
+			rf_registers(3)  <= "0000000000011001"; -- rf3
+
 			rf_registers(4)  <= "0000000000000000"; -- rf4
 			rf_registers(5)  <= "0000000000000000"; -- rf5 
 			rf_registers(6)  <= "0000000000000000"; -- rf6
 			rf_registers(7)  <= "0000000000000000"; -- rf7
+
 			rf_registers(8)  <= "0000000000000000"; -- rf8
 			rf_registers(9)  <= "0000000000000000"; -- rf9 
 			rf_registers(10) <= "0000000000000000"; -- rf10
 			rf_registers(11) <= "0000000000000000"; -- rf11
+
 			rf_registers(12) <= "0000000000000000"; -- rf12
 			rf_registers(13) <= "0000000000000000"; -- rf13
 			rf_registers(14) <= "0000000000000000"; -- sp
