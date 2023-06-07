@@ -20,8 +20,9 @@ entity cometa16_core is
         clk: in std_logic;
         rst: in std_logic
 
-        -- main_mem_out: in std_logic_vector(63 downto 0);
-        -- pc_out: out std_logic_vector(15 downto 0);
+        core_in: in std_logic_vector(63 downto 0);
+        core_out: out std_logic_vector(63 downto 0)
+        
     );
 
 end cometa16_core;
