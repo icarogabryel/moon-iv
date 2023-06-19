@@ -34,7 +34,7 @@ entity cometa16_css is
         -- 2 miss bits, 32 rd_addr bits, 64 data_mem_bk_out bits, 16 main_mem_wr_addr bits, 1 wr_main_mem bit
         main_mem_out: in std_logic_vector(129 downto 0)
 
-    );
+    )
 
 end cometa16_css;
 

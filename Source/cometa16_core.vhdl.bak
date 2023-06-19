@@ -19,7 +19,9 @@ entity cometa16_core is
     port(
         clk: in std_logic;
         rst: in std_logic
-        
+
+        -- main_mem_out: in std_logic_vector(63 downto 0);
+        -- pc_out: out std_logic_vector(15 downto 0);
     );
 
 end cometa16_core;
@@ -106,8 +108,8 @@ architecture behavior_core of cometa16_core is
 
     end component;
 
-    signal inst_hit_out: std_logic;
     signal inst_mem_out: std_logic_vector(15 downto 0);
+    signal inst_hit_out: std_logic;
 
     component cometa16_inst_mem is
         port(
@@ -115,12 +117,11 @@ architecture behavior_core of cometa16_core is
             rst: in std_logic;
 
             pc_out: in std_logic_vector(15 downto 0);
+            main_mem_out: in std_logic_vector(63 downto 0);
+            css_wr_inst_mem: in std_logic;
 
-            main_mem_to_inst: in std_logic_vector(63 downto 0);
-            ctrl_wr_inst_mem_from_main: in std_logic;
-
-            inst_hit_out: out std_logic;
-            inst_mem_out: out std_logic_vector(15 downto 0)
+            inst_mem_out: out std_logic_vector(15 downto 0);
+            inst_hit_out: out std_logic
 
         );
 
@@ -128,8 +129,9 @@ architecture behavior_core of cometa16_core is
 
     signal main_mem_to_inst: std_logic_vector(63 downto 0);
     signal main_mem_to_data: std_logic_vector(63 downto 0);
-    signal ctrl_wr_inst_mem_from_main: std_logic;
-    signal ctrl_wr_data_mem_from_main: std_logic;
+    signal wr_cache_mem: std_logic;
+    signal css_wr_inst_mem: std_logic;
+    signal css_wr_data_mem: std_logic;
     signal ctrl_wr_pc: std_logic;
 
     component cometa16_main_mem is
@@ -140,17 +142,16 @@ architecture behavior_core of cometa16_core is
             pc_out:       in std_logic_vector(15 downto 0);
             alu_out:      in std_logic_vector(15 downto 0);
             
-            inst_hit_out:     in std_logic;
-            data_hit_out:     in std_logic;
+            inst_hit:     in std_logic;
+            data_hit:     in std_logic;
 
             ctrl_wr_main_mem: in std_logic;
-            main_mem_wr_addr: in std_logic_vector(15 downto 0);
-            data_mem_bk_out: in std_logic_vector(63 downto 0);
+            data_mem_to_css: in std_logic_vector(63 downto 0);
 
             main_mem_to_inst: out std_logic_vector(63 downto 0);
             main_mem_to_data: out std_logic_vector(63 downto 0);
-            ctrl_wr_inst_mem_from_main: out std_logic;
-            ctrl_wr_data_mem_from_main: out std_logic;
+            css_wr_inst_mem:  out std_logic;
+            css_wr_data_mem:  out std_logic;
 
             ctrl_wr_pc:   out std_logic
 
@@ -287,8 +288,7 @@ architecture behavior_core of cometa16_core is
     end component;
 
     signal ctrl_wr_main_mem: std_logic;
-    signal main_mem_wr_addr: std_logic_vector(15 downto 0);
-    signal data_mem_bk_out: std_logic_vector(63 downto 0);
+    signal data_mem_to_css: std_logic_vector(63 downto 0);
     signal data_hit_out: std_logic;
     signal data_mem_out: std_logic_vector(15 downto 0);
 
@@ -303,15 +303,11 @@ architecture behavior_core of cometa16_core is
             alu_out: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
 
-            -- Recive the block from main memory
-            main_mem_to_data: in std_logic_vector(63 downto 0);
-            ctrl_wr_data_mem_from_main: in std_logic;
+            css_out: in std_logic_vector(64 downto 0);
+            ccs_wr_mem: in std_logic;
 
-            -- Send the block to main memory
             ctrl_wr_main_mem: out std_logic;
-            main_mem_wr_addr: out std_logic_vector(15 downto 0);
-            data_mem_bk_out: out std_logic_vector(63 downto 0);
-
+            data_mem_to_css: out std_logic_vector(63 downto 0);
             data_hit_out: out std_logic;
             data_mem_out: out std_logic_vector(15 downto 0)
 
@@ -350,9 +346,8 @@ begin
             ctrl_alu         => ctrl_alu,
         
             ctrl_shifter     => ctrl_shifter,
-
-            ctrl_data_mem_use => ctrl_data_mem_use,
-            ctrl_wr_data_mem => ctrl_wr_data_mem
+    		
+            ctrl_data_mem_use => ctrl_data_mem_use
 
         );
     
@@ -383,12 +378,11 @@ begin
             rst => rst,
 
             pc_out => pc_out,
+            main_mem_out => main_mem_to_inst,
+            css_wr_inst_mem => css_wr_inst_mem,
 
-            main_mem_to_inst => main_mem_to_inst,
-            ctrl_wr_inst_mem_from_main => ctrl_wr_inst_mem_from_main,
-
-            inst_hit_out => inst_hit_out,
-            inst_mem_out => inst_mem_out
+            inst_mem_out => inst_mem_out,
+            inst_hit_out => inst_hit_out
 
         );
 
@@ -400,19 +394,19 @@ begin
             pc_out => pc_out,
             alu_out => alu_out,
             
-            inst_hit_out => inst_hit_out,
-            data_hit_out => data_hit_out,
+            inst_hit => inst_hit_out,
+            data_hit => data_hit_out,
 
             ctrl_wr_main_mem => ctrl_wr_main_mem,
-            main_mem_wr_addr => main_mem_wr_addr,
-            data_mem_bk_out => data_mem_bk_out,
+            data_mem_to_css => data_mem_to_css,
 
             main_mem_to_inst => main_mem_to_inst,
             main_mem_to_data => main_mem_to_data,
-            ctrl_wr_inst_mem_from_main => ctrl_wr_inst_mem_from_main,
-            ctrl_wr_data_mem_from_main => ctrl_wr_data_mem_from_main,
+            css_wr_inst_mem => css_wr_inst_mem,
+            css_wr_data_mem => css_wr_data_mem,
 
             ctrl_wr_pc => ctrl_wr_pc
+
         );
 
     rf_registers: cometa16_rf_registers
@@ -521,13 +515,11 @@ begin
             alu_out => alu_out,
             ac_out => ac_out,
 
-            main_mem_to_data => main_mem_to_data,
-            ctrl_wr_data_mem_from_main => ctrl_wr_data_mem_from_main,
+            css_out => main_mem_to_data,
+            ccs_wr_mem => css_wr_data_mem,
 
             ctrl_wr_main_mem => ctrl_wr_main_mem,
-            main_mem_wr_addr => main_mem_wr_addr,
-            data_mem_bk_out => data_mem_bk_out,
-
+            data_mem_to_css => data_mem_to_css,
             data_hit_out => data_hit_out,
             data_mem_out => data_mem_out
 
