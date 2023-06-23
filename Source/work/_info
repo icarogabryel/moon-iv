@@ -163,7 +163,7 @@ Z33 !s110 1687482587
 !i10b 1
 Z34 !s108 1687482587.000000
 Z35 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_core.vhdl|
-!s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_core.vhdl|
+Z36 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_core.vhdl|
 !i113 1
 R14
 R15
@@ -184,42 +184,61 @@ R33
 !i10b 1
 R34
 R35
-Z36 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_core.vhdl|
+R36
 !i113 1
 R14
 R15
 Ecometa16_css
-w1687137466
+Z37 w1687483932
 R3
 R4
-!i122 58
+!i122 77
 R5
-8C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_css.vhdl
-FC:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_css.vhdl
+Z38 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_css.vhdl
+Z39 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_css.vhdl
 l0
-Z37 L17 1
-V@hD50C:PdPOaUH`POdfB:2
-!s100 ;BMh?2jNHflF<hG6L^<Fl3
+L4 1
+VId7j;C5?ibGRFQ=c5F]bZ1
+!s100 VJ=S1>;EkeBQTOXBj1F<c1
 R9
 33
-R20
+Z40 !s110 1687483937
 !i10b 1
-R27
-!s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_css.vhdl|
-!s107 C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_css.vhdl|
+Z41 !s108 1687483937.000000
+Z42 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_css.vhdl|
+!s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_css.vhdl|
+!i113 1
+R14
+R15
+Abehavior_css
+R3
+R4
+DEx4 work 12 cometa16_css 0 22 Id7j;C5?ibGRFQ=c5F]bZ1
+!i122 77
+l36
+L25 84
+VfagE_jSA1LVW<2GiDMH9a3
+!s100 :dUgc>JK5j;_O]6WdRD5^0
+R9
+33
+R40
+!i10b 1
+R41
+R42
+Z43 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_css.vhdl|
 !i113 1
 R14
 R15
 Ecometa16_data_mem
-Z38 w1685533898
+Z44 w1685533898
 R1
 R2
 R3
 R4
 !i122 59
 R5
-Z39 8C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl
-Z40 FC:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl
+Z45 8C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl
+Z46 FC:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl
 l0
 R8
 ViXNZJcDoB00[HSXNT7]AH2
@@ -229,8 +248,8 @@ R9
 R20
 !i10b 1
 R27
-Z41 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl|
-Z42 !s107 C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl|
+Z47 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl|
+Z48 !s107 C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl|
 !i113 1
 R14
 R15
@@ -250,32 +269,32 @@ R9
 R20
 !i10b 1
 R27
-R41
-R42
+R47
+R48
 !i113 1
 R14
 R15
 Ecometa16_hilo
-Z43 w1684524306
+Z49 w1684524306
 R1
 R2
 R3
 R4
 !i122 60
 R5
-Z44 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl
-Z45 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl
+Z50 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl
+Z51 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl
 l0
 R8
 V`d>=MK=9cWm<4UlVj:d0l2
 !s100 cHUTd>ILRcI?h9VfBAZZP1
 R9
 33
-Z46 !s110 1687137898
+Z52 !s110 1687137898
 !i10b 1
-Z47 !s108 1687137898.000000
-Z48 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl|
-Z49 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl|
+Z53 !s108 1687137898.000000
+Z54 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl|
+Z55 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl|
 !i113 1
 R14
 R15
@@ -292,35 +311,35 @@ V4>Oo@PlhJ=diFD?D6Q2M`0
 !s100 T[_0bDYD;]]gPBdM:gW_F1
 R9
 33
-R46
+R52
 !i10b 1
-R47
-R48
-R49
+R53
+R54
+R55
 !i113 1
 R14
 R15
 Ecometa16_inst_mem
-Z50 w1685534250
+Z56 w1685534250
 R1
 R2
 R3
 R4
 !i122 61
 R5
-Z51 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl
-Z52 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl
+Z57 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl
+Z58 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl
 l0
 R8
 V6c[mcE6TNnf?8iYnIZDMT1
 !s100 [V;U5YC6kk[?<7n]k0HdG1
 R9
 33
-R46
+R52
 !i10b 1
-R47
-Z53 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl|
-Z54 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl|
+R53
+Z59 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl|
+Z60 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl|
 !i113 1
 R14
 R15
@@ -337,35 +356,35 @@ VPTBl<W:IKRnmi`9nzD2d51
 !s100 lG6KSbU_4TA8D`1TR4EWN0
 R9
 33
-R46
+R52
 !i10b 1
-R47
 R53
-R54
+R59
+R60
 !i113 1
 R14
 R15
 Ecometa16_main_mem
-Z55 w1685539289
+Z61 w1685539289
 R1
 R2
 R3
 R4
 !i122 62
 R5
-Z56 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl
-Z57 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl
+Z62 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl
+Z63 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl
 l0
 L19 1
 VhJ`lof_Iba:_`Z?[zP[7[0
 !s100 kKS4]h2X;0Jd1Wlhmi@iA0
 R9
 33
-R46
+R52
 !i10b 1
-R47
-Z58 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl|
-Z59 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl|
+R53
+Z64 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl|
+Z65 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl|
 !i113 1
 R14
 R15
@@ -382,35 +401,35 @@ Vfgan`XR_fA05<E9=SADND2
 !s100 LDF3N15z:HF5RBVhQ7mYZ1
 R9
 33
-R46
+R52
 !i10b 1
-R47
-R58
-R59
+R53
+R64
+R65
 !i113 1
 R14
 R15
 Ecometa16_pc
-Z60 w1685016822
+Z66 w1685016822
 R1
 R2
 R3
 R4
 !i122 64
 R5
-Z61 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl
-Z62 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl
+Z67 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl
+Z68 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl
 l0
 R8
 VR7S9Df4VU0:YJBJ4YFoHE0
 !s100 l9>J?B9kG@84[lHj4jXG93
 R9
 33
-Z63 !s110 1687137899
+Z69 !s110 1687137899
 !i10b 1
-R47
-Z64 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl|
-Z65 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl|
+R53
+Z70 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl|
+Z71 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl|
 !i113 1
 R14
 R15
@@ -427,35 +446,35 @@ VSgU4OBLCPa6fjN9^>b9h:0
 !s100 CEdD5@lX=3nUDz[_`ZoEf0
 R9
 33
-R63
+R69
 !i10b 1
-R47
-R64
-R65
+R53
+R70
+R71
 !i113 1
 R14
 R15
 Ecometa16_rf_registers
-Z66 w1685484725
+Z72 w1685484725
 R1
 R2
 R3
 R4
 !i122 65
 R5
-Z67 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl
-Z68 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl
+Z73 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl
+Z74 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl
 l0
 R8
 V?gGSkW:PilQLT?AO`3@:_3
 !s100 [Nc;jT=7?9dGQ3H1dQT4S0
 R9
 33
-R63
+R69
 !i10b 1
-Z69 !s108 1687137899.000000
-Z70 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl|
-Z71 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl|
+Z75 !s108 1687137899.000000
+Z76 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl|
+Z77 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_rf_registers.vhdl|
 !i113 1
 R14
 R15
@@ -472,39 +491,39 @@ Vz?d<LiiJF_a3LgBLnMH:Y2
 !s100 ^78bb1XBD6Y70fTijO@?Y2
 R9
 33
-R63
-!i10b 1
 R69
-R70
-R71
+!i10b 1
+R75
+R76
+R77
 !i113 1
 R14
 R15
 Ecometa16_shifter
-Z72 w1684407979
-Z73 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z78 w1684407979
+Z79 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 R3
 R4
 !i122 66
 R5
-Z74 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl
-Z75 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl
+Z80 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl
+Z81 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl
 l0
 R8
 VXI4HPzDiDRzOeV@:SN2VC2
 !s100 QL`<FRL;Bi1k^lOzaz4CO0
 R9
 33
-R63
-!i10b 1
 R69
-Z76 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl|
-Z77 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl|
+!i10b 1
+R75
+Z82 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl|
+Z83 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_shifter.vhdl|
 !i113 1
 R14
 R15
 Abehavior_shifter
-R73
+R79
 R3
 R4
 DEx4 work 16 cometa16_shifter 0 22 XI4HPzDiDRzOeV@:SN2VC2
@@ -515,33 +534,33 @@ ViH95YhCX=MCLSjzASa0gH0
 !s100 9JG9[_Tic9GN0f0kW`ned1
 R9
 33
-R63
-!i10b 1
 R69
-R76
-R77
+!i10b 1
+R75
+R82
+R83
 !i113 1
 R14
 R15
 Ecometa16_sign_extend
-R72
+R78
 R3
 R4
 !i122 67
 R5
-Z78 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl
-Z79 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl
+Z84 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl
+Z85 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl
 l0
-R37
+Z86 L17 1
 VIRC?THf:UF`nPiKk5XXa;2
 !s100 ESjXGg4eVgdmlaO]c0EhT2
 R9
 33
-R63
-!i10b 1
 R69
-Z80 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl|
-Z81 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl|
+!i10b 1
+R75
+Z87 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl|
+Z88 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_sign_extend.vhdl|
 !i113 1
 R14
 R15
@@ -556,35 +575,35 @@ V3=k8E<zo_PbkkgihAfmBO0
 !s100 ;XBcchn^Ub81Ia0H5dbF_3
 R9
 33
-R63
-!i10b 1
 R69
-R80
-R81
+!i10b 1
+R75
+R87
+R88
 !i113 1
 R14
 R15
 Ecometa16_testbench
-Z82 w1684540750
+Z89 w1684540750
 R1
 R2
 R3
 R4
 !i122 68
 R5
-Z83 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl
-Z84 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl
+Z90 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl
+Z91 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl
 l0
 R8
 V:`7Y[TO^7S=9bU`<6WZGA3
 !s100 FMNKQ@2<Q9@OH9@fd9MG]2
 R9
 33
-R63
-!i10b 1
 R69
-Z85 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl|
-Z86 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl|
+!i10b 1
+R75
+Z92 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl|
+Z93 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_testbench.vhdl|
 !i113 1
 R14
 R15
@@ -601,11 +620,11 @@ V:=7@fVCJmeQ6c]]<^oD6F1
 !s100 zg=i><PNi3[<4a;mBWLIG0
 R9
 33
-R63
-!i10b 1
 R69
-R85
-R86
+!i10b 1
+R75
+R92
+R93
 !i113 1
 R14
 R15
@@ -613,21 +632,21 @@ Popcodes
 R3
 R4
 !i122 63
-R72
+R78
 R5
-Z87 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl
-Z88 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl
+Z94 8C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl
+Z95 FC:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl
 l0
-R37
+R86
 V[Ng18;U]=]b>[0^A`=Q=B2
 !s100 zK=YHfezk]>VZ@_ij4l`33
 R9
 33
-R46
+R52
 !i10b 1
-R47
-Z89 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl|
-Z90 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl|
+R53
+Z96 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl|
+Z97 !s107 C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_opcodes.vhdl|
 !i113 1
 R14
 R15
@@ -642,11 +661,11 @@ V8FJIYTYPmkdg?ajKJDj5@1
 !s100 Jmk:e7M?GJPYc^^ZdcGDN1
 R9
 33
-R46
+R52
 !i10b 1
-R47
-R89
-R90
+R53
+R96
+R97
 !i113 1
 R14
 R15
