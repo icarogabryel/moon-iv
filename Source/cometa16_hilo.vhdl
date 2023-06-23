@@ -48,7 +48,7 @@ begin
 
     with ctrl_src_hilo select src_hilo_mux <=
         hi_out(15 downto 0) & ac_out(15 downto 0) when "00",
-        ac_out(15 downto 0) & lo_out(15 downto 1) when "01",
+        ac_out(15 downto 0) & lo_out(15 downto 0) when "01",
         src_shifter_mux(31 downto 0)              when "11",
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"        when others;
 
