@@ -18,13 +18,24 @@ use ieee.std_logic_unsigned.all;
 entity cometa16_core is
     port(
         clk: in std_logic;
-        rst: in std_logic
+        rst: in std_logic;
+
+        core_in: in std_logic_vector(130 downto 0);
+        core_out: out std_logic_vector(114 downto 0)
         
     );
 
 end cometa16_core;
 
 architecture behavior_core of cometa16_core is
+    -- Main memory signals 
+    signal main_mem_to_inst: std_logic_vector(63 downto 0);
+    signal main_mem_to_data: std_logic_vector(63 downto 0);
+    signal ctrl_wr_inst_mem_from_main: std_logic;
+    signal ctrl_wr_data_mem_from_main: std_logic;
+    signal ctrl_wr_pc: std_logic;
+
+    -- Controller signals
     signal ctrl_dvc:         std_logic_vector(2 downto 0);
     signal ctrl_dvi:         std_logic_vector(1 downto 0);
 
@@ -125,39 +136,7 @@ architecture behavior_core of cometa16_core is
         );
 
     end component;
-
-    signal main_mem_to_inst: std_logic_vector(63 downto 0);
-    signal main_mem_to_data: std_logic_vector(63 downto 0);
-    signal ctrl_wr_inst_mem_from_main: std_logic;
-    signal ctrl_wr_data_mem_from_main: std_logic;
-    signal ctrl_wr_pc: std_logic;
-
-    component cometa16_main_mem is
-        port(
-            clk: in std_logic;
-            rst: in std_logic;
-
-            pc_out:       in std_logic_vector(15 downto 0);
-            alu_out:      in std_logic_vector(15 downto 0);
-            
-            inst_hit_out:     in std_logic;
-            data_hit_out:     in std_logic;
-
-            ctrl_wr_main_mem: in std_logic;
-            main_mem_wr_addr: in std_logic_vector(15 downto 0);
-            data_mem_bk_out: in std_logic_vector(63 downto 0);
-
-            main_mem_to_inst: out std_logic_vector(63 downto 0);
-            main_mem_to_data: out std_logic_vector(63 downto 0);
-            ctrl_wr_inst_mem_from_main: out std_logic;
-            ctrl_wr_data_mem_from_main: out std_logic;
-
-            ctrl_wr_pc:   out std_logic
-
-        );
-
-    end component;
-
+    
     signal opcode:   std_logic_vector(5 downto 0);
     signal ac_addr:  std_logic_vector(1 downto 0);
     signal rf1_addr: std_logic_vector(3 downto 0);
@@ -320,6 +299,14 @@ architecture behavior_core of cometa16_core is
     end component;
 
 begin
+    core_out <= inst_hit_out & data_hit_out & pc_out & alu_out & ctrl_wr_main_mem & main_mem_wr_addr & data_mem_bk_out;
+
+    ctrl_wr_pc                 <= core_in(130);
+    ctrl_wr_inst_mem_from_main <= core_in(129);
+    main_mem_to_inst           <= core_in(128 downto 65);
+    ctrl_wr_data_mem_from_main <= core_in(64);
+    main_mem_to_data           <= core_in(63 downto 0);
+
     opcode   <= inst_mem_out(15 downto 10);
     ac_addr  <= inst_mem_out(9 downto 8);
     rf1_addr <= inst_mem_out(7 downto 4);
@@ -390,29 +377,6 @@ begin
             inst_hit_out => inst_hit_out,
             inst_mem_out => inst_mem_out
 
-        );
-
-    main_mem: cometa16_main_mem
-        port map(
-            clk => clk,
-            rst => rst,
-
-            pc_out => pc_out,
-            alu_out => alu_out,
-            
-            inst_hit_out => inst_hit_out,
-            data_hit_out => data_hit_out,
-
-            ctrl_wr_main_mem => ctrl_wr_main_mem,
-            main_mem_wr_addr => main_mem_wr_addr,
-            data_mem_bk_out => data_mem_bk_out,
-
-            main_mem_to_inst => main_mem_to_inst,
-            main_mem_to_data => main_mem_to_data,
-            ctrl_wr_inst_mem_from_main => ctrl_wr_inst_mem_from_main,
-            ctrl_wr_data_mem_from_main => ctrl_wr_data_mem_from_main,
-
-            ctrl_wr_pc => ctrl_wr_pc
         );
 
     rf_registers: cometa16_rf_registers
