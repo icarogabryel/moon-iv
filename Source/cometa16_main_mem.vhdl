@@ -44,7 +44,6 @@ end cometa16_main_mem;
 
 architecture behavior_main_mem of cometa16_main_mem is
     type memory is array(0 to 63, 0 to 3) of std_logic_vector(15 downto 0);
-    signal main_mem: memory;
 
     signal rd_addr: std_logic_vector(15 downto 0);
     signal wr_cache_mem: std_logic;
@@ -80,6 +79,8 @@ architecture behavior_main_mem of cometa16_main_mem is
         return temp_main_memory;
 
     end function read_main_memory_file;
+
+    signal main_mem: memory := read_main_memory_file("memories/main_mem.txt");
 
 begin
     ctrl_wr_pc <= inst_hit_out and data_hit_out;

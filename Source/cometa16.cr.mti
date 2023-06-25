@@ -25,7 +25,7 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity cometa16_controller
 -- Compiling architecture behavior_controller of cometa16_controller
 
-} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_data_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none {C:\Users\icaro\Documents\GitHub\cometa16\Source\cometa16_data_mem.vhdl}
+} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_data_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_data_mem.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -56,6 +56,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling architecture behavior_alu of cometa16_alu
 -- Loading package STD_LOGIC_UNSIGNED
 
+} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_main_mem.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_main_mem
+-- Compiling architecture behavior_main_mem of cometa16_main_mem
+
 } {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_pc.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -65,6 +75,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package STD_LOGIC_UNSIGNED
 -- Compiling entity cometa16_pc
 -- Compiling architecture behavior_pc of cometa16_pc
+
+} {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_hilo.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_hilo
+-- Compiling architecture behavior_hilo of cometa16_hilo
 
 } {} {}} C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/Documents/GitHub/cometa16/Source/cometa16_inst_mem.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
