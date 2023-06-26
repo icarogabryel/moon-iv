@@ -37,19 +37,21 @@ architecture behavior_datapath of cometa16_datapath is
 
     component cometa16_css is
         port(
-        core0_in:     out std_logic_vector(130 downto 0);
-        core0_out:    in std_logic_vector(114 downto 0);
+        rst: in std_logic;
 
-        core1_in:     out std_logic_vector(130 downto 0);
-        core1_out:    in std_logic_vector(114 downto 0);
+        core0_in: out std_logic_vector(130 downto 0);
+        core0_out: in std_logic_vector(114 downto 0);
 
-        core2_in:     out std_logic_vector(130 downto 0);
-        core2_out:    in std_logic_vector(114 downto 0);
+        core1_in: out std_logic_vector(130 downto 0);
+        core1_out: in std_logic_vector(114 downto 0);
 
-        core3_in:     out std_logic_vector(130 downto 0);
-        core3_out:    in std_logic_vector(114 downto 0);
+        core2_in: out std_logic_vector(130 downto 0);
+        core2_out: in std_logic_vector(114 downto 0);
 
-        main_mem_in:  out std_logic_vector(114 downto 0);
+        core3_in: out std_logic_vector(130 downto 0);
+        core3_out: in std_logic_vector(114 downto 0);
+
+        main_mem_in: out std_logic_vector(114 downto 0);
         main_mem_out: in std_logic_vector(130 downto 0)
 
     );
@@ -127,6 +129,8 @@ begin
     
     css: cometa16_css
         port map(
+            rst => rst,
+
             core0_in => core0_in,
             core0_out => core0_out,
 
