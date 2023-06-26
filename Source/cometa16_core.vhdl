@@ -20,20 +20,23 @@ entity cometa16_core is
         clk: in std_logic;
         rst: in std_logic;
 
-        core_in: in std_logic_vector(130 downto 0);
-        core_out: out std_logic_vector(114 downto 0)
+        req: out std_logic;
+        core_in: in std_logic_vector(64 downto 0);
+        core_out: out std_logic_vector(97 downto 0)
         
     );
 
 end cometa16_core;
 
 architecture behavior_core of cometa16_core is
+    signal ctrl_wr_pc: std_logic;
+    signal rd_addr: std_logic_vector(15 downto 0);
+
     -- Main memory signals 
     signal main_mem_to_inst: std_logic_vector(63 downto 0);
     signal main_mem_to_data: std_logic_vector(63 downto 0);
     signal ctrl_wr_inst_mem_from_main: std_logic;
     signal ctrl_wr_data_mem_from_main: std_logic;
-    signal ctrl_wr_pc: std_logic;
 
     -- Controller signals
     signal ctrl_dvc:         std_logic_vector(2 downto 0);
@@ -97,18 +100,21 @@ architecture behavior_core of cometa16_core is
 
     component cometa16_pc is
         port(
-            clk, rst: in std_logic;
+            clk: in std_logic;
+            rst: in std_logic;
 
             z_signal:        in std_logic;
             n_signal:        in std_logic;
 
             ctrl_dvc:        in std_logic_vector(2 downto 0);
             ctrl_dvi:        in std_logic_vector(1 downto 0);
-            ctrl_wr_pc:      in std_logic;
 
             rf1_out:         in std_logic_vector(15 downto 0);
             inst_mem_out:    in std_logic_vector(15 downto 0);
             sign_extend_out: in std_logic_vector(15 downto 0);
+
+            inst_hit_out:    in std_logic;
+            data_hit_out:    in std_logic;
 
             pc_out:          out std_logic_vector(15 downto 0);
             pc_plus_one:     out std_logic_vector(15 downto 0)
@@ -283,13 +289,13 @@ architecture behavior_core of cometa16_core is
             ac_out: in std_logic_vector(15 downto 0);
 
             -- Recive the block from main memory
-            main_mem_to_data: in std_logic_vector(63 downto 0);
-            ctrl_wr_data_mem_from_main: in std_logic;
+            main_mem_to_data: in std_logic_vector(63 downto 0);  --css_out
+            ctrl_wr_data_mem_from_main: in std_logic; -- ccs_wr_mem
 
             -- Send the block to main memory
             ctrl_wr_main_mem: out std_logic;
-            main_mem_wr_addr: out std_logic_vector(15 downto 0);
-            data_mem_bk_out: out std_logic_vector(63 downto 0);
+            main_mem_wr_addr: out std_logic_vector(15 downto 0); --wr_addr
+            data_mem_bk_out: out std_logic_vector(63 downto 0); --data_mem_to_css
 
             data_hit_out: out std_logic;
             data_mem_out: out std_logic_vector(15 downto 0)
@@ -299,13 +305,15 @@ architecture behavior_core of cometa16_core is
     end component;
 
 begin
-    core_out <= inst_hit_out & data_hit_out & pc_out & alu_out & ctrl_wr_main_mem & main_mem_wr_addr & data_mem_bk_out;
+    ctrl_wr_pc <= inst_hit_out and data_hit_out;
+    req <= not ctrl_wr_pc;
+    core_out <= (not ctrl_wr_pc) & rd_addr & ctrl_wr_main_mem & main_mem_wr_addr & data_mem_bk_out;
+    rd_addr <= pc_out when data_hit_out = '1' else alu_out;
 
-    ctrl_wr_pc                 <= core_in(130);
-    ctrl_wr_inst_mem_from_main <= core_in(129);
-    main_mem_to_inst           <= core_in(128 downto 65);
-    ctrl_wr_data_mem_from_main <= core_in(64);
-    main_mem_to_data           <= core_in(63 downto 0);
+    main_mem_to_inst <= core_in(63 downto 0) when data_hit_out = '1' else (others => '0');
+    main_mem_to_data <= core_in(63 downto 0) when data_hit_out = '0' else (others => '0');
+    ctrl_wr_inst_mem_from_main <= core_in(64) when data_hit_out = '1' else '0';
+    ctrl_wr_data_mem_from_main <= core_in(64) when data_hit_out = '0' else '0';
 
     opcode   <= inst_mem_out(15 downto 10);
     ac_addr  <= inst_mem_out(9 downto 8);
@@ -353,15 +361,16 @@ begin
 
             ctrl_dvc => ctrl_dvc,
             ctrl_dvi => ctrl_dvi,
-            ctrl_wr_pc => ctrl_wr_pc,
 
             rf1_out => rf1_out,
             inst_mem_out => inst_mem_out,
             sign_extend_out => sign_extend_out,
 
+            inst_hit_out => inst_hit_out,
+            data_hit_out => data_hit_out,
+
             pc_out => pc_out,
             pc_plus_one => pc_plus_one
-
         );
 
     inst_mem: cometa16_inst_mem

@@ -25,11 +25,13 @@ entity cometa16_pc is
 
         ctrl_dvc:        in std_logic_vector(2 downto 0);
         ctrl_dvi:        in std_logic_vector(1 downto 0);
-        ctrl_wr_pc:      in std_logic;
 
         rf1_out:         in std_logic_vector(15 downto 0);
         inst_mem_out:    in std_logic_vector(15 downto 0);
         sign_extend_out: in std_logic_vector(15 downto 0);
+
+        inst_hit_out:    in std_logic;
+        data_hit_out:    in std_logic;
 
         pc_out:          out std_logic_vector(15 downto 0);
         pc_plus_one:     out std_logic_vector(15 downto 0)
@@ -42,8 +44,11 @@ architecture behavior_pc of cometa16_pc is
     signal pc_reg: std_logic_vector(15 downto 0);
     signal take: std_logic;
     signal dvc_mux, dvi_mux: std_logic_vector(15 downto 0);
+    signal ctrl_wr_pc: std_logic;
 
 begin
+    ctrl_wr_pc <= inst_hit_out and data_hit_out;
+
     with ctrl_dvc select take <=
         '0'                               when "000",
         z_signal                          when "001",

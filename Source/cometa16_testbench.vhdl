@@ -18,7 +18,7 @@ use ieee.std_logic_unsigned.all;
 entity cometa16_testbench is end;
 
 architecture behavior_testbench of cometa16_testbench is
-    constant clk_period: time := 40 ns;
+    constant clk_period: time := 1000 ns;
     signal clk_count: integer := 0;
 
     signal clk: std_logic;

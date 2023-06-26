@@ -1,26 +1,28 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
 use ieee.std_logic_unsigned.all;
 
 entity cometa16_css is
     port(
-        rst: in std_logic;
+        clk, rst: in std_logic;
 
-        core0_in: out std_logic_vector(130 downto 0);
-        core0_out: in std_logic_vector(114 downto 0);
+        req0: in std_logic;
+        req1: in std_logic;
+        req2: in std_logic;
+        req3: in std_logic;
 
-        core1_in: out std_logic_vector(130 downto 0);
-        core1_out: in std_logic_vector(114 downto 0);
+        core0_in: out std_logic_vector(64 downto 0);
+        core1_in: out std_logic_vector(64 downto 0);
+        core2_in: out std_logic_vector(64 downto 0);
+        core3_in: out std_logic_vector(64 downto 0);
 
-        core2_in: out std_logic_vector(130 downto 0);
-        core2_out: in std_logic_vector(114 downto 0);
+        core0_out: in std_logic_vector(97 downto 0);
+        core1_out: in std_logic_vector(97 downto 0);
+        core2_out: in std_logic_vector(97 downto 0);
+        core3_out: in std_logic_vector(97 downto 0);
 
-        core3_in: out std_logic_vector(130 downto 0);
-        core3_out: in std_logic_vector(114 downto 0);
-
-        main_mem_in: out std_logic_vector(114 downto 0);
-        main_mem_out: in std_logic_vector(130 downto 0)
+        main_mem_in: out std_logic_vector(97 downto 0);
+        main_mem_out: in std_logic_vector(64 downto 0)
 
     );
 
@@ -28,22 +30,16 @@ end cometa16_css;
 
 architecture behavior_css of cometa16_css is
     signal priority: std_logic_vector(1 downto 0);
-    signal priority_plus_one: integer;
+    signal priority_plus_one: std_logic_vector(1 downto 0);
 
     signal served: std_logic_vector(3 downto 0);
     signal served_ord0, served_ord1, served_ord2, served_ord3: std_logic;
     signal served_desord0, served_desord1, served_desord2, served_desord3: std_logic;
 
     -- request signal ordeneated by priority
-    signal req0, req1, req2, req3: std_logic;
     signal req_ord0, req_ord1, req_ord2, req_ord3: std_logic;
 
 begin
-    req0 <= (not core0_out(114)) or (not core0_out(113));
-    req1 <= (not core1_out(114)) or (not core1_out(113));
-    req2 <= (not core2_out(114)) or (not core2_out(113));
-    req3 <= (not core3_out(114)) or (not core3_out(113));
-
     -- requests priority ordenation top to down
     with priority select req_ord0 <=
         req0 when "00",
@@ -111,25 +107,25 @@ begin
     served <= served_desord0 & served_desord1 & served_desord2 & served_desord3;
 
     -- priority write process
-    priority_plus_one <= conv_integer(priority) + 1;
+    priority_plus_one <= priority + 1;
 
-    reg: process (rst)
+    reg: process (clk, rst)
 
     begin
         if (rst = '1') then
             priority <= "00";
 
         elsif (req0'event and req0 = '0') then
-            priority <= std_logic_vector(to_unsigned(priority_plus_one mod 4, 2));
+            priority <= priority_plus_one(1 downto 0);
 
         elsif (req1'event and req1 = '0') then
-            priority <= std_logic_vector(to_unsigned(priority_plus_one mod 4, 2));
+            priority <= priority_plus_one(1 downto 0);
 
         elsif (req2'event and req2 = '0') then
-            priority <= std_logic_vector(to_unsigned(priority_plus_one mod 4, 2));
+            priority <= priority_plus_one(1 downto 0);
 
         elsif (req3'event and req3 = '0') then
-            priority <= std_logic_vector(to_unsigned(priority_plus_one mod 4, 2));
+            priority <= priority_plus_one(1 downto 0);
 
         end if;
 
@@ -137,19 +133,19 @@ begin
     
     -- memory to core data
     with served select core0_in <=
-        main_mem_out    when "1000",
+        main_mem_out         when "1000",
         (others => '0') when others;
 
     with served select core1_in <=
-        main_mem_out    when "0100",
+        main_mem_out         when "0100",
         (others => '0') when others;
 
     with served select core2_in <=
-        main_mem_out    when "0010",
+        main_mem_out         when "0010",
         (others => '0') when others;
 
     with served select core3_in <=
-        main_mem_out    when "0001",
+        main_mem_out         when "0001",
         (others => '0') when others;
 
     -- core to memory data
