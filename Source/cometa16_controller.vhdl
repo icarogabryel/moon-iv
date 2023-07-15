@@ -52,9 +52,7 @@ end cometa16_controller;
 architecture behavior_controller of cometa16_controller is
 
 begin
-    process(opcode)
-
-    begin
+    process(opcode) begin
         case opcode is
             when nope_opcode =>
 
@@ -82,6 +80,58 @@ begin
             ctrl_wr_data_mem <= '0';
             ctrl_data_mem_use <= '0';
 
+            when nota_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0010";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when notb_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0011";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+            
             when add_opcode =>
 
             ctrl_dvc         <= "000";
@@ -107,6 +157,267 @@ begin
 
             ctrl_wr_data_mem <= '0';
             ctrl_data_mem_use <= '0';
+
+            when sub_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0101";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when and_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0110";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when or_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0111";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when xor_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "1000";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when nand_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "1000";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when nor_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "1010";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when xnor_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "1011";
+        
+            ctrl_shifter     <= "00";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when sll_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0000";
+        
+            ctrl_shifter     <= "01";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when srl_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0000";
+        
+            ctrl_shifter     <= "10";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when sra_opcode =>
+
+            ctrl_dvc         <= "000";
+            ctrl_dvi         <= "00";
+
+            ctrl_stk         <= "00";
+            ctrl_wr_rf       <= '0';
+            ctrl_src_rf      <= '0';
+        
+            ctrl_wr_ac       <= '1';
+            ctrl_src_ac      <= "000";
+        
+            ctrl_wr_hilo     <= '0';
+            ctrl_src_hilo    <= "00";
+        
+            ctrl_sign_extend <= "00";
+        
+            ctrl_src_alu_a   <= '0';
+            ctrl_src_alu_b   <= "00";
+            ctrl_alu         <= "0000";
+        
+            ctrl_shifter     <= "11";
+
+            ctrl_wr_data_mem <= '0';
+            ctrl_data_mem_use <= '0';
+
 
             when lwr_opcode =>
 

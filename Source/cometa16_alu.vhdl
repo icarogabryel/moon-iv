@@ -56,18 +56,17 @@ begin
         out_mux_a(15 downto 0)                             when "0000",
         out_mux_b(15 downto 0)                             when "0001",
 
-        not out_mux_a(15 downto 0)                         when "0010",
-        not out_mux_b(15 downto 0)                         when "0011",
+        out_mux_a(15 downto 0) +    out_mux_b(15 downto 0) when "0010",
+        out_mux_a(15 downto 0) -    out_mux_b(15 downto 0) when "0011",
 
-        out_mux_a(15 downto 0) +    out_mux_b(15 downto 0) when "0100",
-        out_mux_a(15 downto 0) -    out_mux_b(15 downto 0) when "0101",
+        not out_mux_a(15 downto 0)                         when "0100",
 
-        out_mux_a(15 downto 0) and  out_mux_b(15 downto 0) when "0110",
-        out_mux_a(15 downto 0) or   out_mux_b(15 downto 0) when "0111",
-        out_mux_a(15 downto 0) xor  out_mux_b(15 downto 0) when "1000",
-        out_mux_a(15 downto 0) nand out_mux_b(15 downto 0) when "1001",
-        out_mux_a(15 downto 0) nor  out_mux_b(15 downto 0) when "1010",
-        out_mux_a(15 downto 0) xnor out_mux_b(15 downto 0) when "1011",
+        out_mux_a(15 downto 0) and  out_mux_b(15 downto 0) when "0101",
+        out_mux_a(15 downto 0) or   out_mux_b(15 downto 0) when "0110",
+        out_mux_a(15 downto 0) xor  out_mux_b(15 downto 0) when "0111",
+        out_mux_a(15 downto 0) nand out_mux_b(15 downto 0) when "1000",
+        out_mux_a(15 downto 0) nor  out_mux_b(15 downto 0) when "1001",
+        out_mux_a(15 downto 0) xnor out_mux_b(15 downto 0) when "1010",
 
         "XXXXXXXXXXXXXXXX"                                 when others;
 

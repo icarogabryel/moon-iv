@@ -32,8 +32,8 @@ architecture behavior_shifter of cometa16_shifter is
 begin
     with ctrl_shifter select shifter_out <=
         alu_out(15 downto 0)                                              when "00",
-        std_logic_vector(signed(alu_out) srl to_integer(unsigned(shamt))) when "01",
-        std_logic_vector(signed(alu_out) sll to_integer(unsigned(shamt))) when "10",
+        std_logic_vector(signed(alu_out) sll to_integer(unsigned(shamt))) when "01",
+        std_logic_vector(signed(alu_out) srl to_integer(unsigned(shamt))) when "10",
 		std_logic_vector(signed(alu_out) sra to_integer(unsigned(shamt))) when "11",
         "XXXXXXXXXXXXXXXX"                                                when others;
 

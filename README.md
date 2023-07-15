@@ -1,5 +1,5 @@
-# COMETA 16 G2
-## Computer for Every Task Architecture 16 Bits Gen 2
+# COMETA MK II
+## Computer for Every Task Architecture Mark II
 
 Developed by Ícaro Gabryel
 GitHub:
@@ -9,9 +9,7 @@ FEDERAL UNIVERSITY OF PIAUI
 NATURE SCIENCE CENTER
 COMPUTING DEPARTMENT
 
-First generation of this architecture is registered in INPI (National Institute of Industrial Property) under the number BR 51 2023 000286 0.
-
-COMETA 16 G2 is as 16 Bit, unicycle computer designed for general purpose.
+COMETA MK II is a 16 Bit, unicycle computer designed for general purpose.
 
 12 bits label
 data mem with modivied bit

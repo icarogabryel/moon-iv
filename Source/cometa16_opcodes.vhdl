@@ -20,10 +20,9 @@ package opcodes is
     -- Logical and Arithmetic Operations
     constant add_opcode:   std_logic_vector(5 downto 0) := "000001";
     constant sub_opcode:   std_logic_vector(5 downto 0) := "000010";
-
-    constant sll_opcode:   std_logic_vector(5 downto 0) := "000011";
-    constant srl_opcode:   std_logic_vector(5 downto 0) := "000100";
-    constant sra_opcode:   std_logic_vector(5 downto 0) := "000101";
+    
+    constant nota_opcode:
+    constant notb_opcode:
 
     constant and_opcode:   std_logic_vector(5 downto 0) := "000110";
     constant or_opcode:    std_logic_vector(5 downto 0) := "000111";
@@ -31,6 +30,10 @@ package opcodes is
     constant nand_opcode:  std_logic_vector(5 downto 0) := "001001";
     constant nor_opcode:   std_logic_vector(5 downto 0) := "001010";
     constant xnor_opcode:  std_logic_vector(5 downto 0) := "001011";
+
+    constant sll_opcode:   std_logic_vector(5 downto 0) := "000011";
+    constant srl_opcode:   std_logic_vector(5 downto 0) := "000100";
+    constant sra_opcode:   std_logic_vector(5 downto 0) := "000101";
 
     constant tasm_opcode:  std_logic_vector(5 downto 0) := "001100";
     constant tasd_opcode:  std_logic_vector(5 downto 0) := "001101";
