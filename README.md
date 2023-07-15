@@ -69,7 +69,8 @@ uses Harvad architecture.
 | Jump                   | jump | 100101 | imm(9-0) | pc = pc(15-10) & imm |
 | Jump and Link          | jal  | 100110 | imm(9-0) | lk = pc + 1; pc = pc(15-10) & imm |
 | Jump Register          | jr   | 100111 | rf1(7-4) | pc = rf1 |
-| Jump Greater Than Zero | jgtz | 101000 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
-| Jump Less Than Zero    | jltz | 101001 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
-| Jump Equal To Zero     | jeqz | 101010 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
-| Jump Not Equal To Zero | jnez | 101011 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
+| Jump Register and Link | jral | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 | 
+| Jump Greater Than Zero | jgtz | 101001 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
+| Jump Less Than Zero    | jltz | 101010 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
+| Jump Equal To Zero     | jeqz | 101011 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
+| Jump Not Equal To Zero | jnez | 101100 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
