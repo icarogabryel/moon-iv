@@ -21,8 +21,7 @@ package opcodes is
     constant add_opcode:   std_logic_vector(5 downto 0) := "000001";
     constant sub_opcode:   std_logic_vector(5 downto 0) := "000010";
     
-    constant nota_opcode:
-    constant notb_opcode:
+    constant not_opcode:
 
     constant and_opcode:   std_logic_vector(5 downto 0) := "000110";
     constant or_opcode:    std_logic_vector(5 downto 0) := "000111";
