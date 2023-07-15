@@ -17,7 +17,7 @@
 | Shift Right Logical                    | srl  | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
 | Shift Right Arithmetic                 | sra  | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
 | Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
-| Test, Sub and Shift for Multiplication | tasd | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
+| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
 | Move To Low                            | mtl  | 001111 | ac(9-8)                       | lo = ac |
 | Move From Low                          | mfl  | 010000 | ac(9-8)                       | ac = lo |
 | Move To High                           | mth  | 010001 | ac(9-8)                       | hi = ac |
@@ -55,7 +55,8 @@
 | Jump                   | jump | 100101 | imm(9-0) | pc = pc(15-10) & imm |
 | Jump and Link          | jal  | 100110 | imm(9-0) | lk = pc + 1; pc = pc(15-10) & imm |
 | Jump Register          | jr   | 100111 | rf1(7-4) | pc = rf1 |
-| Jump Greater Than Zero | jgtz | 101000 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
-| Jump Less Than Zero    | jltz | 101001 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
-| Jump Equal To Zero     | jeqz | 101010 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
-| Jump Not Equal To Zero | jnez | 101011 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
+| Jump Register and Link | jral | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 | 
+| Jump Greater Than Zero | jgtz | 101001 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
+| Jump Less Than Zero    | jltz | 101010 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
+| Jump Equal To Zero     | jeqz | 101011 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
+| Jump Not Equal To Zero | jnez | 101100 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
