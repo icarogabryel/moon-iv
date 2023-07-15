@@ -21,8 +21,8 @@ entity cometa16_controller is
     port(
         opcode:            in std_logic_vector(5 downto 0);
 
-        ctrl_dvc:          out std_logic_vector(2 downto 0);
-        ctrl_dvi:          out std_logic_vector(1 downto 0);
+        ctrl_cj:           out std_logic_vector(2 downto 0);
+        ctrl_ij:           out std_logic_vector(1 downto 0);
 
         ctrl_stk:          out std_logic_vector(1 downto 0);
         ctrl_wr_rf:        out std_logic;
@@ -56,8 +56,8 @@ begin
         case opcode is
             when nope_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -82,8 +82,8 @@ begin
             
             when add_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -108,8 +108,8 @@ begin
 
             when sub_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -134,8 +134,8 @@ begin
 
             when not_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -160,8 +160,8 @@ begin
 
             when and_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -186,8 +186,8 @@ begin
 
             when or_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -212,8 +212,8 @@ begin
 
             when xor_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -238,8 +238,8 @@ begin
 
             when nand_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -264,8 +264,8 @@ begin
 
             when nor_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -290,8 +290,8 @@ begin
 
             when xnor_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -316,8 +316,8 @@ begin
 
             when sll_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -342,8 +342,8 @@ begin
 
             when srl_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -368,8 +368,8 @@ begin
 
             when sra_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -395,8 +395,8 @@ begin
 
             when lwr_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -421,8 +421,8 @@ begin
 
             when swr_opcode =>
 
-            ctrl_dvc          <= "000";
-            ctrl_dvi          <= "00";
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
             ctrl_wr_rf        <= '0';
@@ -447,8 +447,8 @@ begin
 
             when others =>
 
-            ctrl_dvc          <= "XXX";
-            ctrl_dvi          <= "XX";
+            ctrl_cj          <= "XXX";
+            ctrl_ij          <= "XX";
 
             ctrl_stk          <= "XX";
             ctrl_wr_rf        <= 'X';

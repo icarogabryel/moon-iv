@@ -23,8 +23,8 @@ entity cometa16_pc is
         z_signal:        in std_logic;
         n_signal:        in std_logic;
 
-        ctrl_dvc:        in std_logic_vector(2 downto 0);
-        ctrl_dvi:        in std_logic_vector(1 downto 0);
+        ctrl_cj:         in std_logic_vector(2 downto 0);
+        ctrl_ij:         in std_logic_vector(1 downto 0);
 
         rf1_out:         in std_logic_vector(15 downto 0);
         inst_mem_out:    in std_logic_vector(15 downto 0);
@@ -43,13 +43,13 @@ end cometa16_pc;
 architecture behavior_pc of cometa16_pc is
     signal pc_reg: std_logic_vector(15 downto 0);
     signal take: std_logic;
-    signal dvc_mux, dvi_mux: std_logic_vector(15 downto 0);
+    signal cj_mux, ij_mux: std_logic_vector(15 downto 0);
     signal ctrl_wr_pc: std_logic;
 
 begin
     ctrl_wr_pc <= inst_hit_out and data_hit_out;
 
-    with ctrl_dvc select take <=
+    with ctrl_cj select take <=
         '0'                               when "000",
         z_signal                          when "001",
         not z_signal                      when "010",
@@ -57,25 +57,25 @@ begin
         (not Z_signal) and (not N_signal) when "100",
         'X'                               when others;
 
-    with take select dvc_mux <=
+    with take select cj_mux <=
         pc_plus_one                   when '0',
         sign_extend_out + pc_plus_one when '1',
         "XXXXXXXXXXXXXXXX"            when others;
 
-    with ctrl_dvi select dvi_mux <=
-        dvc_mux                                         when "00",
+    with ctrl_ij select ij_mux <=
+        cj_mux                                         when "00",
         pc_reg(15 downto 10) & inst_mem_out(9 downto 0) when "01",
         rf1_out                                         when "11",
         "XXXXXXXXXXXXXXXX"                              when others;
 
-    write_pc_reg: process(clk, rst, dvi_mux)
+    write_pc_reg: process(clk, rst, ij_mux)
     
     begin
         if (rst = '1') then
             pc_reg <= "0000000000000000";
         
         elsif ((clk'event and clk ='1') and (ctrl_wr_pc = '1')) then
-            pc_reg <= dvi_mux;
+            pc_reg <= ij_mux;
         
         end if;
     

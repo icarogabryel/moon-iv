@@ -39,56 +39,56 @@ architecture behavior_core of cometa16_core is
     signal ctrl_wr_data_mem_from_main: std_logic;
 
     -- Controller signals
-    signal ctrl_dvc:         std_logic_vector(2 downto 0);
-    signal ctrl_dvi:         std_logic_vector(1 downto 0);
+    signal ctrl_cj:          std_logic_vector(2 downto 0);
+    signal ctrl_ij:          std_logic_vector(1 downto 0);
 
-    signal ctrl_stk:         std_logic_vector(1 downto 0);
-    signal ctrl_wr_rf:       std_logic;
-    signal ctrl_src_rf:      std_logic;
+    signal ctrl_stk:          std_logic_vector(1 downto 0);
+    signal ctrl_wr_rf:        std_logic;
+    signal ctrl_src_rf:       std_logic;
 
-    signal ctrl_wr_ac:       std_logic;
-    signal ctrl_src_ac:      std_logic_vector(2 downto 0);
+    signal ctrl_wr_ac:        std_logic;
+    signal ctrl_src_ac:       std_logic_vector(2 downto 0);
 
-    signal ctrl_wr_hilo:     std_logic;
-    signal ctrl_src_hilo:    std_logic_vector(1 downto 0);
+    signal ctrl_wr_hilo:      std_logic;
+    signal ctrl_src_hilo:     std_logic_vector(1 downto 0);
 
-    signal ctrl_sign_extend: std_logic_vector(1 downto 0);
+    signal ctrl_sign_extend:  std_logic_vector(1 downto 0);
 
-    signal ctrl_src_alu_a:   std_logic;
-    signal ctrl_src_alu_b:   std_logic_vector(1 downto 0);
-    signal ctrl_alu:         std_logic_vector(3 downto 0);
+    signal ctrl_src_alu_a:    std_logic;
+    signal ctrl_src_alu_b:    std_logic_vector(1 downto 0);
+    signal ctrl_alu:          std_logic_vector(3 downto 0);
 
-    signal ctrl_shifter:     std_logic_vector(1 downto 0);
+    signal ctrl_sh:           std_logic_vector(1 downto 0);
 
-    signal ctrl_wr_data_mem: std_logic;
+    signal ctrl_wr_data_mem:  std_logic;
     signal ctrl_data_mem_use: std_logic;
 
     component cometa16_controller is
         port(
-            opcode:           in std_logic_vector(5 downto 0);
+            opcode:            in std_logic_vector(5 downto 0);
     
-            ctrl_dvc:         out std_logic_vector(2 downto 0);
-            ctrl_dvi:         out std_logic_vector(1 downto 0);
+            ctrl_cj:           out std_logic_vector(2 downto 0);
+            ctrl_ij:           out std_logic_vector(1 downto 0);
     
-            ctrl_stk:         out std_logic_vector(1 downto 0);
-            ctrl_wr_rf:       out std_logic;
-            ctrl_src_rf:      out std_logic;
+            ctrl_stk:          out std_logic_vector(1 downto 0);
+            ctrl_wr_rf:        out std_logic;
+            ctrl_src_rf:       out std_logic;
         
-            ctrl_wr_ac:       out std_logic;
-            ctrl_src_ac:      out std_logic_vector(2 downto 0);
+            ctrl_wr_ac:        out std_logic;
+            ctrl_src_ac:       out std_logic_vector(2 downto 0);
         
-            ctrl_wr_hilo:     out std_logic;
-            ctrl_src_hilo:    out std_logic_vector(1 downto 0);
+            ctrl_wr_hilo:      out std_logic;
+            ctrl_src_hilo:     out std_logic_vector(1 downto 0);
         
-            ctrl_sign_extend: out std_logic_vector(1 downto 0);
+            ctrl_sign_extend:  out std_logic_vector(1 downto 0);
         
-            ctrl_src_alu_a:   out std_logic;
-            ctrl_src_alu_b:   out std_logic_vector(1 downto 0);
-            ctrl_alu:         out std_logic_vector(3 downto 0);
+            ctrl_src_alu_a:    out std_logic;
+            ctrl_src_alu_b:    out std_logic_vector(1 downto 0);
+            ctrl_alu:          out std_logic_vector(3 downto 0);
         
-            ctrl_shifter:     out std_logic_vector(1 downto 0);
+            ctrl_sh:           out std_logic_vector(1 downto 0);
 
-            ctrl_wr_data_mem: out std_logic;
+            ctrl_wr_data_mem:  out std_logic;
             ctrl_data_mem_use: out std_logic
     
         );
@@ -106,8 +106,8 @@ architecture behavior_core of cometa16_core is
             z_signal:        in std_logic;
             n_signal:        in std_logic;
 
-            ctrl_dvc:        in std_logic_vector(2 downto 0);
-            ctrl_dvi:        in std_logic_vector(1 downto 0);
+            ctrl_cj:         in std_logic_vector(2 downto 0);
+            ctrl_ij:         in std_logic_vector(1 downto 0);
 
             rf1_out:         in std_logic_vector(15 downto 0);
             inst_mem_out:    in std_logic_vector(15 downto 0);
@@ -261,7 +261,7 @@ architecture behavior_core of cometa16_core is
 
     component cometa16_shifter is
         port(
-            ctrl_shifter: in std_logic_vector(1 downto 0);
+            ctrl_sh:       in std_logic_vector(1 downto 0);
             shamt:           in std_logic_vector(3 downto 0);
 
             alu_out:         in std_logic_vector(15 downto 0);
@@ -323,31 +323,31 @@ begin
 
     controller: cometa16_controller
         port map(
-            opcode          => opcode,
+            opcode => opcode,
     
-            ctrl_dvc         => ctrl_dvc,
-            ctrl_dvi         => ctrl_dvi,
+            ctrl_cj => ctrl_cj,
+            ctrl_ij => ctrl_ij,
     
-            ctrl_stk         => ctrl_stk,
-            ctrl_wr_rf       => ctrl_wr_rf,
-            ctrl_src_rf      => ctrl_src_rf,
+            ctrl_stk => ctrl_stk,
+            ctrl_wr_rf => ctrl_wr_rf,
+            ctrl_src_rf => ctrl_src_rf,
         
-            ctrl_wr_ac       => ctrl_wr_ac,
-            ctrl_src_ac      => ctrl_src_ac,
+            ctrl_wr_ac => ctrl_wr_ac,
+            ctrl_src_ac => ctrl_src_ac,
         
-            ctrl_wr_hilo     => ctrl_wr_hilo,
-            ctrl_src_hilo    => ctrl_src_hilo,
+            ctrl_wr_hilo => ctrl_wr_hilo,
+            ctrl_src_hilo => ctrl_src_hilo,
         
             ctrl_sign_extend => ctrl_sign_extend,
         
-            ctrl_src_alu_a   => ctrl_src_alu_a,
-            ctrl_src_alu_b   => ctrl_src_alu_b,
-            ctrl_alu         => ctrl_alu,
+            ctrl_src_alu_a => ctrl_src_alu_a,
+            ctrl_src_alu_b => ctrl_src_alu_b,
+            ctrl_alu => ctrl_alu,
         
-            ctrl_shifter     => ctrl_shifter,
+            ctrl_sh => ctrl_sh,
 
-            ctrl_data_mem_use => ctrl_data_mem_use,
-            ctrl_wr_data_mem => ctrl_wr_data_mem
+            ctrl_wr_data_mem => ctrl_wr_data_mem,
+            ctrl_data_mem_use => ctrl_data_mem_use
 
         );
     
@@ -359,8 +359,8 @@ begin
             z_signal => z_signal,
             n_signal => n_signal,
 
-            ctrl_dvc => ctrl_dvc,
-            ctrl_dvi => ctrl_dvi,
+            ctrl_cj => ctrl_cj,
+            ctrl_ij => ctrl_ij,
 
             rf1_out => rf1_out,
             inst_mem_out => inst_mem_out,
@@ -371,6 +371,7 @@ begin
 
             pc_out => pc_out,
             pc_plus_one => pc_plus_one
+
         );
 
     inst_mem: cometa16_inst_mem
@@ -474,7 +475,7 @@ begin
 
     shifter: cometa16_shifter
         port map(
-            ctrl_shifter => ctrl_shifter,
+            ctrl_sh:ifter => ctrl_sh:ifter,
             shamt => rf2_addr,
 
             alu_out => alu_out,
