@@ -1,15 +1,15 @@
--- ||****************************************************************||
--- ||                                                                ||
--- ||   FEDERAL UNIVERSITY OF PIAUI                                  ||
--- ||   NATURE SCIENCE CENTER                                        ||
--- ||   COMPUTING DEPARTMENT                                         ||
--- ||                                                                ||
--- ||   Computer for Every Task Architecture 16 Bits Generation 2    ||
--- ||   COMETA 16 G2                                                 ||
--- ||                                                                ||
--- ||   Developer: Icaro Gabryel de Araujo Silva                     ||
--- ||                                                                ||
--- ||****************************************************************||
+-- ||***************************************************||
+-- ||                                                   ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                     ||
+-- ||   NATURE SCIENCE CENTER                           ||
+-- ||   COMPUTING DEPARTMENT                            ||
+-- ||                                                   ||
+-- ||   Computer for Every Task Architecture Mark II    ||
+-- ||   COMETA MK II                                    ||
+-- ||                                                   ||
+-- ||   Developer: Icaro Gabryel                        ||
+-- ||                                                   ||
+-- ||***************************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -21,8 +21,7 @@ package opcodes is
     constant add_opcode:   std_logic_vector(5 downto 0) := "000001";
     constant sub_opcode:   std_logic_vector(5 downto 0) := "000010";
     
-    constant not_opcode:
-
+    constant not_opcode:   std_logic_vector(5 downto 0) := "000011";
     constant and_opcode:   std_logic_vector(5 downto 0) := "000110";
     constant or_opcode:    std_logic_vector(5 downto 0) := "000111";
     constant xor_opcode:   std_logic_vector(5 downto 0) := "001000";
@@ -80,6 +79,4 @@ package opcodes is
 
 end package;
 
-package body opcodes is
-
-end package body;
+package body opcodes is end package body;

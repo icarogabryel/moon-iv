@@ -1,15 +1,15 @@
--- ||***********************************************************||
--- ||                                                           ||
--- ||   FEDERAL UNIVERSITY OF PIAUI                             ||
--- ||   NATURE SCIENCE CENTER                                   ||
--- ||   COMPUTING DEPARTMENT                                    ||
--- ||                                                           ||
--- ||   Computer for Every Task Architecture 16 Bits Mark II    ||
--- ||   COMETA 16 II                                            ||
--- ||                                                           ||
--- ||   Developer: Icaro Gabryel de Araujo Silva                ||
--- ||                                                           ||
--- ||***********************************************************||
+-- ||***************************************************||
+-- ||                                                   ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI                     ||
+-- ||   NATURE SCIENCE CENTER                           ||
+-- ||   COMPUTING DEPARTMENT                            ||
+-- ||                                                   ||
+-- ||   Computer for Every Task Architecture Mark II    ||
+-- ||   COMETA MK II                                    ||
+-- ||                                                   ||
+-- ||   Developer: Icaro Gabryel                        ||
+-- ||                                                   ||
+-- ||***************************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
