@@ -1,14 +1,16 @@
-# example:
-# add 1 2 3
-# will result in 0000010100100011
-
-def convert_to_fixed_bits(binary_string, num_bits):
+def toBits(binary_string, bits_len):
+    # string with decimal to string with binary
     integer_value = int(binary_string)
     binary_representation = bin(integer_value)[2:]  # Remove o prefixo "0b"
     
-    if len(binary_representation) < num_bits:
-        num_zeros = num_bits - len(binary_representation)
-        binary_representation = '0' * num_zeros + binary_representation
+    # Add zeros to the left
+    if len(binary_representation) < bits_len:
+        num_zeros = bits_len - len(binary_representation)
+        binary_representation = ('0' * num_zeros) + binary_representation
+    
+    # Check if the binary string is bigger than bits_len
+    if len(binary_representation) > bits_len:
+        raise Exception('Binary string is bigger than bits_len')
     
     return binary_representation
 
@@ -18,16 +20,28 @@ with open('input.txt', 'r') as file:
     lines = file.readlines()
 
 for line in lines:
+    line = line.strip()
     inst, parametres = line.split(' ', 1)
+    parametres = parametres.replace(' ', '')
 
     match(inst):
-        case 'nope':
-            result += '0000000000000000\n'
         case 'add':
             p1, p2, p3 = parametres.split(',')
-            result += f'000001{p1}{p2}{p3}'
 
-result += '\n'
+            p1 = toBits(p1[1:], 2)
+            p2 = toBits(p2[1:], 4)
+            p3 = toBits(p3[1:], 4)
+
+            result += f'000001{p1}{p2}{p3}\n'
+        
+        case 'sub':
+            p1, p2, p3 = parametres.split(',')
+
+            p1 = toBits(p1[1:], 2)
+            p2 = toBits(p2[1:], 4)
+            p3 = toBits(p3[1:], 4)
+
+            result += f'000010{p1}{p2}{p3}\n'
 
 with open('output.txt', 'w') as file:
     file.write(result)
