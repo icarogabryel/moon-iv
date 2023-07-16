@@ -22,8 +22,8 @@
 | Move From Low                          | mfl  | 010000 | ac(9-8)                       | ac = lo |
 | Move To High                           | mth  | 010001 | ac(9-8)                       | hi = ac |
 | Move From High                         | mfh  | 010010 | ac(9-8)                       | ac = hi |
-| Move To AC                             | mtac | 010011 | ac(9-8), rf1(7-4)             | rf1 = ac |
-| Move From AC                           | mfac | 010100 | ac(9-8), rf1(7-4)             | ac = rf1 |
+| Move To AC                             | mtac | 010011 | ac(9-8), rf1(7-4)             | ac = rf1 |
+| Move From AC                           | mfac | 010100 | ac(9-8), rf1(7-4)             | rf1 = ac |
 | Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
 
 ## Immediate Operations

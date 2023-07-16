@@ -23,7 +23,8 @@ entity cometa16_rf_registers is
         ctrl_wr_rf: in std_logic;
         ctrl_src_rf: in std_logic;
 
-        ctrl_stk:  in std_logic_vector(1 downto 0);
+        ctrl_stk: in std_logic_vector(1 downto 0);
+		ctrl_lk: in std_logic;
 
         pc_plus_one: in std_logic_vector(15 downto 0);
         ac_out: in std_logic_vector(15 downto 0);
@@ -31,8 +32,8 @@ entity cometa16_rf_registers is
         rf1_addr: in std_logic_vector(3 downto 0);
         rf2_addr: in std_logic_vector(3 downto 0);
 
-        rf1_out : out std_logic_vector(15 downto 0);
-        rf2_out : out std_logic_vector(15 downto 0)
+        rf1_out: out std_logic_vector(15 downto 0);
+        rf2_out: out std_logic_vector(15 downto 0)
 
     );
 
@@ -54,19 +55,24 @@ begin
 
 	rf2_out <= rf_registers(conv_integer(rf2_addr));
 
+	with ctrl_lk select wr_adrr <=
+		rf1_addr when '0',
+		"1111"   when '1',
+		"XXXX"   when others;
+
 	with ctrl_src_rf select src_rf_mux <=
 		pc_plus_one(15 downto 0)     when '0',
-		ac_out(15 downto 0) when '1',
+		ac_out(15 downto 0)          when '1',
 		"XXXXXXXXXXXXXXXX"           when others;
 
 	wr_rf_registers: process(clk, rst, ctrl_wr_rf)
 
 	begin
 		if (rst = '1') then
-			rf_registers(0)  <= "0000000000000001"; -- rf0 
-			rf_registers(1)  <= "0000000000000011"; -- rf1
-			rf_registers(2)  <= "0000000000001000"; -- rf2 
-			rf_registers(3)  <= "0000000000011001"; -- rf3
+			rf_registers(0)  <= "0000000000000000"; -- rf0 
+			rf_registers(1)  <= "0000000000000000"; -- rf1
+			rf_registers(2)  <= "0000000000000000"; -- rf2 
+			rf_registers(3)  <= "0000000000000000"; -- rf3
 
 			rf_registers(4)  <= "0000000000000000"; -- rf4
 			rf_registers(5)  <= "0000000000000000"; -- rf5 
@@ -81,7 +87,7 @@ begin
 			rf_registers(12) <= "0000000000000000"; -- rf12
 			rf_registers(13) <= "0000000000000000"; -- rf13
 			rf_registers(14) <= "0000000000000000"; -- sp
-			rf_registers(15) <= "0000000000000000"; -- link
+			rf_registers(15) <= "0000000000000000"; -- lk
 
 		elsif ((clk'event and clk ='1') and (ctrl_wr_rf = '1') and (ctrl_stk = "00")) then
 			rf_registers(conv_integer(wr_adrr)) <= src_rf_mux;

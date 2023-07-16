@@ -1,2 +1,15 @@
-add &3, $7, $12
-sub &0, $4, $8
+lsi &0, 2
+mfac &0, $0 // coloca o valor 2 no registrador $0. Irá apontar para o endereço na memória
+lsi &0, 255 // coloca o valor 1111111111111111 no registrador &0. Será o conteúdo colocado dentro da memória.
+swr &0, $0 // coloca o valor 1111111111111111 no endereço de memória apontado por $0
+nope
+nope
+lsi &1, 18 // coloca o valor 18 no registrador ac 1. Irá apontar para o endereço na memória
+mfac &1, $1 // move de ac 1 para rf 1
+lsi &2, 100 // coloca o valor 100 no registrador ac 2. Irá ser colocado no endereço na memória
+swr &2, $1 // colocar o valor dentro de ac 2 no endereço de memória apontado por rf 1
+nope
+nope
+nope
+nope
+nope

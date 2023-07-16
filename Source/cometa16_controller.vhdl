@@ -25,6 +25,7 @@ entity cometa16_controller is
         ctrl_ij:           out std_logic_vector(1 downto 0);
 
         ctrl_stk:          out std_logic_vector(1 downto 0);
+        ctrl_lk:           out std_logic;
         ctrl_wr_rf:        out std_logic;
         ctrl_src_rf:       out std_logic;
     
@@ -60,6 +61,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -86,6 +88,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -112,6 +115,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -138,6 +142,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -164,6 +169,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -190,6 +196,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -216,6 +223,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -242,6 +250,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -268,6 +277,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -294,6 +304,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -320,6 +331,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -346,6 +358,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -372,6 +385,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -392,13 +406,69 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 
+            when mfac_opcode =>
 
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '1';
+            ctrl_src_rf       <= '1';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            -- Immediate Operations
+            when lsi_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "11";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "01";
+            ctrl_alu          <= "0001";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            -- Memory Access Operations
             when lwr_opcode =>
 
             ctrl_cj          <= "000";
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -425,6 +495,7 @@ begin
             ctrl_ij          <= "00";
 
             ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
             ctrl_wr_rf        <= '0';
             ctrl_src_rf       <= '0';
         
@@ -451,6 +522,7 @@ begin
             ctrl_ij          <= "XX";
 
             ctrl_stk          <= "XX";
+            ctrl_lk           <= 'X';
             ctrl_wr_rf        <= 'X';
             ctrl_src_rf       <= 'X';
         

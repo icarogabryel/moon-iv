@@ -25,8 +25,8 @@ entity cometa16_main_mem is
         rd_addr: in std_logic_vector(15 downto 0);
 
         ctrl_wr_main_mem: in std_logic;
-        main_mem_wr_addr: in std_logic_vector(15 downto 0); --wr_addr
-        data_mem_bk_out: in std_logic_vector(63 downto 0); --data_mem_to_css
+        main_mem_wr_addr: in std_logic_vector(15 downto 0);
+        data_mem_bk_out: in std_logic_vector(63 downto 0);
 
         main_mem_bk_out: out std_logic_vector(63 downto 0);
         wr_cache_mem: out std_logic

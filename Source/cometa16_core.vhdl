@@ -43,6 +43,7 @@ architecture behavior_core of cometa16_core is
     signal ctrl_ij:          std_logic_vector(1 downto 0);
 
     signal ctrl_stk:          std_logic_vector(1 downto 0);
+    signal ctrl_lk:           std_logic;
     signal ctrl_wr_rf:        std_logic;
     signal ctrl_src_rf:       std_logic;
 
@@ -71,6 +72,7 @@ architecture behavior_core of cometa16_core is
             ctrl_ij:           out std_logic_vector(1 downto 0);
     
             ctrl_stk:          out std_logic_vector(1 downto 0);
+            ctrl_lk:           out std_logic;
             ctrl_wr_rf:        out std_logic;
             ctrl_src_rf:       out std_logic;
         
@@ -160,7 +162,8 @@ architecture behavior_core of cometa16_core is
             ctrl_wr_rf: in std_logic;
             ctrl_src_rf: in std_logic;
     
-            ctrl_stk:  in std_logic_vector(1 downto 0);
+            ctrl_stk: in std_logic_vector(1 downto 0);
+            ctrl_lk: in std_logic;
     
             pc_plus_one: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
@@ -168,8 +171,8 @@ architecture behavior_core of cometa16_core is
             rf1_addr: in std_logic_vector(3 downto 0);
             rf2_addr: in std_logic_vector(3 downto 0);
     
-            rf1_out : out std_logic_vector(15 downto 0);
-            rf2_out : out std_logic_vector(15 downto 0)
+            rf1_out: out std_logic_vector(15 downto 0);
+            rf2_out: out std_logic_vector(15 downto 0)
     
         );
     
@@ -329,6 +332,7 @@ begin
             ctrl_ij => ctrl_ij,
     
             ctrl_stk => ctrl_stk,
+            ctrl_lk => ctrl_lk,
             ctrl_wr_rf => ctrl_wr_rf,
             ctrl_src_rf => ctrl_src_rf,
         
@@ -398,6 +402,7 @@ begin
             ctrl_src_rf => ctrl_src_rf,
 
             ctrl_stk => ctrl_stk,
+            ctrl_lk => ctrl_lk,
 
             pc_plus_one => pc_plus_one,
             ac_out => ac_out,
@@ -475,7 +480,7 @@ begin
 
     shifter: cometa16_shifter
         port map(
-            ctrl_sh:ifter => ctrl_sh:ifter,
+            ctrl_sh => ctrl_sh,
             shamt => rf2_addr,
 
             alu_out => alu_out,
