@@ -52,6 +52,7 @@ architecture behavior_datapath of cometa16_datapath is
     signal core2_in: std_logic_vector(64 downto 0);
     signal core3_in: std_logic_vector(64 downto 0);
 
+    signal served_out: std_logic_vector(3 downto 0);
     signal main_mem_in: std_logic_vector(97 downto 0);
 
     component cometa16_css is
@@ -73,6 +74,8 @@ architecture behavior_datapath of cometa16_datapath is
             core2_out: in std_logic_vector(97 downto 0);
             core3_out: in std_logic_vector(97 downto 0);
 
+            served_out: out std_logic_vector(3 downto 0);
+
             main_mem_in: out std_logic_vector(97 downto 0);
             main_mem_out: in std_logic_vector(64 downto 0)
 
@@ -86,6 +89,8 @@ architecture behavior_datapath of cometa16_datapath is
         port(
             clk: in std_logic;
             rst: in std_logic;
+
+            served_out: in std_logic_vector(3 downto 0);
     
             ctrl_rd_main_mem: in std_logic;
             rd_addr: in std_logic_vector(15 downto 0);
@@ -167,6 +172,7 @@ begin
             core3_in => core3_in,
             core3_out => core3_out,
 
+            served_out => served_out,
             main_mem_in => main_mem_in,
             main_mem_out => main_mem_out
 
@@ -176,6 +182,8 @@ begin
         port map(
             clk => clk,
             rst => rst,
+
+            served_out => served_out,
 
             ctrl_rd_main_mem => main_mem_in(97),
             rd_addr => main_mem_in(96 downto 81),

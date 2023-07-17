@@ -34,6 +34,8 @@ entity cometa16_css is
         core2_out: in std_logic_vector(97 downto 0);
         core3_out: in std_logic_vector(97 downto 0);
 
+        served_out: out std_logic_vector(3 downto 0);
+
         main_mem_in: out std_logic_vector(97 downto 0);
         main_mem_out: in std_logic_vector(64 downto 0)
 
@@ -58,6 +60,7 @@ architecture behavior_css of cometa16_css is
     signal req_ord0, req_ord1, req_ord2, req_ord3: std_logic;
 
 begin
+    served_out <= served_reg;
     -- requests enters
 
     -- requests priority ordenation top to down
@@ -161,24 +164,24 @@ begin
     priority_plus_one <= priority + 1;
     
     -- memory to core data
-    with served select core0_in <=
+    with served_reg select core0_in <=
         main_mem_out         when "1000",
         (others => '0') when others;
 
-    with served select core1_in <=
+    with served_reg select core1_in <=
         main_mem_out         when "0100",
         (others => '0') when others;
 
-    with served select core2_in <=
+    with served_reg select core2_in <=
         main_mem_out         when "0010",
         (others => '0') when others;
 
-    with served select core3_in <=
+    with served_reg select core3_in <=
         main_mem_out         when "0001",
         (others => '0') when others;
 
     -- core to memory data
-    with served select main_mem_in <=
+    with served_reg select main_mem_in <=
         core0_out       when "1000",
         core1_out       when "0100",
         core2_out       when "0010",
