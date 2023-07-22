@@ -188,7 +188,7 @@ architecture behavior_core of cometa16_core is
             ctrl_wr_ac:   in std_logic;
             ctrl_src_ac:  in std_logic_vector(2 downto 0);
     
-            alu_out:      in std_logic_vector(15 downto 0);
+            shifter_out:  in std_logic_vector(15 downto 0);
             data_mem_out: in std_logic_vector(15 downto 0);
             n_signal:     in std_logic;
             hi_out:       in std_logic_vector(15 downto 0);
@@ -264,7 +264,7 @@ architecture behavior_core of cometa16_core is
 
     component cometa16_shifter is
         port(
-            ctrl_sh:       in std_logic_vector(1 downto 0);
+            ctrl_sh:         in std_logic_vector(1 downto 0);
             shamt:           in std_logic_vector(3 downto 0);
 
             alu_out:         in std_logic_vector(15 downto 0);
@@ -422,7 +422,7 @@ begin
             ctrl_wr_ac => ctrl_wr_ac,
             ctrl_src_ac => ctrl_src_ac,
 
-            alu_out => alu_out,
+            shifter_out => shifter_out,
             data_mem_out => data_mem_out,
             n_signal => n_signal,
             hi_out => hi_out,

@@ -102,7 +102,7 @@ begin
         
             ctrl_src_alu_a    <= '0';
             ctrl_src_alu_b    <= "00";
-            ctrl_alu          <= "0100";
+            ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
 

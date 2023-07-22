@@ -23,7 +23,7 @@ entity cometa16_ac_registers is
         ctrl_wr_ac:   in std_logic;
         ctrl_src_ac:  in std_logic_vector(2 downto 0);
 
-        alu_out:      in std_logic_vector(15 downto 0);
+        shifter_out:  in std_logic_vector(15 downto 0);
         data_mem_out: in std_logic_vector(15 downto 0);
         n_signal:     in std_logic;
         hi_out:       in std_logic_vector(15 downto 0);
@@ -44,7 +44,7 @@ architecture behavior_ac_registers of cometa16_ac_registers is
 
 begin
     with ctrl_src_ac select src_ac_mux <=
-        alu_out                      when "000",
+        shifter_out                      when "000",
         data_mem_out                 when "001",
         "000000000000000" & n_signal when "010",
         lo_out                       when "011",

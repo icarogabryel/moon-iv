@@ -14,69 +14,75 @@ def toBits(binary_string, bits_len):
     
     return binary_representation
 
-result = ''
+def compile(openFile, saveFile):
+    result = ''
 
-with open('input2.txt', 'r') as file:
-    lines = file.readlines()
+    with open(openFile, 'r') as file:
+        lines = file.readlines()
 
-for line in lines:
-    line = line.split('//')[0]
-    line = line.strip()
+    for line in lines:
+        line = line.split('//')[0]
+        line = line.strip()
 
-    if(line[:5] == 'nope'):
-        result += '0000000000000000\n'
-        continue
+        if(line[:5] == 'nope'):
+            result += '0000000000000000\n'
+            continue
 
-    inst, parametres = line.split(' ', 1)
-    parametres = parametres.replace(' ', '')
+        inst, parametres = line.split(' ', 1)
+        parametres = parametres.replace(' ', '')
 
-    match(inst):
-        # Logical and Arithmetic
-        case 'add':
-            p1, p2, p3 = parametres.split(',')
+        match(inst):
+            # Logical and Arithmetic
+            case 'add':
+                p1, p2, p3 = parametres.split(',')
 
-            p1 = toBits(p1[1:], 2)
-            p2 = toBits(p2[1:], 4)
-            p3 = toBits(p3[1:], 4)
+                p1 = toBits(p1[1:], 2)
+                p2 = toBits(p2[1:], 4)
+                p3 = toBits(p3[1:], 4)
 
-            result += f'000001{p1}{p2}{p3}\n'
-        
-        case 'sub':
-            p1, p2, p3 = parametres.split(',')
+                result += f'000001{p1}{p2}{p3}\n'
+            
+            case 'sub':
+                p1, p2, p3 = parametres.split(',')
 
-            p1 = toBits(p1[1:], 2)
-            p2 = toBits(p2[1:], 4)
-            p3 = toBits(p3[1:], 4)
+                p1 = toBits(p1[1:], 2)
+                p2 = toBits(p2[1:], 4)
+                p3 = toBits(p3[1:], 4)
 
-            result += f'000010{p1}{p2}{p3}\n'
+                result += f'000010{p1}{p2}{p3}\n'
 
-        case 'mfac':
-            p1, p2 = parametres.split(',')
+            case 'mfac':
+                p1, p2 = parametres.split(',')
 
-            p1 = toBits(p1[1:], 2)
-            p2 = toBits(p2[1:], 4)
+                p1 = toBits(p1[1:], 2)
+                p2 = toBits(p2[1:], 4)
 
-            result += f'010100{p1}{p2}0000\n'
-        
-        # Immediate
-        case 'lsi':
-            p1, p2 = parametres.split(',')
+                result += f'010100{p1}{p2}0000\n'
+            
+            # Immediate
+            case 'lsi':
+                p1, p2 = parametres.split(',')
 
-            p1 = toBits(p1[1:], 2)
-            p2 = toBits(p2, 8)
+                p1 = toBits(p1[1:], 2)
+                p2 = toBits(p2, 8)
 
-            result += f'100000{p1}{p2}\n'
+                result += f'100000{p1}{p2}\n'
 
-        # Memory access
-        case 'swr':
-            p1, p2 = parametres.split(',')
+            # Memory access
+            case 'swr':
+                p1, p2 = parametres.split(',')
 
-            p1 = toBits(p1[1:], 2)
-            p2 = toBits(p2[1:], 4)
+                p1 = toBits(p1[1:], 2)
+                p2 = toBits(p2[1:], 4)
 
-            result += f'100010{p1}{p2}0000\n'
+                result += f'100010{p1}{p2}0000\n'
 
-with open('output.txt', 'w') as file:
-    file.write(result)
+    with open(saveFile, 'w') as file:
+        file.write(result)
+
+fileNameIn = input('Enter file name: ')
+fileNameOut = input('Enter output file name: ')
+
+compile(fileNameIn, fileNameOut)
 
 print('Done!')
