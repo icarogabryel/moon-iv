@@ -44,7 +44,7 @@ architecture behavior_ac_registers of cometa16_ac_registers is
 
 begin
     with ctrl_src_ac select src_ac_mux <=
-        shifter_out                      when "000",
+        shifter_out                  when "000",
         data_mem_out                 when "001",
         "000000000000000" & n_signal when "010",
         lo_out                       when "011",
