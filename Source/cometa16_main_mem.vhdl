@@ -63,7 +63,7 @@ architecture behavior_main_mem of cometa16_main_mem is
                 j := j + 1;
             end if;
 
-        end loop;
+        end;
 
         return temp_main_memory;
 

@@ -23,7 +23,7 @@ entity cometa16_hilo is
         ctrl_wr_hilo:  in std_logic;
         ctrl_src_hilo: in std_logic_vector(1 downto 0);
 
-        alu_out:       in std_logic_vector(15 downto 0);
+        sh_out:       in std_logic_vector(15 downto 0);
         ac_out:        in std_logic_vector(15 downto 0);
 
         lo_out:        out std_logic_vector(15 downto 0);
@@ -42,14 +42,14 @@ architecture behavior_hilo of cometa16_hilo is
 
 begin
     with low_register(0) select src_shifter_mux <=
-        '0' & hi_out(15 downto 0) & lo_out(15 downto 1)  when '0',
-        '0' & alu_out(15 downto 0) & lo_out(15 downto 1) when '1',
+        '0' & hi_out(15 downto 0) & lo_out(15 downto 1) when '0',
+        '0' & sh_out(15 downto 0) & lo_out(15 downto 1) when '1',
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"               when others;
 
     with ctrl_src_hilo select src_hilo_mux <=
-        hi_out(15 downto 0) & ac_out(15 downto 0) when "00",
-        ac_out(15 downto 0) & lo_out(15 downto 0) when "01",
-        src_shifter_mux(31 downto 0)              when "11",
+        src_shifter_mux(31 downto 0)              when "00",
+        hi_out(15 downto 0) & ac_out(15 downto 0) when "01",
+        ac_out(15 downto 0) & lo_out(15 downto 0) when "10",
         "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"        when others;
 
     lo_out <= low_register;

@@ -12,7 +12,7 @@ COMPUTING DEPARTMENT
 COMETA MK II is a 16 Bit, unicycle, multicore processor designed for general purpose. It have two bank registers, memory hierarchy and
 uses Harvad architecture.
 
-A transparency for shift instructions
+A transparency for shift instructions, for move to ac instructionS
 rf receves hit signal because not do pop or push infinity
 
 # COMETA MK II - Instruction Set Architecture

@@ -406,6 +406,195 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 
+            when tasm_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '1';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "11";
+            ctrl_alu          <= "0010";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when tssm_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '1';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "11";
+            ctrl_alu          <= "0011";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when mtl_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '1';
+            ctrl_src_hilo     <= "01";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when mfl_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "011";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when mth_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '1';
+            ctrl_src_hilo     <= "10";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when mfh_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "100";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when mtac_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
             when mfac_opcode =>
 
             ctrl_cj          <= "000";
@@ -427,6 +616,33 @@ begin
             ctrl_src_alu_a    <= '0';
             ctrl_src_alu_b    <= "00";
             ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when slt_opcode =>
+
+            ctrl_cj          <= "000";
+            ctrl_ij          <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "010";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0011";
         
             ctrl_sh           <= "00";
 
