@@ -63,7 +63,7 @@ begin
         "XXXXXXXXXXXXXXXX"            when others;
 
     with ctrl_ij select ij_mux <=
-        cj_mux                                         when "00",
+        cj_mux                                          when "00",
         pc_reg(15 downto 10) & inst_mem_out(9 downto 0) when "01",
         rf1_out                                         when "11",
         "XXXXXXXXXXXXXXXX"                              when others;

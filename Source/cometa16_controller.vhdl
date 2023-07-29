@@ -1059,6 +1059,224 @@ begin
 
             ctrl_wr_data_mem  <= '1';
             ctrl_data_mem_use <= '1';
+			
+			-- Control Operations
+			
+			when jump_opcode =>
+
+            ctrl_cj           <= "000";
+            ctrl_ij           <= "01";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jal_opcode =>
+
+            ctrl_cj           <= "000";
+            ctrl_ij           <= "01";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '1';
+            ctrl_wr_rf        <= '1';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jr_opcode =>
+
+            ctrl_cj           <= "000";
+            ctrl_ij           <= "10";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jral_opcode =>
+
+            ctrl_cj           <= "000";
+            ctrl_ij           <= "10";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '1';
+            ctrl_wr_rf        <= '1';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '0';
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000";
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jgtz_opcode =>
+
+            ctrl_cj           <= "100"; -- not z and not n
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '1'; -- from ac
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jltz_opcode =>
+
+            ctrl_cj           <= "011"; -- n
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '1'; -- from ac
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jeqz_opcode =>
+
+            ctrl_cj           <= "001"; -- z
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '1'; -- from ac
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when jnez_opcode =>
+
+            ctrl_cj           <= "010"; -- not z
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= '1'; -- from ac
+            ctrl_src_alu_b    <= "00";
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
 
             when others =>
 
