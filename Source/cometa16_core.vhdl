@@ -212,7 +212,7 @@ architecture behavior_core of cometa16_core is
             ctrl_wr_hilo:  in std_logic;
             ctrl_src_hilo: in std_logic_vector(1 downto 0);
 
-            alu_out:       in std_logic_vector(15 downto 0);
+            sh_out:       in std_logic_vector(15 downto 0);
             ac_out:        in std_logic_vector(15 downto 0);
 
             lo_out:        out std_logic_vector(15 downto 0);
@@ -441,7 +441,7 @@ begin
             ctrl_wr_hilo => ctrl_wr_hilo,
             ctrl_src_hilo => ctrl_src_hilo,
 
-            alu_out => alu_out,
+            sh_out => shifter_out,
             ac_out => ac_out,
 
             lo_out => lo_out,

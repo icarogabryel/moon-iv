@@ -12,11 +12,12 @@ COMPUTING DEPARTMENT
 COMETA MK II is a 16 Bit, unicycle, multicore processor designed for general purpose. It have two bank registers, memory hierarchy and
 uses Harvad architecture.
 
-A transparency for shift instructions, for move to ac instructionS, for cond Jump instructions
-B transparency for load imm Operations
-AC register recieve wr pc because ac = ac + imm in Immediate instructions
-rf receves hit signal because not do pop or push infinity
-ctrl wr rf need to be eneble to do push and pop Operations
+The ALU have A transparency for shift instructions, move to ac instructionS nad condicional jump instructions.
+Have B transparency for load word register and immediate o perations.
+
+RF and AC registers only write when data memory have hit because pusp/pop and immediate instructions can be executed over and over when the core whaits for a data memory block from maim memory.
+
+ctrl wr rf need to be enable to do push and pop Operations.
 
 # COMETA MK II - Instruction Set Architecture
 
