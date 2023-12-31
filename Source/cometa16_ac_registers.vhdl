@@ -57,7 +57,7 @@ begin
 
     begin
         if (rst = '1') then
-            ac_registers(0) <= "0000000000000000";
+            ac_registers(0) <= "1111111111111111";
             ac_registers(1) <= "0000000000000000";
             ac_registers(2) <= "0000000000000000";
             ac_registers(3) <= "0000000000000000";

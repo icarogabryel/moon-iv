@@ -164,7 +164,9 @@ architecture behavior_core of cometa16_core is
     
             ctrl_stk: in std_logic_vector(1 downto 0);
             ctrl_lk: in std_logic;
-    
+
+            data_hit_out: in std_logic;
+
             pc_plus_one: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
     
@@ -403,6 +405,8 @@ begin
 
             ctrl_stk => ctrl_stk,
             ctrl_lk => ctrl_lk,
+
+            data_hit_out => data_hit_out,
 
             pc_plus_one => pc_plus_one,
             ac_out => ac_out,
