@@ -30,7 +30,7 @@ entity cometa16_alu is
 
         z_signal:        out std_logic;
         n_signal:        out std_logic;
-
+        
         alu_out:         out std_logic_vector(15 downto 0)
     );
 
