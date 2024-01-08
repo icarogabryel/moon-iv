@@ -124,22 +124,22 @@ begin
 
         -- writing in main memory
         elsif ((clk'event and clk = '1') and (ctrl_wr_main_mem = '1')) then
-            if(served_out = "1000") then
+            if (served_out = "1000") then
                 main_mem_0(conv_integer(main_mem_wr_addr)/4, 0) <= data_mem_bk_out(63 downto 48);
                 main_mem_0(conv_integer(main_mem_wr_addr)/4, 1) <= data_mem_bk_out(47 downto 32);
                 main_mem_0(conv_integer(main_mem_wr_addr)/4, 2) <= data_mem_bk_out(31 downto 16);
                 main_mem_0(conv_integer(main_mem_wr_addr)/4, 3) <= data_mem_bk_out(15 downto 0);
-            elsif(served_out = "0100") then
+            elsif (served_out = "0100") then
                 main_mem_1(conv_integer(main_mem_wr_addr)/4, 0) <= data_mem_bk_out(63 downto 48);
                 main_mem_1(conv_integer(main_mem_wr_addr)/4, 1) <= data_mem_bk_out(47 downto 32);
                 main_mem_1(conv_integer(main_mem_wr_addr)/4, 2) <= data_mem_bk_out(31 downto 16);
                 main_mem_1(conv_integer(main_mem_wr_addr)/4, 3) <= data_mem_bk_out(15 downto 0);
-            elsif(served_out = "0010") then
+            elsif (served_out = "0010") then
                 main_mem_2(conv_integer(main_mem_wr_addr)/4, 0) <= data_mem_bk_out(63 downto 48);
                 main_mem_2(conv_integer(main_mem_wr_addr)/4, 1) <= data_mem_bk_out(47 downto 32);
                 main_mem_2(conv_integer(main_mem_wr_addr)/4, 2) <= data_mem_bk_out(31 downto 16);
                 main_mem_2(conv_integer(main_mem_wr_addr)/4, 3) <= data_mem_bk_out(15 downto 0);
-            elsif(served_out = "0001") then
+            elsif (served_out = "0001") then
                 main_mem_3(conv_integer(main_mem_wr_addr)/4, 0) <= data_mem_bk_out(63 downto 48);
                 main_mem_3(conv_integer(main_mem_wr_addr)/4, 1) <= data_mem_bk_out(47 downto 32);
                 main_mem_3(conv_integer(main_mem_wr_addr)/4, 2) <= data_mem_bk_out(31 downto 16);

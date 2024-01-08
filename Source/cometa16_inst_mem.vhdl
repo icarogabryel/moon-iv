@@ -42,7 +42,7 @@ architecture behavior_inst_mem of cometa16_inst_mem is
 begin
     data_pointed <= inst_mem(conv_integer(pc_out(3 downto 2)), conv_integer(pc_out(1 downto 0)));
 
-    hit_process: process (clk, rst)
+    hit_process: process(data_pointed, pc_out)
     
     begin
         if (pc_out(15 downto 4) = data_pointed(27 downto 16)) and (data_pointed(28) = '1') then

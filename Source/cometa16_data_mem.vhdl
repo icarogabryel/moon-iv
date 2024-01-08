@@ -77,7 +77,7 @@ begin
 
     main_mem_wr_addr <= data_mem_data_read(27 downto 16) & shifter_out(3 downto 0);
     
-    hit_process: process (clk, rst)
+    hit_process: process (shifter_out, data_mem_data_read)
     
     begin
         -- check if the label of the address is the same as the label of the

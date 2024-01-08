@@ -33,10 +33,10 @@ architecture behavior_core of cometa16_core is
     signal rd_addr: std_logic_vector(15 downto 0);
 
     -- Main memory signals 
-    signal main_mem_to_inst: std_logic_vector(63 downto 0);
-    signal main_mem_to_data: std_logic_vector(63 downto 0);
-    signal ctrl_wr_inst_mem_from_main: std_logic;
-    signal ctrl_wr_data_mem_from_main: std_logic;
+    signal main_to_inst_bk: std_logic_vector(63 downto 0);
+    signal main_to_data_bk: std_logic_vector(63 downto 0);
+    signal wr_inst_from_main: std_logic;
+    signal wr_data_from_main: std_logic;
 
     -- Controller signals
     signal ctrl_cj:          std_logic_vector(2 downto 0);
@@ -135,8 +135,8 @@ architecture behavior_core of cometa16_core is
 
             pc_out: in std_logic_vector(15 downto 0);
 
-            main_mem_to_inst: in std_logic_vector(63 downto 0);
-            ctrl_wr_inst_mem_from_main: in std_logic;
+            main_to_inst_bk: in std_logic_vector(63 downto 0);
+            wr_inst_from_main: in std_logic;
 
             inst_hit_out: out std_logic;
             inst_mem_out: out std_logic_vector(15 downto 0)
@@ -276,9 +276,9 @@ architecture behavior_core of cometa16_core is
 
     end component;
 
-    signal ctrl_wr_main_mem: std_logic;
+    signal wr_main_from_data: std_logic;
     signal main_mem_wr_addr: std_logic_vector(15 downto 0);
-    signal data_mem_bk_out: std_logic_vector(63 downto 0);
+    signal data_to_main_bk: std_logic_vector(63 downto 0);
     signal data_hit_out: std_logic;
     signal data_mem_out: std_logic_vector(15 downto 0);
 
@@ -290,17 +290,17 @@ architecture behavior_core of cometa16_core is
             ctrl_wr_data_mem: in std_logic;
             ctrl_data_mem_use: in std_logic;
 
-            alu_out: in std_logic_vector(15 downto 0);
+            shifter_out: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
 
             -- Recive the block from main memory
-            main_mem_to_data: in std_logic_vector(63 downto 0);  --css_out
-            ctrl_wr_data_mem_from_main: in std_logic; -- ccs_wr_mem
+            main_to_data_bk: in std_logic_vector(63 downto 0);
+            wr_data_from_main: in std_logic;
 
             -- Send the block to main memory
-            ctrl_wr_main_mem: out std_logic;
-            main_mem_wr_addr: out std_logic_vector(15 downto 0); --wr_addr
-            data_mem_bk_out: out std_logic_vector(63 downto 0); --data_mem_to_css
+            wr_main_from_data: out std_logic;
+            main_mem_wr_addr: out std_logic_vector(15 downto 0);
+            data_to_main_bk: out std_logic_vector(63 downto 0);
 
             data_hit_out: out std_logic;
             data_mem_out: out std_logic_vector(15 downto 0)
@@ -312,13 +312,13 @@ architecture behavior_core of cometa16_core is
 begin
     ctrl_wr_pc <= inst_hit_out and data_hit_out;
     req <= not ctrl_wr_pc;
-    core_out <= (not ctrl_wr_pc) & rd_addr & ctrl_wr_main_mem & main_mem_wr_addr & data_mem_bk_out;
+    core_out <= (not ctrl_wr_pc) & rd_addr & wr_main_from_data & main_mem_wr_addr & data_to_main_bk;
     rd_addr <= pc_out when data_hit_out = '1' else alu_out;
 
-    main_mem_to_inst <= core_in(63 downto 0) when data_hit_out = '1' else (others => '0');
-    main_mem_to_data <= core_in(63 downto 0) when data_hit_out = '0' else (others => '0');
-    ctrl_wr_inst_mem_from_main <= core_in(64) when data_hit_out = '1' else '0';
-    ctrl_wr_data_mem_from_main <= core_in(64) when data_hit_out = '0' else '0';
+    main_to_inst_bk <= core_in(63 downto 0) when data_hit_out = '1' else (others => '0');
+    main_to_data_bk <= core_in(63 downto 0) when data_hit_out = '0' else (others => '0');
+    wr_inst_from_main <= core_in(64) when data_hit_out = '1' else '0';
+    wr_data_from_main <= core_in(64) when data_hit_out = '0' else '0';
 
     opcode   <= inst_mem_out(15 downto 10);
     ac_addr  <= inst_mem_out(9 downto 8);
@@ -387,8 +387,8 @@ begin
 
             pc_out => pc_out,
 
-            main_mem_to_inst => main_mem_to_inst,
-            ctrl_wr_inst_mem_from_main => ctrl_wr_inst_mem_from_main,
+            main_to_inst_bk => main_to_inst_bk,
+            wr_inst_from_main => wr_inst_from_main,
 
             inst_hit_out => inst_hit_out,
             inst_mem_out => inst_mem_out
@@ -501,15 +501,15 @@ begin
             ctrl_wr_data_mem => ctrl_wr_data_mem,
             ctrl_data_mem_use => ctrl_data_mem_use,
 
-            alu_out => alu_out,
+            shifter_out => shifter_out,
             ac_out => ac_out,
 
-            main_mem_to_data => main_mem_to_data,
-            ctrl_wr_data_mem_from_main => ctrl_wr_data_mem_from_main,
+            main_to_data_bk => main_to_data_bk,
+            wr_data_from_main => wr_data_from_main,
 
-            ctrl_wr_main_mem => ctrl_wr_main_mem,
+            wr_main_from_data => wr_main_from_data,
             main_mem_wr_addr => main_mem_wr_addr,
-            data_mem_bk_out => data_mem_bk_out,
+            data_to_main_bk => data_to_main_bk,
 
             data_hit_out => data_hit_out,
             data_mem_out => data_mem_out

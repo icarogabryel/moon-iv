@@ -41,7 +41,7 @@ entity cometa16_pc is
 end cometa16_pc;
 
 architecture behavior_pc of cometa16_pc is
-    signal pc_reg: std_logic_vector(15 downto 0);
+    signal pc_reg: std_logic_vector(15 downto 0) := "0000000000000000";
     signal take: std_logic;
     signal cj_mux, ij_mux: std_logic_vector(15 downto 0);
     signal ctrl_wr_pc: std_logic;
