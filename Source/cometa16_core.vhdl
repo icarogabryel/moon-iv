@@ -13,31 +13,27 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
 
 entity cometa16_core is
     port(
         clk: in std_logic;
-        rst: in std_logic;
+        rst: in std_logic; 
 
-        req: out std_logic;
-        core_in: in std_logic_vector(64 downto 0);
-        core_out: out std_logic_vector(97 downto 0)
+        wr_cache_from_main: in std_logic;
+        main_to_cache_bk: in std_logic_vector(63 downto 0);
+
+        request: out std_logic;
+        main_addr: out std_logic_vector(15 downto 0);
+
+        wr_main_from_data: out std_logic;
+        data_to_main_bk: out std_logic_vector(63 downto 0);
+        main_mem_wr_addr: out std_logic_vector(15 downto 0)
         
     );
 
 end cometa16_core;
 
 architecture behavior_core of cometa16_core is
-    signal ctrl_wr_pc: std_logic;
-    signal rd_addr: std_logic_vector(15 downto 0);
-
-    -- Main memory signals 
-    signal main_to_inst_bk: std_logic_vector(63 downto 0);
-    signal main_to_data_bk: std_logic_vector(63 downto 0);
-    signal wr_inst_from_main: std_logic;
-    signal wr_data_from_main: std_logic;
-
     -- Controller signals
     signal ctrl_cj:          std_logic_vector(2 downto 0);
     signal ctrl_ij:          std_logic_vector(1 downto 0);
@@ -115,8 +111,7 @@ architecture behavior_core of cometa16_core is
             inst_mem_out:    in std_logic_vector(15 downto 0);
             sign_extend_out: in std_logic_vector(15 downto 0);
 
-            inst_hit_out:    in std_logic;
-            data_hit_out:    in std_logic;
+            hit_signal:      in std_logic;
 
             pc_out:          out std_logic_vector(15 downto 0);
             pc_plus_one:     out std_logic_vector(15 downto 0)
@@ -165,7 +160,7 @@ architecture behavior_core of cometa16_core is
             ctrl_stk: in std_logic_vector(1 downto 0);
             ctrl_lk: in std_logic;
 
-            data_hit_out: in std_logic;
+            hit_signal: in std_logic;
 
             pc_plus_one: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
@@ -276,9 +271,6 @@ architecture behavior_core of cometa16_core is
 
     end component;
 
-    signal wr_main_from_data: std_logic;
-    signal main_mem_wr_addr: std_logic_vector(15 downto 0);
-    signal data_to_main_bk: std_logic_vector(63 downto 0);
     signal data_hit_out: std_logic;
     signal data_mem_out: std_logic_vector(15 downto 0);
 
@@ -309,17 +301,39 @@ architecture behavior_core of cometa16_core is
     
     end component;
 
+    signal wr_inst_from_main: std_logic;
+    signal main_to_inst_bk: std_logic_vector(63 downto 0);
+    signal wr_data_from_main: std_logic;
+    signal main_to_data_bk: std_logic_vector(63 downto 0);
+    signal hit_signal: std_logic;
+
+    component cometa16_mau is
+        port(
+            inst_hit_out: in std_logic;
+            data_hit_out: in std_logic;
+
+            pc_out: in std_logic_vector(15 downto 0);
+            shifter_out: in std_logic_vector(15 downto 0);
+
+            wr_cache_from_main: in std_logic;
+            main_to_cache_bk: in std_logic_vector(63 downto 0);
+
+            wr_inst_from_main: out std_logic;
+            main_to_inst_bk: out std_logic_vector(63 downto 0);
+
+            wr_data_from_main: out std_logic;
+            main_to_data_bk: out std_logic_vector(63 downto 0);
+
+            hit_signal: out std_logic;
+            request: out std_logic;
+            main_addr: out std_logic_vector(15 downto 0)
+
+        );
+
+    end component;
+
 begin
-    ctrl_wr_pc <= inst_hit_out and data_hit_out;
-    req <= not ctrl_wr_pc;
-    core_out <= (not ctrl_wr_pc) & rd_addr & wr_main_from_data & main_mem_wr_addr & data_to_main_bk;
-    rd_addr <= pc_out when data_hit_out = '1' else alu_out;
-
-    main_to_inst_bk <= core_in(63 downto 0) when data_hit_out = '1' else (others => '0');
-    main_to_data_bk <= core_in(63 downto 0) when data_hit_out = '0' else (others => '0');
-    wr_inst_from_main <= core_in(64) when data_hit_out = '1' else '0';
-    wr_data_from_main <= core_in(64) when data_hit_out = '0' else '0';
-
+    -- Instruction fields
     opcode   <= inst_mem_out(15 downto 10);
     ac_addr  <= inst_mem_out(9 downto 8);
     rf1_addr <= inst_mem_out(7 downto 4);
@@ -372,8 +386,7 @@ begin
             inst_mem_out => inst_mem_out,
             sign_extend_out => sign_extend_out,
 
-            inst_hit_out => inst_hit_out,
-            data_hit_out => data_hit_out,
+            hit_signal => hit_signal,
 
             pc_out => pc_out,
             pc_plus_one => pc_plus_one
@@ -406,7 +419,7 @@ begin
             ctrl_stk => ctrl_stk,
             ctrl_lk => ctrl_lk,
 
-            data_hit_out => data_hit_out,
+            hit_signal => hit_signal,
 
             pc_plus_one => pc_plus_one,
             ac_out => ac_out,
@@ -513,6 +526,29 @@ begin
 
             data_hit_out => data_hit_out,
             data_mem_out => data_mem_out
+
+        );
+
+    mau: cometa16_mau
+        port map(
+            inst_hit_out => inst_hit_out,
+            data_hit_out => data_hit_out,
+
+            pc_out => pc_out,
+            shifter_out => shifter_out,
+
+            wr_cache_from_main => wr_cache_from_main,
+            main_to_cache_bk => main_to_cache_bk,
+
+            wr_inst_from_main => wr_inst_from_main,
+            main_to_inst_bk => main_to_inst_bk,
+
+            wr_data_from_main => wr_data_from_main,
+            main_to_data_bk => main_to_data_bk,
+
+            hit_signal => hit_signal,
+            request => request,
+            main_addr => main_addr
 
         );
 

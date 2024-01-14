@@ -26,7 +26,7 @@ entity cometa16_rf_registers is
         ctrl_stk: in std_logic_vector(1 downto 0);
 		ctrl_lk: in std_logic;
 
-		data_hit_out: in std_logic;
+		hit_signal: in std_logic;
 
         pc_plus_one: in std_logic_vector(15 downto 0);
         ac_out: in std_logic_vector(15 downto 0);
@@ -91,13 +91,13 @@ begin
 			rf_registers(14) <= "0000000100000000"; -- sp
 			rf_registers(15) <= "0000000000000000"; -- lk
 
-		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "00") and (data_hit_out = '1')) then
+		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "00") and (hit_signal = '1')) then
 			rf_registers(conv_integer(wr_adrr)) <= src_rf_mux;
 
-		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "01") and (data_hit_out = '1')) then -- pop
+		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "01") and (hit_signal = '1')) then -- pop
 			rf_registers(14) <= rf_registers(14) + 1;
 
-		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "10") and (data_hit_out = '1')) then -- push
+		elsif ((clk'event and clk = '1') and (ctrl_wr_rf = '1') and (ctrl_stk = "10") and (hit_signal = '1')) then -- push
 			rf_registers(14) <= rf_registers(14) - 1;
 
 		end if;

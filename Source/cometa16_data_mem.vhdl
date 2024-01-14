@@ -32,8 +32,8 @@ entity cometa16_data_mem is
 
         -- Send the block to main memory
         wr_main_from_data: out std_logic;
-        main_mem_wr_addr: out std_logic_vector(15 downto 0);
         data_to_main_bk: out std_logic_vector(63 downto 0);
+        main_mem_wr_addr: out std_logic_vector(15 downto 0);
         
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)

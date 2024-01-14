@@ -30,8 +30,7 @@ entity cometa16_pc is
         inst_mem_out:    in std_logic_vector(15 downto 0);
         sign_extend_out: in std_logic_vector(15 downto 0);
 
-        inst_hit_out:    in std_logic;
-        data_hit_out:    in std_logic;
+        hit_signal:      in std_logic;
 
         pc_out:          out std_logic_vector(15 downto 0);
         pc_plus_one:     out std_logic_vector(15 downto 0)
@@ -44,11 +43,8 @@ architecture behavior_pc of cometa16_pc is
     signal pc_reg: std_logic_vector(15 downto 0) := "0000000000000000";
     signal take: std_logic;
     signal cj_mux, ij_mux: std_logic_vector(15 downto 0);
-    signal ctrl_wr_pc: std_logic;
 
 begin
-    ctrl_wr_pc <= inst_hit_out and data_hit_out;
-
     with ctrl_cj select take <=
         '0'                               when "000",
         z_signal                          when "001",
@@ -74,7 +70,7 @@ begin
         if (rst = '1') then
             pc_reg <= "0000000000000000";
         
-        elsif ((clk'event and clk ='1') and (ctrl_wr_pc = '1')) then
+        elsif ((clk'event and clk ='1') and (hit_signal = '1')) then
             pc_reg <= ij_mux;
         
         end if;
