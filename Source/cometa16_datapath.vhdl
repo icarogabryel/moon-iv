@@ -24,25 +24,51 @@ entity cometa16_datapath is
 end entity cometa16_datapath;
 
 architecture behavior_datapath of cometa16_datapath is
+    signal request0: std_logic;
+    signal request1: std_logic;
+    signal request2: std_logic;
+    signal request3: std_logic;
+
+    signal main_addr0: std_logic_vector(15 downto 0);
+    signal main_addr1: std_logic_vector(15 downto 0);
+    signal main_addr2: std_logic_vector(15 downto 0);
+    signal main_addr3: std_logic_vector(15 downto 0);
+
+    signal wr_main_from_data0: std_logic;
+    signal wr_main_from_data1: std_logic;
+    signal wr_main_from_data2: std_logic;
+    signal wr_main_from_data3: std_logic;
+
+    signal data_to_main_bk0: std_logic_vector(63 downto 0);
+    signal data_to_main_bk1: std_logic_vector(63 downto 0);
+    signal data_to_main_bk2: std_logic_vector(63 downto 0);
+    signal data_to_main_bk3: std_logic_vector(63 downto 0);
+
+    signal main_mem_wr_addr0: std_logic_vector(15 downto 0);
+    signal main_mem_wr_addr1: std_logic_vector(15 downto 0);
+    signal main_mem_wr_addr2: std_logic_vector(15 downto 0);
+    signal main_mem_wr_addr3: std_logic_vector(15 downto 0);
+
     signal core0_out: std_logic_vector(97 downto 0);
     signal core1_out: std_logic_vector(97 downto 0);
     signal core2_out: std_logic_vector(97 downto 0);
     signal core3_out: std_logic_vector(97 downto 0);
-
-    signal req0: std_logic;
-    signal req1: std_logic;
-    signal req2: std_logic;
-    signal req3: std_logic;
     
     component cometa16_core is
         port(
-            clk:      in std_logic;
-            rst:      in std_logic;
+            clk: in std_logic;
+            rst: in std_logic; 
 
-            req:      out std_logic;
-            core_in:  in std_logic_vector(64 downto 0);
-            core_out: out std_logic_vector(97 downto 0)
+            wr_cache_from_main: in std_logic;
+            main_to_cache_bk: in std_logic_vector(63 downto 0);
 
+            request: out std_logic;
+            main_addr: out std_logic_vector(15 downto 0);
+
+            wr_main_from_data: out std_logic;
+            data_to_main_bk: out std_logic_vector(63 downto 0);
+            main_mem_wr_addr: out std_logic_vector(15 downto 0)
+            
         );
 
     end component cometa16_core;
@@ -59,10 +85,10 @@ architecture behavior_datapath of cometa16_datapath is
         port(
             clk, rst: in std_logic;
 
-            req0: in std_logic;
-            req1: in std_logic;
-            req2: in std_logic;
-            req3: in std_logic;
+            request0: in std_logic;
+            request1: in std_logic;
+            request2: in std_logic;
+            request3: in std_logic;
 
             core0_in: out std_logic_vector(64 downto 0);
             core1_in: out std_logic_vector(64 downto 0);
@@ -91,30 +117,41 @@ architecture behavior_datapath of cometa16_datapath is
             rst: in std_logic;
 
             served_out: in std_logic_vector(3 downto 0);
-    
+
             ctrl_rd_main_mem: in std_logic;
             rd_addr: in std_logic_vector(15 downto 0);
-    
+
             ctrl_wr_main_mem: in std_logic;
-            main_mem_wr_addr: in std_logic_vector(15 downto 0); --wr_addr
-            data_mem_bk_out: in std_logic_vector(63 downto 0); --data_mem_to_css
-    
+            main_mem_wr_addr: in std_logic_vector(15 downto 0);
+            data_mem_bk_out: in std_logic_vector(63 downto 0);
+
             main_mem_bk_out: out std_logic_vector(63 downto 0);
             wr_cache_mem: out std_logic
-    
+
         );
 
     end component cometa16_main_mem;
 
-begin 
+begin
+    core0_out <= request0 & main_addr0 & wr_main_from_data0 & main_mem_wr_addr0 & data_to_main_bk0;
+    core1_out <= request1 & main_addr1 & wr_main_from_data1 & main_mem_wr_addr1 & data_to_main_bk1;
+    core2_out <= request2 & main_addr2 & wr_main_from_data2 & main_mem_wr_addr2 & data_to_main_bk2;
+    core3_out <= request3 & main_addr3 & wr_main_from_data3 & main_mem_wr_addr3 & data_to_main_bk3;
+
     core0: cometa16_core
         port map(
             clk => clk,
             rst => rst,
 
-            req => req0,
-            core_in => core0_in,
-            core_out => core0_out
+            wr_cache_from_main => core0_in(64),
+            main_to_cache_bk => core0_in(63 downto 0),
+            
+            request => request0,
+            main_addr => main_addr0,
+
+            wr_main_from_data => wr_main_from_data0,
+            data_to_main_bk => data_to_main_bk0,
+            main_mem_wr_addr => main_mem_wr_addr0
 
         );
     
@@ -123,9 +160,15 @@ begin
             clk => clk,
             rst => rst,
 
-            req => req1,
-            core_in => core1_in,
-            core_out => core1_out
+            wr_cache_from_main => core1_in(64),  
+            main_to_cache_bk => core1_in(63 downto 0),
+            
+            request => request1,
+            main_addr => main_addr1,
+
+            wr_main_from_data => wr_main_from_data1,
+            data_to_main_bk => data_to_main_bk1,
+            main_mem_wr_addr => main_mem_wr_addr1
 
         );
 
@@ -134,9 +177,15 @@ begin
             clk => clk,
             rst => rst,
 
-            req => req2,
-            core_in => core2_in,
-            core_out => core2_out
+            wr_cache_from_main => core2_in(64),  
+            main_to_cache_bk => core2_in(63 downto 0),
+            
+            request => request2,
+            main_addr => main_addr2,
+
+            wr_main_from_data => wr_main_from_data2,
+            data_to_main_bk => data_to_main_bk2,
+            main_mem_wr_addr => main_mem_wr_addr2
 
         );
 
@@ -145,9 +194,15 @@ begin
             clk => clk,
             rst => rst,
 
-            req => req3,
-            core_in => core3_in,
-            core_out => core3_out
+            wr_cache_from_main => core3_in(64),  
+            main_to_cache_bk => core3_in(63 downto 0),
+            
+            request => request3,
+            main_addr => main_addr3,
+
+            wr_main_from_data => wr_main_from_data3,
+            data_to_main_bk => data_to_main_bk3,
+            main_mem_wr_addr => main_mem_wr_addr3
 
         );
     
@@ -156,19 +211,19 @@ begin
             clk => clk,
             rst => rst,
             
-            req0 => req0,
+            request0 => request0,
             core0_in => core0_in,
             core0_out => core0_out,
 
-            req1 => req1,
+            request1 => request1,
             core1_in => core1_in,
             core1_out => core1_out,
 
-            req2 => req2,
+            request2 => request2,
             core2_in => core2_in,
             core2_out => core2_out,
 
-            req3 => req3,
+            request3 => request3,
             core3_in => core3_in,
             core3_out => core3_out,
 
@@ -177,7 +232,7 @@ begin
             main_mem_out => main_mem_out
 
         );
-
+    
     main_mem: cometa16_main_mem
         port map(
             clk => clk,

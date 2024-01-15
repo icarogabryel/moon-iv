@@ -19,10 +19,10 @@ entity cometa16_css is
     port(
         clk, rst: in std_logic;
 
-        req0: in std_logic;
-        req1: in std_logic;
-        req2: in std_logic;
-        req3: in std_logic;
+        request0: in std_logic;
+        request1: in std_logic;
+        request2: in std_logic;
+        request3: in std_logic;
 
         core0_in: out std_logic_vector(64 downto 0);
         core1_in: out std_logic_vector(64 downto 0);
@@ -65,31 +65,31 @@ begin
 
     -- requests priority ordenation top to down
     with priority select req_ord0 <=
-        req0 when "00",
-        req1 when "01",
-        req2 when "10",
-        req3 when "11",
+        request0 when "00",
+        request1 when "01",
+        request2 when "10",
+        request3 when "11",
         'X'  when others;
 
     with priority select req_ord1 <=
-        req1 when "00",
-        req2 when "01",
-        req3 when "10",
-        req0 when "11",
+        request1 when "00",
+        request2 when "01",
+        request3 when "10",
+        request0 when "11",
         'X'  when others;
 
     with priority select req_ord2 <=
-        req2 when "00",
-        req3 when "01",
-        req0 when "10",
-        req1 when "11",
+        request2 when "00",
+        request3 when "01",
+        request0 when "10",
+        request1 when "11",
         'X'  when others;
 
     with priority select req_ord3 <=
-        req3 when "00",
-        req0 when "01",
-        req1 when "10",
-        req2 when "11",
+        request3 when "00",
+        request0 when "01",
+        request1 when "10",
+        request2 when "11",
         'X'  when others;
 
     -- requests priority accordance. Tell what rewuest is being served

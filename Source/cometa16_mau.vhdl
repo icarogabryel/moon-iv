@@ -46,14 +46,9 @@ begin
     request <= not hit_signal;
 
     with inst_hit_out select main_addr <=
-        pc_out      when '0',
-        shifter_out when '1',
-        'X'         when others;
-
-    with inst_hit_out select
-        wr_inst_from_main <=
-            '1' when '0',
-            '0' when others;
+        pc_out               when '0',
+        shifter_out          when '1',
+        "XXXXXXXXXXXXXXXX"   when others;
 
     main_to_inst_bk <= main_to_cache_bk(63 downto 0) when inst_hit_out = '0' else (others => '0');
     main_to_data_bk <= main_to_cache_bk(63 downto 0) when inst_hit_out = '1' else (others => '0');
