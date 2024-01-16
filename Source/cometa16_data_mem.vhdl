@@ -33,7 +33,7 @@ entity cometa16_data_mem is
         -- Send the block to main memory
         wr_main_from_data: out std_logic;
         data_to_main_bk: out std_logic_vector(63 downto 0);
-        main_mem_wr_addr: out std_logic_vector(15 downto 0);
+        main_wr_addr: out std_logic_vector(15 downto 0);
         
         data_hit_out: out std_logic;
         data_mem_out: out std_logic_vector(15 downto 0)
@@ -75,7 +75,7 @@ begin
         data_mem(conv_integer(shifter_out(3 downto 2)), 2)(15 downto 0) &
         data_mem(conv_integer(shifter_out(3 downto 2)), 3)(15 downto 0);
 
-    main_mem_wr_addr <= data_mem_data_read(27 downto 16) & shifter_out(3 downto 0);
+    main_wr_addr <= data_mem_data_read(27 downto 16) & shifter_out(3 downto 0);
     
     hit_process: process (shifter_out, data_mem_data_read)
     

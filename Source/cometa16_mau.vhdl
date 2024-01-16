@@ -33,7 +33,7 @@ entity cometa16_mau is
 
         hit_signal: out std_logic;
         request: out std_logic;
-        main_addr: out std_logic_vector(15 downto 0)
+        main_rd_addr: out std_logic_vector(15 downto 0)
 
     );
 
@@ -45,7 +45,7 @@ begin
     hit_signal <= inst_hit_out and data_hit_out;
     request <= not hit_signal;
 
-    with inst_hit_out select main_addr <=
+    with inst_hit_out select main_rd_addr <=
         pc_out               when '0',
         shifter_out          when '1',
         "XXXXXXXXXXXXXXXX"   when others;

@@ -23,11 +23,11 @@ entity cometa16_core is
         main_to_cache_bk: in std_logic_vector(63 downto 0);
 
         request: out std_logic;
-        main_addr: out std_logic_vector(15 downto 0);
+        main_rd_addr: out std_logic_vector(15 downto 0);
 
         wr_main_from_data: out std_logic;
         data_to_main_bk: out std_logic_vector(63 downto 0);
-        main_mem_wr_addr: out std_logic_vector(15 downto 0)
+        main_wr_addr: out std_logic_vector(15 downto 0)
         
     );
 
@@ -291,9 +291,9 @@ architecture behavior_core of cometa16_core is
 
             -- Send the block to main memory
             wr_main_from_data: out std_logic;
-            main_mem_wr_addr: out std_logic_vector(15 downto 0);
             data_to_main_bk: out std_logic_vector(63 downto 0);
-
+            main_wr_addr: out std_logic_vector(15 downto 0);
+            
             data_hit_out: out std_logic;
             data_mem_out: out std_logic_vector(15 downto 0)
 
@@ -326,7 +326,7 @@ architecture behavior_core of cometa16_core is
 
             hit_signal: out std_logic;
             request: out std_logic;
-            main_addr: out std_logic_vector(15 downto 0)
+            main_rd_addr: out std_logic_vector(15 downto 0)
 
         );
 
@@ -521,7 +521,7 @@ begin
             wr_data_from_main => wr_data_from_main,
 
             wr_main_from_data => wr_main_from_data,
-            main_mem_wr_addr => main_mem_wr_addr,
+            main_wr_addr => main_wr_addr,
             data_to_main_bk => data_to_main_bk,
 
             data_hit_out => data_hit_out,
@@ -548,7 +548,7 @@ begin
 
             hit_signal => hit_signal,
             request => request,
-            main_addr => main_addr
+            main_rd_addr => main_rd_addr
 
         );
 
