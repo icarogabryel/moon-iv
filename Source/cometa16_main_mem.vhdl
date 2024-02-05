@@ -103,7 +103,6 @@ begin
             main_mem(conv_integer(main_wr_addr)/4, 2) <= data_to_main_bk(31 downto 16);
             main_mem(conv_integer(main_wr_addr)/4, 3) <= data_to_main_bk(15 downto 0);
 
-
         end if;
     
     end process wr_main_memory;
