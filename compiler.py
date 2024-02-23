@@ -1,88 +1,93 @@
-def toBits(binary_string, bits_len):
+# string with decimal to string with binary
+def decimalToBinary(decimalNumber: str, length: int) -> str:
     # string with decimal to string with binary
-    integer_value = int(binary_string)
-    binary_representation = bin(integer_value)[2:]  # Remove o prefixo "0b"
-    
-    # Add zeros to the left
-    if len(binary_representation) < bits_len:
-        num_zeros = bits_len - len(binary_representation)
-        binary_representation = ('0' * num_zeros) + binary_representation
+    integerValue = int(decimalNumber)
+    binaryRepresentation = bin(integerValue)[2:]  # Removes the '0b' from the binary string
     
     # Check if the binary string is bigger than bits_len
-    if len(binary_representation) > bits_len:
-        raise Exception('Binary string is bigger than bits_len')
+    if len(binaryRepresentation) > length:
+        raise Exception('Binary representation of given number is bigger than bits space available')
+
+    # Add zeros to the left
+    if len(binaryRepresentation) < length:
+        zerosQuant = length - len(binaryRepresentation)
+        binaryRepresentation = ('0' * zerosQuant) + binaryRepresentation
     
-    return binary_representation
+    return binaryRepresentation
 
-def compile(openFile, saveFile):
-    result = ''
+# Assembly to binary compiler function
+def compiler(inputFile: str, outputFile: str):
+    compiledText = '' # Resulting binary string
 
-    with open(openFile, 'r') as file:
+    with open(inputFile, 'r') as file:
         lines = file.readlines()
 
     for line in lines:
-        line = line.split('//')[0]
+        line = line.split('//')[0] # Remove comments
         line = line.strip()
 
-        if(line[:5] == 'nope'):
-            result += '0000000000000000\n'
+        if(line[:5] == 'nope'): # Case the instruction is No Operation
+            compiledText += '0000000000000000\n'
             continue
 
-        inst, parametres = line.split(' ', 1)
-        parametres = parametres.replace(' ', '')
+        inst, parameters = line.split(' ', 1) # Split the instruction and the parameters
+        parameters = parameters.replace(' ', '') # Remove spaces
 
         match(inst):
-            # Logical and Arithmetic
+            # Logical and Arithmetic Instructions
             case 'add':
-                p1, p2, p3 = parametres.split(',')
+                p1, p2, p3 = parameters.split(',')
 
-                p1 = toBits(p1[1:], 2)
-                p2 = toBits(p2[1:], 4)
-                p3 = toBits(p3[1:], 4)
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
 
-                result += f'000001{p1}{p2}{p3}\n'
+                compiledText += f'000001{p1}{p2}{p3}\n'
             
             case 'sub':
-                p1, p2, p3 = parametres.split(',')
+                p1, p2, p3 = parameters.split(',')
 
-                p1 = toBits(p1[1:], 2)
-                p2 = toBits(p2[1:], 4)
-                p3 = toBits(p3[1:], 4)
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
 
                 result += f'000010{p1}{p2}{p3}\n'
 
             case 'mfac':
-                p1, p2 = parametres.split(',')
+                p1, p2 = parameters.split(',')
 
-                p1 = toBits(p1[1:], 2)
-                p2 = toBits(p2[1:], 4)
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
 
-                result += f'010100{p1}{p2}0000\n'
+                compiledText += f'010100{p1}{p2}0000\n'
             
             # Immediate
             case 'lsi':
-                p1, p2 = parametres.split(',')
+                p1, p2 = parameters.split(',')
 
-                p1 = toBits(p1[1:], 2)
-                p2 = toBits(p2, 8)
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2, 8)
 
-                result += f'100000{p1}{p2}\n'
+                compiledText += f'100000{p1}{p2}\n'
 
             # Memory access
             case 'swr':
-                p1, p2 = parametres.split(',')
+                p1, p2 = parameters.split(',')
 
-                p1 = toBits(p1[1:], 2)
-                p2 = toBits(p2[1:], 4)
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
 
-                result += f'100010{p1}{p2}0000\n'
+                compiledText += f'100010{p1}{p2}0000\n'
 
-    with open(saveFile, 'w') as file:
-        file.write(result)
+    return compiledText
 
-fileNameIn = input('Enter file name: ')
-fileNameOut = input('Enter output file name: ')
+def main():
+    fileNameIn = input('Enter file name: ')
+    fileNameOut = input('Enter output file name: ')
 
-compile(fileNameIn, fileNameOut)
+    compiler(fileNameIn, fileNameOut)
 
-print('Done!')
+    print('Done!')
+
+if __name__ == '__main__':
+    main()
