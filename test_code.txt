@@ -4,6 +4,7 @@ lsi &0, 255 // coloca o valor 1111111111111111 no registrador &0. Será o conte�
 swr &0, $0 // coloca o valor 1111111111111111 no endereço de memória apontado por $0
 nope
 nope
+add &0, $0, $0 // soma o valor de &0 com o valor de &0 e coloca o resultado em &0
 lsi &1, 18 // coloca o valor 18 no registrador ac 1. Irá apontar para o endereço na memória
 mfac &1, $1 // move de ac 1 para rf 1
 lsi &2, 100 // coloca o valor 100 no registrador ac 2. Irá ser colocado no endereço na memória

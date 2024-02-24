@@ -37,8 +37,8 @@ def compiler(inputFile: str, outputFile: str):
             # Logical and Arithmetic Instructions
             case 'add':
                 p1, p2, p3 = parameters.split(',')
-
-                p1 = decimalToBinary(p1[1:], 2)
+                
+                p1 = decimalToBinary(p1[1:], 2) # Remove the '&' or '$' from the register address
                 p2 = decimalToBinary(p2[1:], 4)
                 p3 = decimalToBinary(p3[1:], 4)
 
@@ -61,7 +61,7 @@ def compiler(inputFile: str, outputFile: str):
 
                 compiledText += f'010100{p1}{p2}0000\n'
             
-            # Immediate
+            # Immediate instructions
             case 'lsi':
                 p1, p2 = parameters.split(',')
 
@@ -70,7 +70,7 @@ def compiler(inputFile: str, outputFile: str):
 
                 compiledText += f'100000{p1}{p2}\n'
 
-            # Memory access
+            # Memory access instructions
             case 'swr':
                 p1, p2 = parameters.split(',')
 
@@ -79,8 +79,13 @@ def compiler(inputFile: str, outputFile: str):
 
                 compiledText += f'100010{p1}{p2}0000\n'
 
-    return compiledText
+            # Control instructions
 
+    # Write the compiled text to the output file
+    with open(outputFile, 'w') as file:
+        file.write(compiledText)
+
+# Main function
 def main():
     fileNameIn = input('Enter file name: ')
     fileNameOut = input('Enter output file name: ')
@@ -89,5 +94,6 @@ def main():
 
     print('Done!')
 
+# Run the main function
 if __name__ == '__main__':
     main()

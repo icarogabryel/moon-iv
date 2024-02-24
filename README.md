@@ -19,6 +19,8 @@ RF and AC registers only write when data memory have hit because pusp/pop and im
 
 ctrl wr rf need to be enable to do push and pop Operations.
 
+Memory - 1024 words of 16 bits
+
 # COMETA MK II - Instruction Set Architecture
 
 ## Logical and Arithmetic Operations
