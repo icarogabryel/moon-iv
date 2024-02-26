@@ -34,7 +34,7 @@ def compiler(inputFile: str, outputFile: str):
         parameters = parameters.replace(' ', '') # Remove spaces
 
         match(inst):
-            # Logical and Arithmetic Instructions
+            # Arithmetic Instructions
             case 'add':
                 p1, p2, p3 = parameters.split(',')
                 
@@ -51,7 +51,136 @@ def compiler(inputFile: str, outputFile: str):
                 p2 = decimalToBinary(p2[1:], 4)
                 p3 = decimalToBinary(p3[1:], 4)
 
-                result += f'000010{p1}{p2}{p3}\n'
+                compiledText += f'000010{p1}{p2}{p3}\n'
+
+            # Logic Instructions
+            case 'not':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+
+                compiledText += f'000011{p1}{p2}0000\n'
+
+            case 'and':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'000100{p1}{p2}{p3}\n'
+
+            case 'or':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'000101{p1}{p2}{p3}\n'
+
+            case 'xor':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'000110{p1}{p2}{p3}\n'
+
+            case 'nand':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'000111{p1}{p2}{p3}\n'
+
+            case 'nor':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'001000{p1}{p2}{p3}\n'
+
+            case 'nxor':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'001001{p1}{p2}{p3}\n'
+
+            # Shift instructions
+            case 'sll':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3, 4)
+
+                compiledText += f'001010{p1}{p2}{p3}\n'
+
+            case 'srl':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3, 4)
+
+                compiledText += f'001011{p1}{p2}{p3}\n'
+
+            case 'sra':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3, 4)
+
+                compiledText += f'001100{p1}{p2}{p3}\n'
+
+            case 'tasm':
+                parameters = decimalToBinary(parameters[1:], 4)
+
+                compiledText += f'00110100{parameters}0000\n'
+
+            case 'tssm':
+                parameters = decimalToBinary(parameters[1:], 4)
+
+                compiledText += f'00111000{parameters}0000\n'
+
+            case 'mtl':
+                parameters = decimalToBinary(parameters[1:], 2)
+
+                compiledText += f'001111{parameters}00000000\n'
+
+            case 'mfl':
+                parameters = decimalToBinary(parameters[1:], 2)
+
+                compiledText += f'010000{parameters}00000000\n'
+
+            case 'mth':
+                parameters = decimalToBinary(parameters[1:], 2)
+
+                compiledText += f'010001{parameters}00000000\n'
+
+            case 'mfh':
+                parameters = decimalToBinary(parameters[1:], 2)
+
+                compiledText += f'010010{parameters}00000000\n'
+
+            case 'mtac':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+
+                compiledText += f'010011{p1}{p2}0000\n'
 
             case 'mfac':
                 p1, p2 = parameters.split(',')
@@ -60,6 +189,15 @@ def compiler(inputFile: str, outputFile: str):
                 p2 = decimalToBinary(p2[1:], 4)
 
                 compiledText += f'010100{p1}{p2}0000\n'
+
+            case 'slt':
+                p1, p2, p3 = parameters.split(',')
+
+                p1 = decimalToBinary(p1[1:], 2)
+                p2 = decimalToBinary(p2[1:], 4)
+                p3 = decimalToBinary(p3[1:], 4)
+
+                compiledText += f'010101{p1}{p2}{p3}\n'
             
             # Immediate instructions
             case 'lsi':
