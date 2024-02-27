@@ -1,8 +1,8 @@
-lli &0, 2
-lli &1, 1
-mfac &0, $0
-mafac &1, $1
-add &2, $0, $1
+lli &0, 2        // load 2 em ac0
+lli &1, 1        // load 1 em ac1
+mfac &0, $0      // move 2 to rf0
+mafac &1, $1     // move 1 to rf1
+add &2, $0, $1   // arith and logic ops
 sub &2, $0, $1
 not &2, $0
 and &2, $0, $1
@@ -11,7 +11,19 @@ xor &2, $0, $1
 nand &2, $0, $1
 nor &2, $0, $1
 xnor &2, $0, $1
-sll &3, $0, 6
+sll &3, $0, 6    // shift ops
 srl &3, $0, 6
-lsi &3, -2
-
+lsi &3, -4       // Load -4 em ac3
+mfac &3, $0      // move -4 to rf0
+sra &3, $0, 2    // shift right arithmetic
+tasm $0          // hilo ops
+tasm $0
+tssm $0
+mtl &0           // move ops
+mth &0
+mfh &1
+mfl &1
+mtac &0, $0
+mfac &1, $1
+slt &2, $0, $1   // set on less than
+slt &2, $1, $0
