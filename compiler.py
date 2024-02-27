@@ -6,7 +6,12 @@ def fillTo1024Lines(compiledText: str) -> str:
 
 # string with decimal to string with binary
 def decimalToBinary(decimalNumber: str, length: int) -> str:
-    # string with decimal to string with binary
+    isNegative = False
+    
+    if decimalNumber[0] == '-':
+        decimalNumber = decimalNumber[1:]
+        isNegative = True
+
     integerValue = int(decimalNumber)
     binaryRepresentation = bin(integerValue)[2:]  # Removes the '0b' from the binary string
     
@@ -14,10 +19,14 @@ def decimalToBinary(decimalNumber: str, length: int) -> str:
     if len(binaryRepresentation) > length:
         raise Exception('Binary representation of given number is bigger than bits space available')
 
-    # Add zeros to the left
+    # Add zeros or ones to the left
     if len(binaryRepresentation) < length:
-        zerosQuant = length - len(binaryRepresentation)
-        binaryRepresentation = ('0' * zerosQuant) + binaryRepresentation
+        fillQuant = length - len(binaryRepresentation)
+
+        if isNegative:
+            binaryRepresentation = ('1' * fillQuant) + binaryRepresentation
+        else:
+            binaryRepresentation = ('0' * fillQuant) + binaryRepresentation
     
     return binaryRepresentation
 
