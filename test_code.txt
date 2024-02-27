@@ -1,7 +1,7 @@
 lli &0, 2        // load 2 em ac0
 lli &1, 1        // load 1 em ac1
 mfac &0, $0      // move 2 to rf0
-mafac &1, $1     // move 1 to rf1
+mfac &1, $1      // move 1 to rf1
 add &2, $0, $1   // arith and logic ops
 sub &2, $0, $1
 not &2, $0

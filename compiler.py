@@ -122,7 +122,7 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'001000{p1}{p2}{p3}\n'
 
-            case 'nxor':
+            case 'xnor':
                 p1, p2, p3 = parameters.split(',')
 
                 p1 = decimalToBinary(p1[1:], 2)
