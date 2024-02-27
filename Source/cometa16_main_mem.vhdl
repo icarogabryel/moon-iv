@@ -94,7 +94,7 @@ begin
     
     begin
         if (rst = '1') then
-            main_mem <= read_main_memory_file("memories/main_mem.txt");
+            main_mem <= read_main_memory_file("main_mem.txt");
 
         -- writing in main memory
         elsif ((clk'event and clk = '1') and (wr_main_from_data = '1')) then
