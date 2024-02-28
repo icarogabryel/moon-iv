@@ -3,8 +3,8 @@ lli &1, 5        // load 5 (0101) em ac1
 mfac &0, $0      // move 2 to rf0
 mfac &1, $1      // move 1 to rf1
 add &2, $0, $1   // arith and logic ops
-sub &2, $0, $1
-sub &2, $1, $0   // negative result
+sub &2, $0, $1   // negative result
+sub &2, $1, $0
 not &2, $0
 and &2, $0, $1
 or &2, $0, $1
