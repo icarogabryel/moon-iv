@@ -1,11 +1,14 @@
+lli &0, -2       // load -2 in ac0
+lli &1, 7        // load 7 in ac1
+mfac &0, $0      // move -2 to rf0
+mfac &1, $1      // move 7 to rf1
 sll &3, $0, 6    // shift ops
+sll &3, $1, 6
 srl &3, $0, 6
-lsi &3, -4       // Load -4 em ac3
-mfac &3, $0      // move -4 to rf0
+srl &3, $1, 6
 sra &3, $0, 2    // shift right arithmetic
-tasm $0          // hilo ops
-tasm $0
-tssm $0
+sra &3, $1, 2
+
 mtl &0           // move ops
 mth &0
 mfh &1

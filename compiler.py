@@ -4,18 +4,42 @@ def fillTo1024Lines(compiledText: str) -> str:
     
     return compiledText
 
+def addOne(binaryNumber: str) -> str:
+    carryOn = 1 # Start with the carry on to add 1
+    InvertedResult = ''
+
+    InvertedBinaryNumber = binaryNumber[::-1]
+
+    for bit in InvertedBinaryNumber:
+        if carryOn == 1:
+            if bit == '0':
+                InvertedResult += '1'
+                carryOn = 0
+            else: # bit == '1'
+                InvertedResult += '0'
+                carryOn = 1
+        else:
+            InvertedResult += bit
+
+    if carryOn == 1: # Raise an exception if the result is bigger than the original number
+        raise Exception('Overflow')
+
+    result = InvertedResult[::-1]
+
+    return result
+
 # string with decimal to string with binary
 def decimalToBinary(decimalNumber: str, length: int) -> str:
     isNegative = False
     
+    # Check if the number is negative, if so, convert it to positive and set the isNegative flag
     if decimalNumber[0] == '-':
         decimalNumber = decimalNumber[1:]
         isNegative = True
 
-    integerValue = int(decimalNumber)
-    binaryRepresentation = bin(integerValue)[2:]  # Removes the '0b' from the binary string
+    binaryRepresentation = bin(int(decimalNumber))[2:] # Converts it to a binary string and remove the '0b' from the start
     
-    # Check if the binary string is bigger than bits_len
+    # Check if the binary string is bigger than space available
     if len(binaryRepresentation) > length:
         raise Exception('Binary representation of given number is bigger than bits space available')
 
@@ -23,10 +47,13 @@ def decimalToBinary(decimalNumber: str, length: int) -> str:
     if len(binaryRepresentation) < length:
         fillQuant = length - len(binaryRepresentation)
 
-        if isNegative:
-            binaryRepresentation = ('1' * fillQuant) + binaryRepresentation
-        else:
-            binaryRepresentation = ('0' * fillQuant) + binaryRepresentation
+        binaryRepresentation = ('0' * fillQuant) + binaryRepresentation
+
+    if isNegative:
+        # Invert the bits
+        binaryRepresentation = ''.join(['1' if bit == '0' else '0' for bit in binaryRepresentation])
+        # Add 1 to the binary number
+        binaryRepresentation = addOne(binaryRepresentation)
     
     return binaryRepresentation
 
