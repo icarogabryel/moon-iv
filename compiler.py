@@ -4,6 +4,7 @@ def fillTo1024Lines(compiledText: str) -> str:
     
     return compiledText
 
+# Function to add 1 to a binary number in two's complement algorithm
 def addOne(binaryNumber: str) -> str:
     carryOn = 1 # Start with the carry on to add 1
     InvertedResult = ''

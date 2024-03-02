@@ -73,7 +73,7 @@ begin
     rd_main_memory: process(request, main_rd_addr)
 
     begin
-        if (request) then
+        if ((request = '1') and (conv_integer(main_rd_addr) < 1024)) then
             main_to_cache_bk <=
                 main_mem(conv_integer(main_rd_addr)/4, 0) &
                 main_mem(conv_integer(main_rd_addr)/4, 1) &

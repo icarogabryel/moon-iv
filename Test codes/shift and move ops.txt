@@ -8,12 +8,15 @@ srl &3, $0, 6
 srl &3, $1, 6
 sra &3, $0, 2    // shift right arithmetic
 sra &3, $1, 2
-
 mtl &0           // move ops
-mth &0
-mfh &1
+mth &1
 mfl &1
+mfh &0
 mtac &0, $0
 mfac &1, $1
 slt &2, $0, $1   // set on less than
 slt &2, $1, $0
+tasm $0
+tasm $0
+tssm $0
+tssm $0
