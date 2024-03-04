@@ -1,4 +1,4 @@
-lli &0, -2       // load -2 in ac0
+lls &0, -2       // load -2 in ac0
 lli &1, 7        // load 7 in ac1
 mfac &0, $0      // move -2 to rf0
 mfac &1, $1      // move 7 to rf1
