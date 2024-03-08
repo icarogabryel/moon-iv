@@ -32,13 +32,17 @@ def addOne(binaryNumber: str) -> str:
 # string with decimal to string with binary
 def decimalToBinary(decimalNumber: str, length: int) -> str:
     isNegative = False
-    
+
     # Check if the number is negative, if so, convert it to positive and set the isNegative flag
     if decimalNumber[0] == '-':
         decimalNumber = decimalNumber[1:]
         isNegative = True
 
-    binaryRepresentation = bin(int(decimalNumber))[2:] # Converts it to a binary string and remove the '0b' from the start
+    if decimalNumber[0] == 'b':
+        decimalNumber = decimalNumber[1:]
+        binaryRepresentation = decimalNumber
+    else:
+        binaryRepresentation = bin(int(decimalNumber))[2:] # Converts it to a binary string and remove the '0b' from the start
     
     # Check if the binary string is bigger than space available
     if len(binaryRepresentation) > length:
