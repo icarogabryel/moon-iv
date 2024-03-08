@@ -1,0 +1,17 @@
+lsi &0, 5        // load 5 in ac0
+addi &0, 2       // result = 7
+subi &0, 2       // result = 5 (0101)
+andi &0, b11     // 0011, Result = 0001
+lsi &0, 5        // load 5 in ac0
+ori &0, b11      // 0011, Result = 0111
+lsi &0, 5        // load 5 in ac0
+xori &0, b11      // 0011, Result = 0110
+lsi &0, 5        // load 5 in ac0
+nandi &0, b11    // 0011, Result = 1110
+lsi &0, 5        // load 5 in ac0
+nori &0, b11     // 0011, Result = 1000
+lsi &0, 5        // load 5 in ac0
+xnori &0, b11    // 0011, Result = 1001
+lli &0, 5        // load 5 in ac0
+lui &0, 7        // load 7 in ac0
+lsi &0, -7       // load -7 in ac0
