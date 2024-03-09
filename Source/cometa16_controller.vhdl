@@ -1043,8 +1043,8 @@ begin
             ctrl_wr_rf        <= '1';
             ctrl_src_rf       <= '0';
         
-            ctrl_wr_ac        <= '0';
-            ctrl_src_ac       <= "000";
+            ctrl_wr_ac        <= '1';
+            ctrl_src_ac       <= "001";
         
             ctrl_wr_hilo      <= '0';
             ctrl_src_hilo     <= "00";
@@ -1057,7 +1057,7 @@ begin
         
             ctrl_sh           <= "00";
 
-            ctrl_wr_data_mem  <= '1';
+            ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '1';
 			
 			-- Control Operations
