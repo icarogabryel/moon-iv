@@ -5,7 +5,7 @@ andi &0, b11     // 0011, Result = 0001
 lsi &0, 5        // load 5 in ac0
 ori &0, b11      // 0011, Result = 0111
 lsi &0, 5        // load 5 in ac0
-xori &0, b11      // 0011, Result = 0110
+xori &0, b11     // 0011, Result = 0110
 lsi &0, 5        // load 5 in ac0
 nandi &0, b11    // 0011, Result = 1110
 lsi &0, 5        // load 5 in ac0

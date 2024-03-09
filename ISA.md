@@ -13,6 +13,9 @@
 | NAND                                   | nand | 000111 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NAND rf2 |
 | NOR                                    | nor  | 001000 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NOR rf2 |
 | XNOR                                   | xnor | 001001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XNOR rf2 |
+| Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
+| Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
+| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
 
 ## Shift Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
@@ -20,15 +23,16 @@
 | Shift Left Logical                     | sll  | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
 | Shift Right Logical                    | srl  | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
 | Shift Right Arithmetic                 | sra  | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
-| Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
-| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
+
+## Move Operations
+| Instruction | Mnemonic | Opcode | Fields | Meaning |
+|-|-|-|-|-|
 | Move To Low                            | mtl  | 001111 | ac(9-8)                       | lo = ac |
 | Move From Low                          | mfl  | 010000 | ac(9-8)                       | ac = lo |
 | Move To High                           | mth  | 010001 | ac(9-8)                       | hi = ac |
 | Move From High                         | mfh  | 010010 | ac(9-8)                       | ac = hi |
 | Move To AC                             | mtac | 010011 | ac(9-8), rf1(7-4)             | ac = rf1 |
 | Move From AC                           | mfac | 010100 | ac(9-8), rf1(7-4)             | rf1 = ac |
-| Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
 
 ## Immediate Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
