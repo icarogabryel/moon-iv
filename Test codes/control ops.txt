@@ -1,0 +1,29 @@
+jump 5           // jump to the address 5
+lsi &0, -7       // load -7 in ac0 if something goes wrong
+lsi &0, -7
+lsi &0, -7
+lsi &0, -7
+jal 7            // link the value 6 in lk and jump to 7
+lsi &0, -7
+lli &0, 12       // load 12 in ac0
+mfac &0, $0      // move 12 to rf0
+jr $0            // jump to the address 12 in rf0
+lsi &0, -7
+lsi &0, -7
+lli &1, 16       // load 16 in ac0
+mfac &1, $1      // move 16 to rf0
+jral $1          // link the value 15 in lk and jump to the address 16 in rf0
+lsi &0, -7
+lsi &1, 5        // load 5 in ac1
+jgtz &1, 19      // jump to the address 19 if ac1 is greater than 0
+lsi &0, -7
+lsi &1, -2       // load -2 in ac1
+jltz &1, 23      // jump to the address 23 if ac1 is less than 0
+lsi &0, -7
+lsi &1, 0        // load 0 in ac1
+jeqz &1, 25      // jump to the address 25 if ac1 is equal to 0
+lsi &0, -7
+lli &0, 1        // load 1 in ac0
+jnez &0, 29      // jump to the address 28 if ac0 is not equal to 0
+lsi &0, -7
+lli &0, 0        // load 0 in ac0
