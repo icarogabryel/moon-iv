@@ -30,7 +30,7 @@ def addOne(binaryNumber: str) -> str:
     return result
 
 # string with decimal to string with binary
-def decimalToBinary(decimalNumber: str, length: int) -> str:
+def decimalToBinaryOrFillField(decimalNumber: str, length: int) -> str:
     isNegative = False
 
     # Check if the number is negative, if so, convert it to positive and set the isNegative flag
@@ -85,18 +85,18 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'add':
                 p1, p2, p3 = parameters.split(',')
                 
-                p1 = decimalToBinary(p1[1:], 2) # Remove the '&' or '$' from the register address
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2) # Remove the '&' or '$' from the register address
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000001{p1}{p2}{p3}\n'
             
             case 'sub':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000010{p1}{p2}{p3}\n'
 
@@ -104,62 +104,62 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'not':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'000011{p1}{p2}0000\n'
 
             case 'and':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000100{p1}{p2}{p3}\n'
 
             case 'or':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000101{p1}{p2}{p3}\n'
 
             case 'xor':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000110{p1}{p2}{p3}\n'
 
             case 'nand':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'000111{p1}{p2}{p3}\n'
 
             case 'nor':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'001000{p1}{p2}{p3}\n'
 
             case 'xnor':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'001001{p1}{p2}{p3}\n'
 
@@ -167,83 +167,83 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'sll':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3, 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3, 4)
 
                 compiledText += f'001010{p1}{p2}{p3}\n'
 
             case 'srl':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3, 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3, 4)
 
                 compiledText += f'001011{p1}{p2}{p3}\n'
 
             case 'sra':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3, 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3, 4)
 
                 compiledText += f'001100{p1}{p2}{p3}\n'
 
             case 'tasm':
-                p1 = decimalToBinary(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 compiledText += f'00110100{p1}0000\n'
 
             case 'tssm':
-                p1 = decimalToBinary(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 compiledText += f'00111000{p1}0000\n'
 
             # Move instructions
             case 'mtl':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'001111{p1}00000000\n'
 
             case 'mfl':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'010000{p1}00000000\n'
 
             case 'mth':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'010001{p1}00000000\n'
 
             case 'mfh':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'010010{p1}00000000\n'
 
             case 'mtac':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'010011{p1}{p2}0000\n'
 
             case 'mfac':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'010100{p1}{p2}0000\n'
 
             case 'slt':
                 p1, p2, p3 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
-                p3 = decimalToBinary(p3[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p3 = decimalToBinaryOrFillField(p3[1:], 4)
 
                 compiledText += f'010101{p1}{p2}{p3}\n'
             
@@ -251,88 +251,88 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'addi':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'010110{p1}{p2}\n'    
 
             case 'subi':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'010111{p1}{p2}\n'
 
             case 'andi':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011000{p1}{p2}\n'
 
             case 'ori':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011001{p1}{p2}\n'
 
             case 'xori':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011010{p1}{p2}\n'
 
             case 'nandi':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011011{p1}{p2}\n'
 
             case 'nori':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011100{p1}{p2}\n'
 
             case 'xnori':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011101{p1}{p2}\n'
 
             case 'lli':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011110{p1}{p2}\n'
 
             case 'lui':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'011111{p1}{p2}\n'
 
             case 'lsi':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'100000{p1}{p2}\n'
 
@@ -340,79 +340,79 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'lwr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'100001{p1}{p2}0000\n'
 
             case 'swr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'100010{p1}{p2}0000\n'
 
             case 'push':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'100011{p1}00000000\n'
 
             case 'pop':
-                p1 = decimalToBinary(parameters[1:], 2)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
 
                 compiledText += f'100100{p1}00000000\n'
 
             # Control instructions
             case 'jump':
-                p1 = decimalToBinary(parameters, 10)
+                p1 = decimalToBinaryOrFillField(parameters, 10)
 
                 compiledText += f'100101{p1}\n'
 
             case 'jal':
-                p1 = decimalToBinary(parameters, 10)
+                p1 = decimalToBinaryOrFillField(parameters, 10)
 
                 compiledText += f'100110{p1}\n'
 
             case 'jr':
-                p1 = decimalToBinary(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 compiledText += f'10011100{p1}0000\n'
 
             case 'jral':
-                p1 = decimalToBinary(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 compiledText += f'10100000{p1}0000\n'
 
             case 'jgtz':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'101001{p1}{p2}\n'
 
             case 'jltz':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'101010{p1}{p2}\n'
 
             case 'jeqz':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'101011{p1}{p2}\n'
 
             case 'jnez':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinary(p1[1:], 2)
-                p2 = decimalToBinary(p2, 8)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'101100{p1}{p2}\n'
 
