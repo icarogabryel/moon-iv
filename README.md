@@ -1,4 +1,4 @@
-# COMETA MK II
+# COMETA MARK II
 Computer for Every Task Architecture Mark II
 
 Developed by Ícaro Gabryel\
@@ -9,21 +9,12 @@ FEDERAL UNIVERSITY OF PIAUI\
 NATURE SCIENCE CENTER\
 COMPUTING DEPARTMENT
 
-COMETA MK II is a 16 Bit, unicycle, multicore processor designed for general purpose. It have two bank registers, memory hierarchy and
-uses Harvad architecture.
+## Introduction
+COMETA Mark II is a 16 Bit, unicycle processor designed for general purpose. It have two bank registers, memory hierarchy, uses Harvard architecture and have a 1024 words of 16 bits main memory.
 
-The ALU have A transparency for shift instructions, move to ac instructionS nad condicional jump instructions.
-Have B transparency for load word register and immediate o perations.
+## Instruction Set Architecture - ISA
 
-RF and AC registers only write when data memory have hit because pusp/pop and immediate instructions can be executed over and over when the core whaits for a data memory block from maim memory.
-
-ctrl wr rf need to be enable to do push and pop Operations.
-
-Memory - 1024 words of 16 bits
-
-# COMETA MK II - Instruction Set Architecture
-
-## Logical and Arithmetic Operations
+### Logical and Arithmetic Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
 | No Operation                           | nope | 000000 | None | No operation |
@@ -36,20 +27,28 @@ Memory - 1024 words of 16 bits
 | NAND                                   | nand | 000111 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NAND rf2 |
 | NOR                                    | nor  | 001000 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NOR rf2 |
 | XNOR                                   | xnor | 001001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XNOR rf2 |
+| Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
+| Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
+| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
+
+### Shift Operations
+| Instruction | Mnemonic | Opcode | Fields | Meaning |
+|-|-|-|-|-|
 | Shift Left Logical                     | sll  | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
 | Shift Right Logical                    | srl  | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
 | Shift Right Arithmetic                 | sra  | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
-| Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
-| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
+
+### Move Operations
+| Instruction | Mnemonic | Opcode | Fields | Meaning |
+|-|-|-|-|-|
 | Move To Low                            | mtl  | 001111 | ac(9-8)                       | lo = ac |
 | Move From Low                          | mfl  | 010000 | ac(9-8)                       | ac = lo |
 | Move To High                           | mth  | 010001 | ac(9-8)                       | hi = ac |
 | Move From High                         | mfh  | 010010 | ac(9-8)                       | ac = hi |
 | Move To AC                             | mtac | 010011 | ac(9-8), rf1(7-4)             | ac = rf1 |
 | Move From AC                           | mfac | 010100 | ac(9-8), rf1(7-4)             | rf1 = ac |
-| Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
 
-## Immediate Operations
+### Immediate Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
 | Addition Immediate    | addi  | 010110 | ac(9-8), imm(7-0) | ac = ac + ((imm(7), 8) & imm) |
@@ -64,7 +63,7 @@ Memory - 1024 words of 16 bits
 | Load Upper Immediate  | lui   | 011111 | ac(9-8), imm(7-0) | ac = imm & "00000000" |
 | Load Signed Immediate | lsi   | 100000 | ac(9-8), imm(7-0) | ac = (imm(7), 8) & imm |
 
-## Memory Access Operations
+### Memory Access Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
 | Load Word Register  | lwr  | 100001 | ac(9-8), rf1(7-4) | ac = memory\[rf1\] |
@@ -72,7 +71,7 @@ Memory - 1024 words of 16 bits
 | Push                | push | 100011 | ac(9-8)           | sp = sp - 1; memory\[sp\] = ac |
 | Pop                 | pop  | 100100 | ac(9-8)           | ac = memory\[sp\]; sp = sp + 1 |
 
-## Control Operations
+### Control Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
 | Jump                   | jump | 100101 | imm(9-0) | pc = pc(15-10) & imm |
