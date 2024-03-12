@@ -24,7 +24,7 @@ architecture behavior_testbench of cometa16_testbench is
     signal clk: std_logic;
     signal rst: std_logic;
 
-    component cometa16_datapath is
+    component cometa16_processor_with_memory is
         port(
             clk: in std_logic;
             rst: in std_logic
@@ -34,7 +34,7 @@ architecture behavior_testbench of cometa16_testbench is
     end component;
 
 begin
-    dut: cometa16_datapath
+    dut: cometa16_processor_with_memory
         port map(
             clk=> clk,
             rst => rst
