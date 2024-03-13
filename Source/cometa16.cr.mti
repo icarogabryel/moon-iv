@@ -153,6 +153,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity cometa16_testbench
 -- Compiling architecture behavior_testbench of cometa16_testbench
 
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_main_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_main_mem.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_main_mem
+-- Compiling architecture behavior_main_mem of cometa16_main_mem
+
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_pc.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_pc.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
