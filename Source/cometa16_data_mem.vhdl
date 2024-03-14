@@ -125,7 +125,7 @@ begin
             data_mem(conv_integer(shifter_out(3 downto 2)), conv_integer(shifter_out(1 downto 0))) <= '1' & data_mem(conv_integer(shifter_out(3 downto 2)), conv_integer(shifter_out(1 downto 0)))(28 downto 16) & ac_out(15 downto 0);
         end if;
         
-        -- write block from css to data memory
+        -- write block from main memory to data memory
         if ((clk'event and clk = '1') and (wr_data_from_main = '1')) then
             data_mem(conv_integer(shifter_out(3 downto 2)), 0) <= '0' & '1' & shifter_out(15 downto 4) & main_to_data_bk(63 downto 48);
             data_mem(conv_integer(shifter_out(3 downto 2)), 1) <= '0' & '1' & shifter_out(15 downto 4) & main_to_data_bk(47 downto 32);
