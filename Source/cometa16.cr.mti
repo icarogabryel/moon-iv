@@ -1,4 +1,15 @@
-C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_rf_registers.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_rf_registers.vhdl
+C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_alu.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_alu.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_SIGNED
+-- Compiling entity cometa16_alu
+-- Compiling architecture behavior_alu of cometa16_alu
+-- Loading package STD_LOGIC_UNSIGNED
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_rf_registers.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_rf_registers.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -7,6 +18,32 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package STD_LOGIC_UNSIGNED
 -- Compiling entity cometa16_rf_registers
 -- Compiling architecture behavior_rf_registers of cometa16_rf_registers
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_processor_with_memory.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_processor_with_memory.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity cometa16_processor_with_memory
+-- Compiling architecture behavior_processor_with_memory of cometa16_processor_with_memory
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_mau.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_mau.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity cometa16_mau
+-- Compiling architecture behavior_mau of cometa16_mau
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_ac_registers.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_ac_registers.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_ac_registers
+-- Compiling architecture behavior_ac_registers of cometa16_ac_registers
 
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_testbench.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_testbench.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -34,6 +71,33 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity cometa16_processor
 -- Compiling architecture behavior_processor of cometa16_processor
 
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_controller.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_controller.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package opcodes
+-- Compiling entity cometa16_controller
+-- Compiling architecture behavior_controller of cometa16_controller
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_shifter.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_shifter.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity cometa16_shifter
+-- Compiling architecture behavior_shifter of cometa16_shifter
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_opcodes.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_opcodes.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package opcodes
+-- Compiling package body opcodes
+-- Loading package opcodes
+
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_ac_registers.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_ac_registers.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -53,6 +117,62 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity cometa16_controller
 -- Compiling architecture behavior_controller of cometa16_controller
 
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_sign_extend.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_sign_extend.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity cometa16_sign_extend
+-- Compiling architecture behavior_sign_extend of cometa16_sign_extend
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_processor.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_processor.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity cometa16_processor
+-- Compiling architecture behavior_processor of cometa16_processor
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_data_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_data_mem.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_data_mem
+-- Compiling architecture behavior_data_mem of cometa16_data_mem
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_testbench.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_testbench.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_testbench
+-- Compiling architecture behavior_testbench of cometa16_testbench
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_main_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_main_mem.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_main_mem
+-- Compiling architecture behavior_main_mem of cometa16_main_mem
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_pc.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_pc.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_pc
+-- Compiling architecture behavior_pc of cometa16_pc
+
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_data_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_data_mem.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -62,6 +182,26 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package STD_LOGIC_UNSIGNED
 -- Compiling entity cometa16_data_mem
 -- Compiling architecture behavior_data_mem of cometa16_data_mem
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_inst_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_inst_mem.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_inst_mem
+-- Compiling architecture behavior_inst_mem of cometa16_inst_mem
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_hilo.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_hilo.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_hilo
+-- Compiling architecture behavior_hilo of cometa16_hilo
 
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_alu.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_alu.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -110,15 +250,15 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity cometa16_processor_with_memory
 -- Compiling architecture behavior_processor_with_memory of cometa16_processor_with_memory
 
-} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_hilo.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_hilo.vhdl
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_rf_registers.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/CMT2-Communication-Subsystem/Source/cometa16_rf_registers.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity cometa16_hilo
--- Compiling architecture behavior_hilo of cometa16_hilo
+-- Compiling entity cometa16_rf_registers
+-- Compiling architecture behavior_rf_registers of cometa16_rf_registers
 
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_inst_mem.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_inst_mem.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -130,14 +270,15 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity cometa16_inst_mem
 -- Compiling architecture behavior_inst_mem of cometa16_inst_mem
 
-} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_shifter.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_shifter.vhdl
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_hilo.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_hilo.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity cometa16_shifter
--- Compiling architecture behavior_shifter of cometa16_shifter
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity cometa16_hilo
+-- Compiling architecture behavior_hilo of cometa16_hilo
 
 } {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_opcodes.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_opcodes.vhdl
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -147,5 +288,14 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling package opcodes
 -- Compiling package body opcodes
 -- Loading package opcodes
+
+} {} {}} C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_shifter.vhdl {1 {vcom -work work -2008 -explicit -stats=none C:/Users/icaro/OneDrive/Documentos/GitHub/cometa-mark-ii/Source/cometa16_shifter.vhdl
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity cometa16_shifter
+-- Compiling architecture behavior_shifter of cometa16_shifter
 
 } {} {}}
