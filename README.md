@@ -10,7 +10,7 @@ NATURE SCIENCE CENTER\
 COMPUTING DEPARTMENT
 
 ## Introduction
-COMETA Mark II is a 16 Bit, unicycle processor designed for general purpose. It have two bank registers, memory hierarchy, uses Harvard architecture and have a 1024 words of 16 bits main memory.
+COMETA Mark II is a 16 Bit, unicycle and multicore processor designed for general purpose. It have two bank registers, memory hierarchy, uses Harvard architecture and have a 1024 words of 16 bits main memory.
 
 ## Rights reserved
 
