@@ -1,4 +1,4 @@
-# COMETA MK II - Instruction Set Architecture
+# MOON IV - Instruction Set Architecture
 
 ## Logical and Arithmetic Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
