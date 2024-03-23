@@ -70,7 +70,7 @@ architecture behavior_main_mem of cometa16_main_mem is
     signal main_mem: memory;
 
 begin
-    rd_main_memory: process(request, main_rd_addr, rst)
+    rd_main_memory: process(request, main_rd_addr)
 
     begin
         if ((request = '1') and (conv_integer(main_rd_addr) < 1024)) then

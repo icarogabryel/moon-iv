@@ -14,7 +14,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity cometa16_processor is
+entity cometa16_core is
     port(
         clk: in std_logic;
         rst: in std_logic; 
@@ -31,9 +31,9 @@ entity cometa16_processor is
         
     );
 
-end cometa16_processor;
+end cometa16_core;
 
-architecture behavior_processor of cometa16_processor is
+architecture behavior_core of cometa16_core is
     -- Controller signals
     signal ctrl_cj:          std_logic_vector(2 downto 0);
     signal ctrl_ij:          std_logic_vector(1 downto 0);
@@ -552,4 +552,4 @@ begin
 
         );
 
-end behavior_processor;
+end behavior_core;
