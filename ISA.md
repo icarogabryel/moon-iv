@@ -1,21 +1,28 @@
 # MOON IV - Instruction Set Architecture
 
+## No Operation
+No operation is the only instruction that does not have any fields. All other instructions have a 6-bit opcode field. The opcode field is used to determine the instruction to be executed. The remaining fields are used to specify the operands and the result of the operation.
+
+| Instruction | Mnemonic | Opcode | Fields | Meaning |
+|-|-|-|-|-|
+| No Operation | nope | 000000 | None | No operation |
+
 ## Logical and Arithmetic Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
-| No Operation                           | nope | 000000 | None | No operation |
-| Addition                               | add  | 000001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 + rf2 |
-| Subtraction                            | sub  | 000010 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 - rf2 |
-| NOT                                    | not  | 000011 | ac(9-8), rf1(7-4)             | ac = NOT rf1 |
-| AND                                    | and  | 000100 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 AND rf2 |
-| OR                                     | or   | 000101 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 OR rf2 |
-| XOR                                    | xor  | 000110 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XOR rf2 |
-| NAND                                   | nand | 000111 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NAND rf2 |
-| NOR                                    | nor  | 001000 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NOR rf2 |
-| XNOR                                   | xnor | 001001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XNOR rf2 |
-| Set on Less Than                       | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
-| Test, Add and Shift for Multiplication | tasm | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
-| Test, Sub and Shift for Multiplication | tssm | 001110 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi - rf1; hi, lo >> 1 else hi, lo >> 1 |
+| No Operation            | nope | 000000 | None | No operation |
+| Addition                | add  | 000001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 + rf2 |
+| Subtraction             | sub  | 000010 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 - rf2 |
+| NOT                     | not  | 000011 | ac(9-8), rf1(7-4)             | ac = NOT rf1 |
+| AND                     | and  | 000100 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 AND rf2 |
+| OR                      | or   | 000101 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 OR rf2 |
+| XOR                     | xor  | 000110 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XOR rf2 |
+| NAND                    | nand | 000111 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NAND rf2 |
+| NOR                     | nor  | 001000 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 NOR rf2 |
+| XNOR                    | xnor | 001001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XNOR rf2 |
+| Set on Less Than        | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
+| Test for Multiplication | tmul | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
+| Test for Division       | tdiv | 001110 | rf1(7-4)                      | If hi >= rf1 then hi = hi - rf1; hi, lo << 1 else hi, lo << 1 with '1' |
 
 ## Shift Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
