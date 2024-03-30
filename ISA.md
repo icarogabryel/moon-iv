@@ -10,7 +10,6 @@ No operation is the only instruction that does not have any fields. All other in
 ## Logical and Arithmetic Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
-| No Operation            | nope | 000000 | None | No operation |
 | Addition                | add  | 000001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 + rf2 |
 | Subtraction             | sub  | 000010 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 - rf2 |
 | NOT                     | not  | 000011 | ac(9-8), rf1(7-4)             | ac = NOT rf1 |
@@ -22,7 +21,7 @@ No operation is the only instruction that does not have any fields. All other in
 | XNOR                    | xnor | 001001 | ac(9-8), rf1(7-4), rf2(3-0)   | ac = rf1 XNOR rf2 |
 | Set on Less Than        | slt  | 010101 | ac(9-8), rf1(7-4), rf2(3-0)   | If rf1 < rf2 then ac = 1 else ac = 0 |
 | Test for Multiplication | tmul | 001101 | rf1(7-4)                      | If lo(0) == ‘1’ then  hi = hi + rf1; hi, lo >> 1 else hi, lo >> 1 |
-| Test for Division       | tdiv | 001110 | rf1(7-4)                      | If hi >= rf1 then hi = hi - rf1; hi, lo << 1 else hi, lo << 1 with '1' |
+| Test for Division       | tdiv | 001110 | rf1(7-4)                      | If hi >= rf1 then hi = hi - rf1; hi, lo << 1 with '0' else hi, lo << 1 with '1' |
 
 ## Shift Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
