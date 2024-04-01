@@ -15,16 +15,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_testbench is end;
+entity testbench is end;
 
-architecture behavior_testbench of cometa16_testbench is
+architecture bhvTestbench of testbench is
     constant clk_period: time := 40 ns;
     signal clk_count: integer := 0;
 
     signal clk: std_logic;
     signal rst: std_logic;
 
-    component cometa16_datapath is
+    component moonIv is
         port(
             clk: in std_logic;
             rst: in std_logic
@@ -34,7 +34,7 @@ architecture behavior_testbench of cometa16_testbench is
     end component;
 
 begin
-    dut: cometa16_datapath
+    dut: moonIv
         port map(
             clk=> clk,
             rst => rst
@@ -72,4 +72,4 @@ begin
     
     end process reset_process;
 
-end behavior_testbench;
+end bhvTestbench;

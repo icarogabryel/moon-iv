@@ -14,16 +14,16 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity cometa16_datapath is
+entity moonIv is
     port(
         clk: in std_logic;
         rst: in std_logic
 
     );
 
-end entity cometa16_datapath;
+end entity moonIv;
 
-architecture behavior_datapath of cometa16_datapath is
+architecture bhvMoonIv of moonIv is
     signal request_0: std_logic;
     signal request_1: std_logic;
     signal request_2: std_logic;
@@ -244,4 +244,4 @@ begin
 
         );        
 
-end architecture behavior_datapath;
+end architecture bhvMoonIv;
