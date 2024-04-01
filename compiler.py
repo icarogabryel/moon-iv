@@ -191,15 +191,15 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'001100{p1}{p2}{p3}\n'
 
-            case 'tasm':
+            case 'tmul':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
-                compiledText += f'00110100{p1}0000\n'
+                compiledText += f'001101000000{p1}\n'
 
-            case 'tssm':
+            case 'tdiv':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
-                compiledText += f'00111000{p1}0000\n'
+                compiledText += f'001110000000{p1}\n'
 
             # Move instructions
             case 'mtl':
