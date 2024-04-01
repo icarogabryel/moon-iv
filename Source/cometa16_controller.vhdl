@@ -37,8 +37,8 @@ entity cometa16_controller is
     
         ctrl_sign_extend:  out std_logic_vector(1 downto 0);
     
-        ctrl_src_alu_a:    out std_logic;
-        ctrl_src_alu_b:    out std_logic_vector(1 downto 0);
+        ctrl_src_alu_a:    out std_logic_vector(1 downto 0);
+        ctrl_src_alu_b:    out std_logic;
         ctrl_alu:          out std_logic_vector(3 downto 0);
     
         ctrl_sh:           out std_logic_vector(1 downto 0);
@@ -73,8 +73,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -102,8 +102,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
@@ -129,8 +129,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0011";
         
             ctrl_sh           <= "00";
@@ -156,8 +156,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0100";
         
             ctrl_sh           <= "00";
@@ -183,8 +183,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0101";
         
             ctrl_sh           <= "00";
@@ -210,8 +210,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0110";
         
             ctrl_sh           <= "00";
@@ -237,8 +237,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0111";
         
             ctrl_sh           <= "00";
@@ -264,8 +264,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "1000";
         
             ctrl_sh           <= "00";
@@ -291,8 +291,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "1001";
         
             ctrl_sh           <= "00";
@@ -318,8 +318,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "1010";
         
             ctrl_sh           <= "00";
@@ -345,8 +345,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "01";
@@ -372,8 +372,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "10";
@@ -399,8 +399,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "11";
@@ -426,8 +426,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "11";
+            ctrl_src_alu_a    <= "11";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
@@ -453,8 +453,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "11";
+            ctrl_src_alu_a    <= "11";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0011";
         
             ctrl_sh           <= "00";
@@ -480,8 +480,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -507,8 +507,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -534,8 +534,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -561,8 +561,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -588,8 +588,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -615,8 +615,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -642,8 +642,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0011";
         
             ctrl_sh           <= "00";
@@ -671,8 +671,8 @@ begin
         
             ctrl_sign_extend  <= "11";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
@@ -698,8 +698,8 @@ begin
         
             ctrl_sign_extend  <= "11";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0011";
         
             ctrl_sh           <= "00";
@@ -725,8 +725,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0101";
         
             ctrl_sh           <= "00";
@@ -752,8 +752,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0110";
         
             ctrl_sh           <= "00";
@@ -779,8 +779,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0111";
         
             ctrl_sh           <= "00";
@@ -806,8 +806,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "1000";
         
             ctrl_sh           <= "00";
@@ -833,8 +833,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "1001";
         
             ctrl_sh           <= "00";
@@ -860,8 +860,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "01";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "1010";
         
             ctrl_sh           <= "00";
@@ -887,8 +887,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0001";
         
             ctrl_sh           <= "00";
@@ -914,8 +914,8 @@ begin
         
             ctrl_sign_extend  <= "01";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0001";
         
             ctrl_sh           <= "00";
@@ -941,8 +941,8 @@ begin
         
             ctrl_sign_extend  <= "11";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "01";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '1';
             ctrl_alu          <= "0001";
         
             ctrl_sh           <= "00";
@@ -970,8 +970,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -997,8 +997,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1024,8 +1024,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1051,8 +1051,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1080,8 +1080,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1107,8 +1107,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1134,8 +1134,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1161,8 +1161,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '0';
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "00";
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000";
         
             ctrl_sh           <= "00";
@@ -1188,8 +1188,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1'; -- from ac
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000"; -- A transparency
         
             ctrl_sh           <= "00";
@@ -1215,8 +1215,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1'; -- from ac
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000"; -- A transparency
         
             ctrl_sh           <= "00";
@@ -1242,8 +1242,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1'; -- from ac
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000"; -- A transparency
         
             ctrl_sh           <= "00";
@@ -1269,8 +1269,8 @@ begin
         
             ctrl_sign_extend  <= "00";
         
-            ctrl_src_alu_a    <= '1'; -- from ac
-            ctrl_src_alu_b    <= "00";
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
             ctrl_alu          <= "0000"; -- A transparency
         
             ctrl_sh           <= "00";
@@ -1296,8 +1296,8 @@ begin
         
             ctrl_sign_extend  <= "XX";
         
-            ctrl_src_alu_a    <= 'X';
-            ctrl_src_alu_b    <= "XX";
+            ctrl_src_alu_a    <= "XX";
+            ctrl_src_alu_b    <= 'X';
             ctrl_alu          <= "XXXX";
         
             ctrl_sh           <= "XX";

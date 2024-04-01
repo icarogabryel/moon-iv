@@ -80,8 +80,8 @@ architecture behavior_core of cometa16_core is
         
             ctrl_sign_extend:  out std_logic_vector(1 downto 0);
         
-            ctrl_src_alu_a:    out std_logic;
-            ctrl_src_alu_b:    out std_logic_vector(1 downto 0);
+            ctrl_src_alu_a:    out std_logic_vector(1 downto 0);
+            ctrl_src_alu_b:    out std_logic;
             ctrl_alu:          out std_logic_vector(3 downto 0);
         
             ctrl_sh:           out std_logic_vector(1 downto 0);
