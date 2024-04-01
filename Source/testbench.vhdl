@@ -15,9 +15,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity testbench is end;
+entity testBench is end;
 
-architecture bhvTestbench of testbench is
+architecture bhvTestBench of testBench is
     constant clk_period: time := 40 ns;
     signal clk_count: integer := 0;
 
@@ -72,4 +72,4 @@ begin
     
     end process reset_process;
 
-end bhvTestbench;
+end bhvTestBench;
