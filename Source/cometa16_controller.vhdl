@@ -449,7 +449,7 @@ begin
             ctrl_src_ac       <= "000";
         
             ctrl_wr_hilo      <= '1';
-            ctrl_src_hilo     <= "00";
+            ctrl_src_hilo     <= "01";
         
             ctrl_sign_extend  <= "00";
         
@@ -476,7 +476,7 @@ begin
             ctrl_src_ac       <= "000";
         
             ctrl_wr_hilo      <= '1';
-            ctrl_src_hilo     <= "01";
+            ctrl_src_hilo     <= "10";
         
             ctrl_sign_extend  <= "00";
         
@@ -530,7 +530,7 @@ begin
             ctrl_src_ac       <= "000";
         
             ctrl_wr_hilo      <= '1';
-            ctrl_src_hilo     <= "10";
+            ctrl_src_hilo     <= "11";
         
             ctrl_sign_extend  <= "00";
         
