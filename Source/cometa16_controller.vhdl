@@ -408,7 +408,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 
-            when tasm_opcode =>
+            when tmul_opcode =>
 
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
@@ -435,7 +435,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 
-            when tssm_opcode =>
+            when tdiv_opcode =>
 
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";

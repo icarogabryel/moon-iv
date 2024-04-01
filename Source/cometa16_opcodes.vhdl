@@ -29,12 +29,17 @@ package opcodes is
     constant nor_opcode:   std_logic_vector(5 downto 0) := "001000";
     constant xnor_opcode:  std_logic_vector(5 downto 0) := "001001";
 
+    constant tmul_opcode:  std_logic_vector(5 downto 0) := "001101";
+    constant tdiv_opcode:  std_logic_vector(5 downto 0) := "001110";
+
+    constant slt_opcode:   std_logic_vector(5 downto 0) := "010101";
+
+    -- Shift Operations
     constant sll_opcode:   std_logic_vector(5 downto 0) := "001010";
     constant srl_opcode:   std_logic_vector(5 downto 0) := "001011";
     constant sra_opcode:   std_logic_vector(5 downto 0) := "001100";
 
-    constant tasm_opcode:  std_logic_vector(5 downto 0) := "001101";
-    constant tssm_opcode:  std_logic_vector(5 downto 0) := "001110";
+    -- Move Operations
     constant mtl_opcode:   std_logic_vector(5 downto 0) := "001111";
     constant mfl_opcode:   std_logic_vector(5 downto 0) := "010000";
     constant mth_opcode:   std_logic_vector(5 downto 0) := "010001";
@@ -42,8 +47,6 @@ package opcodes is
 
     constant mtac_opcode:  std_logic_vector(5 downto 0) := "010011";
     constant mfac_opcode:  std_logic_vector(5 downto 0) := "010100";
-
-    constant slt_opcode:   std_logic_vector(5 downto 0) := "010101";
 
     -- Inmediate Operations
     constant addi_opcode:  std_logic_vector(5 downto 0) := "010110";
