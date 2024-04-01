@@ -51,8 +51,8 @@ architecture behavior_core of cometa16_core is
 
     signal ctrl_sign_extend:  std_logic_vector(1 downto 0);
 
-    signal ctrl_src_alu_a:    std_logic;
-    signal ctrl_src_alu_b:    std_logic_vector(1 downto 0);
+    signal ctrl_src_alu_a:    std_logic_vector(1 downto 0);
+    signal ctrl_src_alu_b:    std_logic;
     signal ctrl_alu:          std_logic_vector(3 downto 0);
 
     signal ctrl_sh:           std_logic_vector(1 downto 0);
@@ -239,8 +239,8 @@ architecture behavior_core of cometa16_core is
     component cometa16_alu is
         port(
             ctrl_alu:        in std_logic_vector(3 downto 0);
-            ctrl_src_alu_a:  in std_logic;
-            ctrl_src_alu_b:  in std_logic_vector(1 downto 0);
+            ctrl_src_alu_a:  in std_logic_vector(1 downto 0);
+            ctrl_src_alu_b:  in std_logic;
 
             rf1_out:         in std_logic_vector(15 downto 0);
             rf2_out:         in std_logic_vector(15 downto 0);
@@ -285,7 +285,7 @@ architecture behavior_core of cometa16_core is
             shifter_out: in std_logic_vector(15 downto 0);
             ac_out: in std_logic_vector(15 downto 0);
 
-            -- Recive the block from main memory
+            -- Receive the block from main memory
             main_to_data_bk: in std_logic_vector(63 downto 0);
             wr_data_from_main: in std_logic;
 
