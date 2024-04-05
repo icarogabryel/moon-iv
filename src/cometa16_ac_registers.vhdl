@@ -4,8 +4,7 @@
 -- ||   NATURE SCIENCE CENTER                           ||
 -- ||   COMPUTING DEPARTMENT                            ||
 -- ||                                                   ||
--- ||   Computer for Every Task Architecture Mark II    ||
--- ||   COMETA MK II                                    ||
+-- ||   Many As Only ONe - MOON IV                      ||
 -- ||                                                   ||
 -- ||   Developer: Icaro Gabryel                        ||
 -- ||                                                   ||
@@ -15,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_ac_registers is
+entity moon_ac_registers is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -34,9 +33,9 @@ entity cometa16_ac_registers is
 
     );
 
-end cometa16_ac_registers;
+end moon_ac_registers;
 
-architecture behavior_ac_registers of cometa16_ac_registers is
+architecture bhv_ac_registers of moon_ac_registers is
     type registers is array(0 to 3) of std_logic_vector(15 downto 0);
     signal ac_registers: registers;
 
@@ -53,7 +52,7 @@ begin
 
     ac_out <= ac_registers(conv_integer(ac_addr(1 downto 0)))(15 downto 0);
 
-    wr_ac_regiters: process(clk, rst, ctrl_wr_ac)
+    wr_ac_registers: process(clk, rst, ctrl_wr_ac)
 
     begin
         if (rst = '1') then
@@ -67,6 +66,6 @@ begin
 
         end if;
             
-    end process wr_ac_regiters;
+    end process wr_ac_registers;
 
-end behavior_ac_registers;
+end bhv_ac_registers;

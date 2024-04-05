@@ -4,8 +4,7 @@
 -- ||   NATURE SCIENCE CENTER                           ||
 -- ||   COMPUTING DEPARTMENT                            ||
 -- ||                                                   ||
--- ||   Computer for Every Task Architecture Mark II    ||
--- ||   COMETA MK II                                    ||
+-- ||   Many As Only ONe - MOON IV                      ||
 -- ||                                                   ||
 -- ||   Developer: Icaro Gabryel                        ||
 -- ||                                                   ||
