@@ -59,7 +59,7 @@ architecture bhv_core of moon_core is
     signal ctrl_wr_data_mem:  std_logic;
     signal ctrl_data_mem_use: std_logic;
 
-    component cometa16_controller is
+    component moon_controller is
         port(
             opcode:            in std_logic_vector(5 downto 0);
     
@@ -95,7 +95,7 @@ architecture bhv_core of moon_core is
     signal pc_out: std_logic_vector(15 downto 0);
     signal pc_plus_one: std_logic_vector(15 downto 0);
 
-    component cometa16_pc is
+    component moon_pc is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -122,7 +122,7 @@ architecture bhv_core of moon_core is
     signal inst_hit_out: std_logic;
     signal inst_mem_out: std_logic_vector(15 downto 0);
 
-    component cometa16_inst_mem is
+    component moon_inst_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -148,7 +148,7 @@ architecture bhv_core of moon_core is
     signal rf1_out: std_logic_vector(15 downto 0);
     signal rf2_out: std_logic_vector(15 downto 0);
 
-    component cometa16_rf_registers is
+    component moon_rf_registers is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -176,7 +176,7 @@ architecture bhv_core of moon_core is
 
     signal ac_out: std_logic_vector(15 downto 0);
 
-    component cometa16_ac_registers is
+    component moon_ac_registers is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -200,7 +200,7 @@ architecture bhv_core of moon_core is
     signal lo_out: std_logic_vector(15 downto 0);
     signal hi_out: std_logic_vector(15 downto 0);
     
-    component cometa16_hilo is
+    component moon_hilo is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -220,7 +220,7 @@ architecture bhv_core of moon_core is
 
     signal sign_extend_out: std_logic_vector(15 downto 0);
 
-    component cometa16_sign_extend is
+    component moon_sign_extend is
         port(
             ctrl_sign_extend: in std_logic_vector(1 downto 0);
             imm:              in std_logic_vector(7 downto 0);
@@ -235,7 +235,7 @@ architecture bhv_core of moon_core is
     signal n_signal: std_logic;
     signal alu_out: std_logic_vector(15 downto 0);
 
-    component cometa16_alu is
+    component moon_alu is
         port(
             ctrl_alu:        in std_logic_vector(3 downto 0);
             ctrl_src_alu_a:  in std_logic_vector(1 downto 0);
@@ -258,7 +258,7 @@ architecture bhv_core of moon_core is
 
     signal shifter_out: std_logic_vector(15 downto 0);
 
-    component cometa16_shifter is
+    component moon_shifter is
         port(
             ctrl_sh:         in std_logic_vector(1 downto 0);
             shamt:           in std_logic_vector(3 downto 0);
@@ -273,7 +273,7 @@ architecture bhv_core of moon_core is
     signal data_hit_out: std_logic;
     signal data_mem_out: std_logic_vector(15 downto 0);
 
-    component cometa16_data_mem is
+    component moon_data_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -306,7 +306,7 @@ architecture bhv_core of moon_core is
     signal main_to_data_bk: std_logic_vector(63 downto 0);
     signal hit_signal: std_logic;
 
-    component cometa16_mau is
+    component moon_mau is
         port(
             inst_hit_out: in std_logic;
             data_hit_out: in std_logic;
@@ -339,7 +339,7 @@ begin
     rf2_addr <= inst_mem_out(3 downto 0);
     imm      <= inst_mem_out(7 downto 0);
 
-    controller: cometa16_controller
+    controller: moon_controller
         port map(
             opcode => opcode,
     
@@ -370,7 +370,7 @@ begin
 
         );
     
-    pc: cometa16_pc
+    pc: moon_pc
         port map(
             clk => clk,
             rst => rst,
@@ -392,7 +392,7 @@ begin
 
         );
 
-    inst_mem: cometa16_inst_mem
+    inst_mem: moon_inst_mem
         port map(
             clk => clk,
             rst => rst,
@@ -407,7 +407,7 @@ begin
 
         );
 
-    rf_registers: cometa16_rf_registers
+    rf_registers: moon_rf_registers
         port map(
             clk => clk,
             rst => rst,
@@ -430,7 +430,7 @@ begin
 
         );
 
-    ac_registers: cometa16_ac_registers
+    ac_registers: moon_ac_registers
         port map(
             clk => clk,
             rst => rst,
@@ -449,7 +449,7 @@ begin
 
         );
 
-    hilo: cometa16_hilo
+    hilo: moon_hilo
         port map(
             clk => clk,
             rst => rst,
@@ -465,7 +465,7 @@ begin
 
         );
 
-    sign_extend: cometa16_sign_extend
+    sign_extend: moon_sign_extend
         port map(
             ctrl_sign_extend => ctrl_sign_extend,
             imm => imm,
@@ -474,7 +474,7 @@ begin
 
         );
 
-    alu: cometa16_alu
+    alu: moon_alu
         port map(
             ctrl_alu => ctrl_alu,
             ctrl_src_alu_a => ctrl_src_alu_a,
@@ -494,7 +494,7 @@ begin
 
         );
 
-    shifter: cometa16_shifter
+    shifter: moon_shifter
         port map(
             ctrl_sh => ctrl_sh,
             shamt => rf2_addr,
@@ -505,7 +505,7 @@ begin
 
         );
 
-    data_mem: cometa16_data_mem
+    data_mem: moon_data_mem
         port map(
             clk => clk,
             rst => rst,
@@ -528,7 +528,7 @@ begin
 
         );
 
-    mau: cometa16_mau
+    mau: moon_mau
         port map(
             inst_hit_out => inst_hit_out,
             data_hit_out => data_hit_out,
