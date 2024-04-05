@@ -53,7 +53,7 @@ architecture bhv_moon of moon is
     signal core_out_2: std_logic_vector(97 downto 0);
     signal core_out_3: std_logic_vector(97 downto 0);
     
-    component cometa16_core is
+    component moon_core is
         port(
             clk: in std_logic;
             rst: in std_logic; 
@@ -70,7 +70,7 @@ architecture bhv_moon of moon is
             
         );
 
-    end component cometa16_core;
+    end component moon_core;
 
     signal core_in_0: std_logic_vector(64 downto 0);
     signal core_in_1: std_logic_vector(64 downto 0);
@@ -79,7 +79,7 @@ architecture bhv_moon of moon is
     
     signal main_mem_in: std_logic_vector(97 downto 0);
 
-    component cometa16_css is
+    component moon_css is
         port(
             clk, rst: in std_logic;
 
@@ -103,11 +103,11 @@ architecture bhv_moon of moon is
 
         );
 
-    end component cometa16_css;
+    end component moon_css;
 
     signal main_mem_out: std_logic_vector(64 downto 0);
 
-    component cometa16_main_mem is
+    component moon_main_mem is
         port(
             clk: in std_logic;
             rst: in std_logic;
@@ -124,7 +124,7 @@ architecture bhv_moon of moon is
 
         );
 
-    end component cometa16_main_mem;
+    end component moon_main_mem;
 
 begin
     core_out_0 <= request_0 & main_rd_addr_0 & wr_main_from_data_0 & main_wr_addr_0 & data_to_main_bk_0;
@@ -132,7 +132,7 @@ begin
     core_out_2 <= request_2 & main_rd_addr_2 & wr_main_from_data_2 & main_wr_addr_2 & data_to_main_bk_2;
     core_out_3 <= request_3 & main_rd_addr_3 & wr_main_from_data_3 & main_wr_addr_3 & data_to_main_bk_3;
 
-    core_0: cometa16_core
+    core_0: moon_core
         port map(
             clk => clk,
             rst => rst,
@@ -149,7 +149,7 @@ begin
 
         );
     
-    core_1: cometa16_core
+    core_1: moon_core
         port map(
             clk => clk,
             rst => rst,
@@ -166,7 +166,7 @@ begin
 
         );
 
-    core_2: cometa16_core
+    core_2: moon_core
         port map(
             clk => clk,
             rst => rst,
@@ -183,7 +183,7 @@ begin
 
         );
 
-    core_3: cometa16_core
+    core_3: moon_core
         port map(
             clk => clk,
             rst => rst,
@@ -200,7 +200,7 @@ begin
 
         );
     
-    css: cometa16_css
+    css: moon_css
         port map(
             clk => clk,
             rst => rst,
@@ -226,7 +226,7 @@ begin
 
         );
 
-    main_mem: cometa16_main_mem
+    main_mem: moon_main_mem
         port map(
             clk => clk,
             rst => rst,
