@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_hilo is
+entity moon_hilo is
     port( 
         clk: in std_logic;
         rst: in std_logic;
@@ -30,9 +30,9 @@ entity cometa16_hilo is
 
     );
 
-end cometa16_hilo;
+end moon_hilo;
 
-architecture behavior_hilo of cometa16_hilo is
+architecture bhv_hilo of moon_hilo is
     signal high_register:   std_logic_vector(15 downto 0);
     signal low_register:    std_logic_vector(15 downto 0);
 
@@ -81,4 +81,4 @@ begin
 
     end process;
 
-end behavior_hilo;
+end bhv_hilo;

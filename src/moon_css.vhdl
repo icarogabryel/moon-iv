@@ -15,7 +15,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
-entity cometa16_css is
+entity moon_css is
     port(
         clk, rst: in std_logic;
 
@@ -39,9 +39,9 @@ entity cometa16_css is
 
     );
 
-end cometa16_css;
+end moon_css;
 
-architecture behavior_css of cometa16_css is
+architecture bhv_css of moon_css is
     signal priority: std_logic_vector(1 downto 0);
     signal priority_reg: std_logic_vector(1 downto 0);
     signal priority_plus_one: std_logic_vector(1 downto 0);
@@ -211,4 +211,4 @@ begin
 
     main_mem_in <= pre_main_mem_in(97) & conv_main_rd_addr(15 downto 0) & pre_main_mem_in(80) & conv_main_wr_addr(15 downto 0) & pre_main_mem_in(63 downto 0);
 
-end behavior_css;
+end bhv_css;

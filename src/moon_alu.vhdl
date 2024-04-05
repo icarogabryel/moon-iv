@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_signed.all;
 
-entity cometa16_alu is
+entity moon_alu is
     port(
         ctrl_alu:        in std_logic_vector(3 downto 0);
         ctrl_src_alu_a:  in std_logic_vector(1 downto 0);
@@ -33,9 +33,9 @@ entity cometa16_alu is
         alu_out:         out std_logic_vector(15 downto 0)
     );
 
-end cometa16_alu;
+end moon_alu;
 
-architecture behavior_alu of cometa16_alu is
+architecture bhv_alu of moon_alu is
     signal out_mux_a: std_logic_vector(15 downto 0);
     signal out_mux_b: std_logic_vector(15 downto 0);
 
@@ -75,4 +75,4 @@ begin
     z_signal <= '1' when ieee.std_logic_unsigned."="(alu_out, "0000000000000000") else '0';
     n_signal <= alu_out(15);
 
-end behavior_alu;
+end bhv_alu;

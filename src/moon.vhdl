@@ -13,16 +13,16 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity moonIv is
+entity moon is
     port(
         clk: in std_logic;
         rst: in std_logic
 
     );
 
-end entity moonIv;
+end entity moon;
 
-architecture bhvMoonIv of moonIv is
+architecture bhv_moon of moon is
     signal request_0: std_logic;
     signal request_1: std_logic;
     signal request_2: std_logic;
@@ -243,4 +243,4 @@ begin
 
         );        
 
-end architecture bhvMoonIv;
+end architecture bhv_moon;

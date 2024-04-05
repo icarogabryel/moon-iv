@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_inst_mem is
+entity moon_inst_mem is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -29,9 +29,9 @@ entity cometa16_inst_mem is
 
     );
 
-end cometa16_inst_mem;
+end moon_inst_mem;
 
-architecture behavior_inst_mem of cometa16_inst_mem is
+architecture bhv_inst_mem of moon_inst_mem is
     type memory is array(0 to 3, 0 to 3) of std_logic_vector(28 downto 0);
     signal inst_mem: memory;
 
@@ -90,4 +90,4 @@ begin
 	
     end process wr_inst_mem_process;
 
-end behavior_inst_mem;
+end bhv_inst_mem;

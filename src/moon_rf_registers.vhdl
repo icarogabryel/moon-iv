@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_rf_registers is
+entity moon_rf_registers is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -38,9 +38,9 @@ entity cometa16_rf_registers is
 
     );
 
-end cometa16_rf_registers;
+end moon_rf_registers;
 
-architecture behavior_rf_registers of cometa16_rf_registers is
+architecture bhv_rf_registers of moon_rf_registers is
     type registers is array(0 to 15) of std_logic_vector(15 downto 0);
 	signal rf_registers: registers;
 
@@ -103,4 +103,4 @@ begin
 
 	end process wr_rf_registers;
 
-end behavior_rf_registers;
+end bhv_rf_registers;

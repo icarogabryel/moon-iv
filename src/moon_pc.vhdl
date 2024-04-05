@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_pc is
+entity moon_pc is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -36,9 +36,9 @@ entity cometa16_pc is
 
     );
 
-end cometa16_pc;
+end moon_pc;
 
-architecture behavior_pc of cometa16_pc is
+architecture bhv_pc of moon_pc is
     signal pc_reg: std_logic_vector(15 downto 0) := "0000000000000000";
     signal take: std_logic;
     signal cj_mux, ij_mux: std_logic_vector(15 downto 0);
@@ -79,4 +79,4 @@ begin
     pc_out <= pc_reg;
     pc_plus_one <= pc_reg + 1;
 
-end behavior_pc;
+end bhv_pc;

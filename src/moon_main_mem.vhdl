@@ -15,7 +15,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use std.textio.all;
 
-entity cometa16_main_mem is
+entity moon_main_mem is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -32,9 +32,9 @@ entity cometa16_main_mem is
 
     );
 
-end cometa16_main_mem;
+end moon_main_mem;
 
-architecture behavior_main_mem of cometa16_main_mem is 
+architecture bhv_main_mem of moon_main_mem is 
     type memory is array(0 to 255, 0 to 3) of std_logic_vector(15 downto 0);
 
     impure function read_main_memory_file(file_name: in string) return memory is
@@ -106,4 +106,4 @@ begin
     
     end process wr_main_memory;
 
-end behavior_main_mem;
+end bhv_main_mem;

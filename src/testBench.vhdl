@@ -16,14 +16,14 @@ use ieee.std_logic_unsigned.all;
 
 entity testBench is end;
 
-architecture bhvTestBench of testBench is
+architecture bhv_testbench of testBench is
     constant clk_period: time := 40 ns;
     signal clk_count: integer := 0;
 
     signal clk: std_logic;
     signal rst: std_logic;
 
-    component moonIv is
+    component moon is
         port(
             clk: in std_logic;
             rst: in std_logic
@@ -33,7 +33,7 @@ architecture bhvTestBench of testBench is
     end component;
 
 begin
-    dut: moonIv
+    dut: moon
         port map(
             clk=> clk,
             rst => rst
@@ -71,4 +71,4 @@ begin
     
     end process reset_process;
 
-end bhvTestBench;
+end bhv_testbench;

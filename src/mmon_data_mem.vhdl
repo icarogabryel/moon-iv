@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity cometa16_data_mem is
+entity moon_data_mem is
     port(
         clk: in std_logic;
         rst: in std_logic;
@@ -39,9 +39,9 @@ entity cometa16_data_mem is
 
     );
 
-end cometa16_data_mem;
+end moon_data_mem;
 
-architecture behavior_data_mem of cometa16_data_mem is
+architecture bhv_data_mem of moon_data_mem is
     type memory is array(0 to 3, 0 to 3) of std_logic_vector(29 downto 0);
     signal data_mem: memory;
 
@@ -135,4 +135,4 @@ begin
 
     end process wr_data_mem_process;
 
-end behavior_data_mem;
+end bhv_data_mem;

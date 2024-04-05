@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity cometa16_shifter is
+entity moon_shifter is
     port(
         ctrl_sh:     in std_logic_vector(1 downto 0);
         shamt:       in std_logic_vector(3 downto 0);
@@ -24,9 +24,9 @@ entity cometa16_shifter is
         shifter_out: out std_logic_vector(15 downto 0)
     );
 
-end cometa16_shifter;
+end moon_shifter;
 
-architecture behavior_shifter of cometa16_shifter is
+architecture bhv_shifter of moon_shifter is
 
 begin
     with ctrl_sh select shifter_out <=
@@ -36,4 +36,4 @@ begin
 		std_logic_vector(signed(alu_out) sra to_integer(unsigned(shamt))) when "11",
         "XXXXXXXXXXXXXXXX"                                                when others;
 
-end behavior_shifter;
+end bhv_shifter;

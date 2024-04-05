@@ -13,7 +13,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity cometa16_core is
+entity moon_core is
     port(
         clk: in std_logic;
         rst: in std_logic; 
@@ -30,9 +30,9 @@ entity cometa16_core is
         
     );
 
-end cometa16_core;
+end moon_core;
 
-architecture behavior_core of cometa16_core is
+architecture bhv_core of moon_core is
     -- Controller signals
     signal ctrl_cj:          std_logic_vector(2 downto 0);
     signal ctrl_ij:          std_logic_vector(1 downto 0);
@@ -551,4 +551,4 @@ begin
 
         );
 
-end behavior_core;
+end bhv_core;

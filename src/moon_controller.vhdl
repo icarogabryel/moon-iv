@@ -16,7 +16,7 @@ use ieee.std_logic_1164.all;
 library work;
 use work.opcodes.all;
 
-entity cometa16_controller is
+entity moon_controller is
     port(
         opcode:            in std_logic_vector(5 downto 0);
 
@@ -47,9 +47,9 @@ entity cometa16_controller is
 
     );
 
-end cometa16_controller;
+end moon_controller;
 
-architecture behavior_controller of cometa16_controller is
+architecture bhv_controller of moon_controller is
 
 begin
     process(opcode) begin
@@ -1308,4 +1308,4 @@ begin
 
     end process;
 
-end behavior_controller;
+end bhv_controller;

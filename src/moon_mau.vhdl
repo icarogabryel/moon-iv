@@ -13,7 +13,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity cometa16_mau is
+entity moon_mau is
     port(
         inst_hit_out: in std_logic;
         data_hit_out: in std_logic;
@@ -36,9 +36,9 @@ entity cometa16_mau is
 
     );
 
-end cometa16_mau;
+end moon_mau;
 
-architecture behavior_mau of cometa16_mau is
+architecture bhv_mau of moon_mau is
 
 begin
     hit_signal <= inst_hit_out and data_hit_out;
@@ -55,4 +55,4 @@ begin
     wr_inst_from_main <= wr_cache_from_main when inst_hit_out = '0' else '0';
     wr_data_from_main <= wr_cache_from_main when inst_hit_out = '1' else '0';
 
-end behavior_mau;
+end bhv_mau;
