@@ -14,7 +14,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity testBench is end;
+entity testbench is end;
 
 architecture bhv_testbench of testBench is
     constant clk_period: time := 40 ns;
