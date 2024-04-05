@@ -22,7 +22,7 @@ entity moon_hilo is
         ctrl_wr_hilo:  in std_logic;
         ctrl_src_hilo: in std_logic_vector(1 downto 0);
 
-        sh_out:       in std_logic_vector(15 downto 0);
+        shifter_out:   in std_logic_vector(15 downto 0);
         ac_out:        in std_logic_vector(15 downto 0);
 
         lo_out:        out std_logic_vector(15 downto 0);
@@ -36,27 +36,27 @@ architecture bhv_hilo of moon_hilo is
     signal high_register:   std_logic_vector(15 downto 0);
     signal low_register:    std_logic_vector(15 downto 0);
 
-    signal mulMuxAndRightShifter: std_logic_vector(31 downto 0);
-    signal divMuxAndLeftShifter:  std_logic_vector(31 downto 0);
+    signal mul_mux_and_right_shifter: std_logic_vector(31 downto 0);
+    signal div_mux_and_left_shifter:  std_logic_vector(31 downto 0);
     signal src_hilo_mux:    std_logic_vector(31 downto 0);
 
 begin
-    with low_register(0) select mulMuxAndRightShifter <= -- Multiplication step.
+    with low_register(0) select mul_mux_and_right_shifter <= -- Multiplication step.
         '0' & hi_out(15 downto 0) & lo_out(15 downto 1)
         when '0', -- Just shift right.
-        '0' & sh_out(15 downto 0) & lo_out(15 downto 1)
+        '0' & shifter_out(15 downto 0) & lo_out(15 downto 1)
         when others; -- Add and shift right.
 
-    with sh_out(15) select divMuxAndLeftShifter <= -- Division step.
-        sh_out(14 downto 0) & lo_out(15 downto 0) & '1'
+    with shifter_out(15) select div_mux_and_left_shifter <= -- Division step.
+        shifter_out(14 downto 0) & lo_out(15 downto 0) & '1'
         when '0', -- Positive result, save subtraction and shift left with '1'.
         hi_out(14 downto 0) & lo_out(15 downto 0) & '0'
         when others; -- Negative result, don't save subtraction and shift left with '0'.
 
     with ctrl_src_hilo select src_hilo_mux <=
-        mulMuxAndRightShifter(31 downto 0)
+        mul_mux_and_right_shifter(31 downto 0)
         when "00",
-        divMuxAndLeftShifter(31 downto 0)
+        div_mux_and_left_shifter(31 downto 0)
         when "01",
         hi_out(15 downto 0) & ac_out(15 downto 0)
         when "10",

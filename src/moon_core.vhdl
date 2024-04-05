@@ -457,7 +457,7 @@ begin
             ctrl_wr_hilo => ctrl_wr_hilo,
             ctrl_src_hilo => ctrl_src_hilo,
 
-            sh_out => shifter_out,
+            shifter_out => shifter_out,
             ac_out => ac_out,
 
             lo_out => lo_out,
