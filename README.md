@@ -56,4 +56,4 @@ sub &2, $0, $1   // negative result
 
 ## Instruction Set Architecture - ISA
 
-<!-- include(ISA.md) -->
+You can find the ISA of the processor in the following link: [ISA](isa.md)
