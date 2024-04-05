@@ -53,7 +53,7 @@ add &2, $0, $1   // arith and logic ops
 sub &2, $0, $1   // negative result
 ```
 
-
 ## Instruction Set Architecture - ISA
 
+The MOON IV ISA have 49 instruction and is divided in seven types of instructions: No Operation, Logical and Arithmetic Operations, Shift Operations, Move Operations, Immediate Operations, Memory Access Operations and Control Flow Operations.
 You can find the ISA of the processor in the following link: [ISA](isa.md)

@@ -28,7 +28,7 @@ No operation is the only instruction that does not have any fields. All other in
 |-|-|-|-|-|
 | Shift Left Logical                     | sll  | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
 | Shift Right Logical                    | srl  | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
-| Shift Right Arithmetic                 | sra  | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
+| Shift Right Arithmetic                 | sra  | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |3
 
 ## Move Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
@@ -53,7 +53,7 @@ No operation is the only instruction that does not have any fields. All other in
 | XNOR Immediate        | xnori | 011101 | ac(9-8), imm(7-0) | ac = NOT (ac XOR ("00000000" & imm)) |
 | Load Lower Immediate  | lli   | 011110 | ac(9-8), imm(7-0) | ac = "00000000" & imm |
 | Load Upper Immediate  | lui   | 011111 | ac(9-8), imm(7-0) | ac = imm & "00000000" |
-| Load Signed Immediate | lsi   | 100000 | ac(9-8), imm(7-0) | ac = (imm(7), 8) & imm |
+| Load Signed Immediate | lsi   | 100000 | ac(9-8), imm(7-0) | ac = (imm(7), 8) & imm |11
 
 ## Memory Access Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
@@ -66,11 +66,15 @@ No operation is the only instruction that does not have any fields. All other in
 ## Control Operations
 | Instruction | Mnemonic | Opcode | Fields | Meaning |
 |-|-|-|-|-|
-| Jump                   | jump | 100101 | imm(9-0) | pc = pc(15-10) & imm |
-| Jump and Link          | jal  | 100110 | imm(9-0) | lk = pc + 1; pc = pc(15-10) & imm |
-| Jump Register          | jr   | 100111 | rf1(7-4) | pc = rf1 |
-| Jump Register and Link | jral | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 | 
-| Jump Greater Than Zero | jgtz | 101001 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
-| Jump Less Than Zero    | jltz | 101010 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
-| Jump Equal To Zero     | jeqz | 101011 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
-| Jump Not Equal To Zero | jnez | 101100 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
+| Jump                              | jump | 100101 | imm(9-0) | pc = pc(15-10) & imm |
+| Jump and Link                     | jal  | 100110 | imm(9-0) | lk = pc + 1; pc = pc(15-10) & imm |
+| Jump Register                     | jr   | 100111 | rf1(7-4) | pc = rf1 |
+| Jump Register and Link            | jral | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 | 
+| Branch Greater Than Zero          | bgtz | 101001 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
+| Branch Less Than Zero             | bltz | 101010 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
+| Branch Equal To Zero              | beqz | 101011 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |
+| Branch Not Equal To Zero          | bnez | 101100 | rd(9-8), imm(7-0) | If ac != 0 then pc = (pc + 1) + imm |
+| Branch Greater Than Zero Register | bgtzr | 101101 | rd(9-8), rf1 | If ac > 0 then pc = rf |
+| Branch Less Than Zero Register    | bltzr | 101110 | rd(9-8), rf1 | If ac < 0 then pc = rf |
+| Branch Equal To Zero Register     | beqzr | 101111 | rd(9-8), rf1 | If ac == 0 then pc = rf |
+| Branch Not Equal To Zero Register | bnezr | 110000 | rd(9-8), rf1 | If ac != 0 then pc = rf |
