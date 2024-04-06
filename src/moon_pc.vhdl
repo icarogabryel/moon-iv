@@ -22,6 +22,7 @@ entity moon_pc is
         z_signal:        in std_logic;
         n_signal:        in std_logic;
 
+        ctrl_src_cj:     in std_logic;
         ctrl_cj:         in std_logic_vector(2 downto 0);
         ctrl_ij:         in std_logic_vector(1 downto 0);
 
@@ -41,7 +42,7 @@ end moon_pc;
 architecture bhv_pc of moon_pc is
     signal pc_reg: std_logic_vector(15 downto 0) := "0000000000000000";
     signal take: std_logic;
-    signal cj_mux, ij_mux: std_logic_vector(15 downto 0);
+    signal src_cj_mux, cj_mux, ij_mux: std_logic_vector(15 downto 0);
 
 begin
     with ctrl_cj select take <=
@@ -52,16 +53,18 @@ begin
         (not Z_signal) and (not N_signal) when "100",
         'X'                               when others;
 
+    with ctrl_src_cj select src_cj_mux <=
+        pc_plus_one + sign_extend_out when '0',
+        rf1_out                       when others;
+    
     with take select cj_mux <=
         pc_plus_one                   when '0',
-        sign_extend_out + pc_plus_one when '1',
-        "XXXXXXXXXXXXXXXX"            when others;
+        src_cj_mux                    when others;
 
     with ctrl_ij select ij_mux <=
         cj_mux                                          when "00",
         pc_reg(15 downto 10) & inst_mem_out(9 downto 0) when "01",
-        rf1_out                                         when "10",
-        "XXXXXXXXXXXXXXXX"                              when others;
+        rf1_out                                         when others;
 
     write_pc_reg: process(clk, rst, ij_mux)
     

@@ -34,6 +34,7 @@ end moon_core;
 
 architecture bhv_core of moon_core is
     -- Controller signals
+    signal ctrl_src_cj:      std_logic;
     signal ctrl_cj:          std_logic_vector(2 downto 0);
     signal ctrl_ij:          std_logic_vector(1 downto 0);
 
@@ -63,6 +64,7 @@ architecture bhv_core of moon_core is
         port(
             opcode:            in std_logic_vector(5 downto 0);
     
+            ctrl_src_cj:       out std_logic;
             ctrl_cj:           out std_logic_vector(2 downto 0);
             ctrl_ij:           out std_logic_vector(1 downto 0);
     
@@ -103,6 +105,7 @@ architecture bhv_core of moon_core is
             z_signal:        in std_logic;
             n_signal:        in std_logic;
 
+            ctrl_src_cj:     in std_logic;
             ctrl_cj:         in std_logic_vector(2 downto 0);
             ctrl_ij:         in std_logic_vector(1 downto 0);
 
@@ -343,6 +346,7 @@ begin
         port map(
             opcode => opcode,
     
+            ctrl_src_cj => ctrl_src_cj,
             ctrl_cj => ctrl_cj,
             ctrl_ij => ctrl_ij,
     
@@ -378,6 +382,7 @@ begin
             z_signal => z_signal,
             n_signal => n_signal,
 
+            ctrl_src_cj => ctrl_src_cj,
             ctrl_cj => ctrl_cj,
             ctrl_ij => ctrl_ij,
 

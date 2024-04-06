@@ -20,6 +20,7 @@ entity moon_controller is
     port(
         opcode:            in std_logic_vector(5 downto 0);
 
+        ctrl_src_cj:       out std_logic;
         ctrl_cj:           out std_logic_vector(2 downto 0);
         ctrl_ij:           out std_logic_vector(1 downto 0);
 
@@ -56,6 +57,7 @@ begin
         case opcode is
             when nope_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -85,6 +87,7 @@ begin
 			
             when add_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -112,6 +115,7 @@ begin
 
             when sub_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -139,6 +143,7 @@ begin
 
             when not_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -166,6 +171,7 @@ begin
 
             when and_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -193,6 +199,7 @@ begin
 
             when or_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -220,6 +227,7 @@ begin
 
             when xor_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -247,6 +255,7 @@ begin
 
             when nand_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -274,6 +283,7 @@ begin
 
             when nor_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -301,6 +311,7 @@ begin
 
             when xnor_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -328,6 +339,7 @@ begin
 
             when sll_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -355,6 +367,7 @@ begin
 
             when srl_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -382,6 +395,7 @@ begin
 
             when sra_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -409,6 +423,7 @@ begin
 
             when tmul_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -436,6 +451,7 @@ begin
 
             when tdiv_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -463,6 +479,7 @@ begin
 
             when mtl_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -490,6 +507,7 @@ begin
 
             when mfl_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -517,6 +535,7 @@ begin
 
             when mth_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -544,6 +563,7 @@ begin
 
             when mfh_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -571,6 +591,7 @@ begin
 
             when mtac_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -598,6 +619,7 @@ begin
 
             when mfac_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -625,6 +647,7 @@ begin
 
             when slt_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -654,6 +677,7 @@ begin
 			
 			when addi_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -681,6 +705,7 @@ begin
 			
 			when subi_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -708,6 +733,7 @@ begin
 			
 			when andi_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -735,6 +761,7 @@ begin
 			
 			when ori_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -762,6 +789,7 @@ begin
 			
 			when xori_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -789,6 +817,7 @@ begin
 			
 			when nandi_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -816,6 +845,7 @@ begin
 			
 			when nori_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -843,6 +873,7 @@ begin
 			
 			when xnori_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -870,6 +901,7 @@ begin
 			
             when lli_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -897,6 +929,7 @@ begin
 			
 			when lui_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -924,6 +957,7 @@ begin
 			
 			when lsi_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -953,6 +987,7 @@ begin
 			
             when lwr_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -980,6 +1015,7 @@ begin
 
             when swr_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -1007,6 +1043,7 @@ begin
 			
 			when push_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -1034,6 +1071,7 @@ begin
 			
 			when pop_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "00";
 
@@ -1063,6 +1101,7 @@ begin
 			
 			when jump_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "01";
 
@@ -1090,6 +1129,7 @@ begin
 			
 			when jal_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "01";
 
@@ -1117,6 +1157,7 @@ begin
 			
 			when jr_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "10";
 
@@ -1144,6 +1185,7 @@ begin
 			
 			when jral_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
             ctrl_ij           <= "10";
 
@@ -1171,6 +1213,7 @@ begin
 			
 			when bgtz_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "100"; -- not z and not n
             ctrl_ij           <= "00";
 
@@ -1198,6 +1241,7 @@ begin
 			
 			when bltz_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "011"; -- n
             ctrl_ij           <= "00";
 
@@ -1225,6 +1269,7 @@ begin
 			
 			when beqz_opcode =>
 
+            ctrl_src_cj       <= '0';
             ctrl_cj           <= "001"; -- z
             ctrl_ij           <= "00";
 
@@ -1252,6 +1297,119 @@ begin
 			
 			when bnez_opcode =>
 
+            ctrl_src_cj       <= '0';
+            ctrl_cj           <= "010"; -- not z
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+            when bgtzr_opcode =>
+
+            ctrl_src_cj       <= '1';
+            ctrl_cj           <= "100"; -- not z and not n
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+
+            ctrl_sign_extend  <= "00";
+
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
+            ctrl_alu          <= "0000"; -- A transparency
+
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+
+			when bltzr_opcode =>
+
+            ctrl_src_cj       <= '1';
+            ctrl_cj           <= "011"; -- n
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when beqzr_opcode =>
+
+            ctrl_src_cj       <= '1';
+            ctrl_cj           <= "001"; -- z
+            ctrl_ij           <= "00";
+
+            ctrl_stk          <= "00";
+            ctrl_lk           <= '0';
+            ctrl_wr_rf        <= '0';
+            ctrl_src_rf       <= '0';
+        
+            ctrl_wr_ac        <= '0';
+            ctrl_src_ac       <= "000";
+        
+            ctrl_wr_hilo      <= '0';
+            ctrl_src_hilo     <= "00";
+        
+            ctrl_sign_extend  <= "00";
+        
+            ctrl_src_alu_a    <= "01"; -- from ac
+            ctrl_src_alu_b    <= '0';
+            ctrl_alu          <= "0000"; -- A transparency
+        
+            ctrl_sh           <= "00";
+
+            ctrl_wr_data_mem  <= '0';
+            ctrl_data_mem_use <= '0';
+			
+			when bnezr_opcode =>
+
+            ctrl_src_cj       <= '1';
             ctrl_cj           <= "010"; -- not z
             ctrl_ij           <= "00";
 

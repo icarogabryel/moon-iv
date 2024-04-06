@@ -79,6 +79,11 @@ package opcodes is
     constant beqz_opcode:  std_logic_vector(5 downto 0) := "101011";
     constant bnez_opcode:  std_logic_vector(5 downto 0) := "101100";
 
+    constant bgtzr_opcode: std_logic_vector(5 downto 0) := "101101";
+    constant bltzr_opcode: std_logic_vector(5 downto 0) := "101110";
+    constant beqzr_opcode: std_logic_vector(5 downto 0) := "101111";
+    constant bnezr_opcode: std_logic_vector(5 downto 0) := "110000";
+
 end package;
 
 package body opcodes is end package body;
