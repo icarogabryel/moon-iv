@@ -74,10 +74,10 @@ package opcodes is
     constant jr_opcode:    std_logic_vector(5 downto 0) := "100111";
     constant jral_opcode:  std_logic_vector(5 downto 0) := "101000";
 
-    constant jgtz_opcode:  std_logic_vector(5 downto 0) := "101001";
-    constant jltz_opcode:  std_logic_vector(5 downto 0) := "101010";
-    constant jeqz_opcode:  std_logic_vector(5 downto 0) := "101011";
-    constant jnez_opcode:  std_logic_vector(5 downto 0) := "101100";
+    constant bgtz_opcode:  std_logic_vector(5 downto 0) := "101001";
+    constant bltz_opcode:  std_logic_vector(5 downto 0) := "101010";
+    constant beqz_opcode:  std_logic_vector(5 downto 0) := "101011";
+    constant bnez_opcode:  std_logic_vector(5 downto 0) := "101100";
 
 end package;
 

@@ -384,7 +384,7 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'10100000{p1}0000\n'
 
-            case 'jgtz':
+            case 'bgtz':
                 p1, p2 = parameters.split(',')
 
                 p1 = decimalToBinaryOrFillField(p1[1:], 2)
@@ -392,7 +392,7 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'101001{p1}{p2}\n'
 
-            case 'jltz':
+            case 'bltz':
                 p1, p2 = parameters.split(',')
 
                 p1 = decimalToBinaryOrFillField(p1[1:], 2)
@@ -400,7 +400,7 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'101010{p1}{p2}\n'
 
-            case 'jeqz':
+            case 'beqz':
                 p1, p2 = parameters.split(',')
 
                 p1 = decimalToBinaryOrFillField(p1[1:], 2)
@@ -408,7 +408,7 @@ def compiler(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'101011{p1}{p2}\n'
 
-            case 'jnez':
+            case 'bnez':
                 p1, p2 = parameters.split(',')
 
                 p1 = decimalToBinaryOrFillField(p1[1:], 2)

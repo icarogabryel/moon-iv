@@ -1169,7 +1169,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jgtz_opcode =>
+			when bgtz_opcode =>
 
             ctrl_cj           <= "100"; -- not z and not n
             ctrl_ij           <= "00";
@@ -1196,7 +1196,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jltz_opcode =>
+			when bltz_opcode =>
 
             ctrl_cj           <= "011"; -- n
             ctrl_ij           <= "00";
@@ -1223,7 +1223,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jeqz_opcode =>
+			when beqz_opcode =>
 
             ctrl_cj           <= "001"; -- z
             ctrl_ij           <= "00";
@@ -1250,7 +1250,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jnez_opcode =>
+			when bnez_opcode =>
 
             ctrl_cj           <= "010"; -- not z
             ctrl_ij           <= "00";
