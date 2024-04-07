@@ -233,10 +233,10 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'mfac':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(p1[1:], 2)
-                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 4)
+                p2 = decimalToBinaryOrFillField(p2[1:], 2)
 
-                compiledText += f'010100{p1}{p2}0000\n'
+                compiledText += f'010100{p2}{p1}0000\n' # Invert the order of the parameters
 
             case 'slt':
                 p1, p2, p3 = parameters.split(',')
@@ -348,10 +348,10 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'swr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(p1[1:], 2)
-                p2 = decimalToBinaryOrFillField(p2[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 4)
+                p2 = decimalToBinaryOrFillField(p2[1:], 2)
 
-                compiledText += f'100010{p1}{p2}0000\n'
+                compiledText += f'100010{p2}{p1}0000\n' # Invert the order of the parameters
 
             case 'push':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 2)
@@ -415,6 +415,38 @@ def compiler(inputFile: str, outputFile: str) -> None:
                 p2 = decimalToBinaryOrFillField(p2, 8)
 
                 compiledText += f'101100{p1}{p2}\n'
+
+            case 'bgtzr':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
+                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+
+                compiledText += f'101101{p1}{p2}0000\n'
+
+            case 'bltzr':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
+                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+
+                compiledText += f'101110{p1}{p2}0000\n'
+
+            case 'beqzr':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
+                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+
+                compiledText += f'101111{p1}{p2}0000\n'
+
+            case 'bnezr':
+                p1, p2 = parameters.split(',')
+
+                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
+                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+
+                compiledText += f'110000{p1}{p2}0000\n'
 
     # Write the compiled text to the output file
     with open(outputFile, 'w') as file:
