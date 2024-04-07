@@ -419,32 +419,32 @@ def compiler(inputFile: str, outputFile: str) -> None:
             case 'bgtzr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
-                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'101101{p1}{p2}0000\n'
 
             case 'bltzr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
-                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'101110{p1}{p2}0000\n'
 
             case 'beqzr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
-                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'101111{p1}{p2}0000\n'
 
             case 'bnezr':
                 p1, p2 = parameters.split(',')
 
-                p1 = decimalToBinaryOrFillField(parameters[1:], 2)
-                p2 = decimalToBinaryOrFillField(parameters[1:], 4)
+                p1 = decimalToBinaryOrFillField(p1[1:], 2)
+                p2 = decimalToBinaryOrFillField(p2[1:], 4)
 
                 compiledText += f'110000{p1}{p2}0000\n'
 
