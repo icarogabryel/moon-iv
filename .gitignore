@@ -1,1 +1,5 @@
-/ms project
+src/work
+*.mti
+*.mpf
+/src/transcript
+*.wlf

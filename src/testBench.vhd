@@ -16,7 +16,7 @@ use ieee.std_logic_unsigned.all;
 
 entity testbench is end;
 
-architecture bhv_testbench of testBench is
+architecture bhv_testbench of testbench is
     constant clk_period: time := 40 ns;
     signal clk_count: integer := 0;
 
