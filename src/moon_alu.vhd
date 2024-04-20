@@ -1,14 +1,14 @@
--- ||***************************************************||
--- ||                                                   ||
--- ||   FEDERAL UNIVERSITY OF PIAUI                     ||
--- ||   NATURE SCIENCE CENTER                           ||
--- ||   COMPUTING DEPARTMENT                            ||
--- ||                                                   ||
--- ||   Many As Only ONe - MOON IV                      ||
--- ||                                                   ||
--- ||   Developer: Icaro Gabryel                        ||
--- ||                                                   ||
--- ||***************************************************||
+-- ||******************************************||
+-- ||                                          ||
+-- ||   FEDERAL UNIVERSITY OF PIAUI            ||
+-- ||   NATURE SCIENCE CENTER                  ||
+-- ||   COMPUTING DEPARTMENT                   ||
+-- ||                                          ||
+-- ||   Many As Only ONe Quad-Core - MOON IV   ||
+-- ||                                          ||
+-- ||   Developer: Icaro Gabryel               ||
+-- ||                                          ||
+-- ||******************************************||
 
 library ieee;
 use ieee.std_logic_1164.all;
