@@ -63,7 +63,7 @@ def decimalToBinaryOrFillField(decimalNumber: str, length: int) -> str:
     return binaryRepresentation
 
 # Assembly to binary compiler function
-def compiler(inputFile: str, outputFile: str) -> None:
+def assembledToMachineCode(inputFile: str, outputFile: str) -> None:
     compiledText = '' # Resulting binary string
 
     with open(inputFile, 'r') as file:
@@ -451,16 +451,3 @@ def compiler(inputFile: str, outputFile: str) -> None:
     # Write the compiled text to the output file
     with open(outputFile, 'w') as file:
         file.write(fillTo1024Lines(compiledText))
-
-# Main function
-def main():
-    fileNameIn = input('Enter file name: ')
-    fileNameOut = input('Enter output file name: ')
-
-    compiler(fileNameIn, fileNameOut)
-
-    print('Done!')
-
-# Run the main function
-if __name__ == '__main__':
-    main()
