@@ -63,13 +63,10 @@ def decimalToBinaryOrFillField(decimalNumber: str, length: int) -> str:
     return binaryRepresentation
 
 # Assembly to binary compiler function
-def assembledToMachineCode(inputFile: str, outputFile: str) -> None:
+def assembledToMachineCode(assembledCode: list[str]) -> str:
     compiledText = '' # Resulting binary string
 
-    with open(inputFile, 'r') as file:
-        lines = file.readlines()
-
-    for line in lines:
+    for line in assembledCode:
         line = line.split('//')[0] # Remove comments
         line = line.strip()
 
@@ -448,6 +445,4 @@ def assembledToMachineCode(inputFile: str, outputFile: str) -> None:
 
                 compiledText += f'110000{p1}{p2}0000\n'
 
-    # Write the compiled text to the output file
-    with open(outputFile, 'w') as file:
-        file.write(fillTo1024Lines(compiledText))
+    return fillTo1024Lines(compiledText)

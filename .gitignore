@@ -3,3 +3,4 @@ src/work
 *.mpf
 /src/transcript
 *.wlf
+__pycache__/
