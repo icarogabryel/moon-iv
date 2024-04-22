@@ -20,5 +20,5 @@ tdiv $0
 tdiv $0
 tdiv $0
 mfh &2           // move high register to ac2
-mfac &2, $1      // move ac2 to rf1
+mfac $1, &2      // move ac2 to rf1
 srl &2, $1, 1    // shift right rf1 (Real rest)

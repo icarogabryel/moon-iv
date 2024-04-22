@@ -1,6 +1,6 @@
 from translator import assembledToMachineCode
 
-assembledFile = "Assembler/Test codes/immediate ops.asm"
+assembledFile = "Assembler/Test codes/arith and logic ops.asm"
 machineCodeFile = "program_code.txt"
 
 with open(assembledFile, 'r') as file:
