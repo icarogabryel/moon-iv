@@ -348,7 +348,7 @@ def assembledToMachineCode(assembledCode: list[str]) -> str:
                 p1 = decimalToBinaryOrFillField(p1[1:], 4)
                 p2 = decimalToBinaryOrFillField(p2[1:], 2)
 
-                compiledText += f'100010{p2}{p1}0000\n' # Invert the order of the parameters
+                compiledText += f'100010{p1}{p2}0000\n'
 
             case 'push':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 2)
