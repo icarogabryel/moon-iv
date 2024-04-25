@@ -8,9 +8,8 @@ The instruction formats are shown in the following table. The opcode field is us
 | N-Type | opcode(15-10) |
 | R-Type | opcode(15-10) &ac(9-8), $rf1(7-4), &rf2(3-0) |
 | I-Type | opcode(15-10) &ac(9-8), $rf1(7-4), imm(3-0) |
-| S-Type | opcode(15-10) &ac(9-8), shamt(7-0) |
 | J-Type | opcode(15-10) imm(9-0) |
-| B-Type | opcode(15-10) &rd(9-8), imm(7-0) |
+| B-Type | opcode(15-10) &ac(9-8), imm(7-0) |
 
 ## Instructions Subsets
 
@@ -40,9 +39,9 @@ No operation is the only instruction that does not have any fields. All other in
 ### Shift Operations
 | Instruction | Mnemonic | Type | Opcode | Fields | Meaning |
 |-|-|-|-|-|-|
-| Shift Left Logical                     | sll  | S | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
-| Shift Right Logical                    | srl  | S | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
-| Shift Right Arithmetic                 | sra  | S | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |3
+| Shift Left Logical                     | sll  | I | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
+| Shift Right Logical                    | srl  | I | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
+| Shift Right Arithmetic                 | sra  | I | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |3
 
 ### Move Operations
 | Instruction | Mnemonic | Type | Opcode | Fields | Meaning |
