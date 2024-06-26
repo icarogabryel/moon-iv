@@ -90,8 +90,8 @@ Memory access operations are used to load and store data from and to the memory.
 
 | Instruction | Mnemonic | Type | Opcode | Fields | Meaning |
 |-|-|-|-|-|-|
-| Load Word Register  | lwr  | R | 100001 | ac(9-8), rf1(7-4) | ac = memory\[rf1\] |
-| Store Word Register | swr  | R | 100010 | ac(9-8), rf1(7-4) | memory\[rf1\] = ac |
+| Load Word Register  | lwr  | R | 100001 | ac(9-8), rf1(7-4), rf2(3-0) | ac = memory\[rf1 + rf2\] |
+| Store Word Register | swr  | R | 100010 | ac(9-8), rf1(7-4), rf2(3-0) | memory\[rf1 + rf2\] = ac |
 | Push                | push | R | 100011 | ac(9-8)           | sp = sp - 1; memory\[sp\] = ac |
 | Pop                 | pop  | R | 100100 | ac(9-8)           | ac = memory\[sp\]; sp = sp + 1 |
 
