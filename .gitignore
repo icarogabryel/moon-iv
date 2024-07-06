@@ -1,6 +1,4 @@
-src/work
-*.mti
-*.mpf
-/src/transcript
-*.wlf
 __pycache__/
+*.o
+*.cf
+testbench

@@ -13,7 +13,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library work;
 use work.opcodes.all;
 
 entity moon_controller is
@@ -1006,7 +1005,7 @@ begin
         
             ctrl_src_alu_a    <= "00";
             ctrl_src_alu_b    <= '0';
-            ctrl_alu          <= "0000";
+            ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
 
@@ -1034,7 +1033,7 @@ begin
         
             ctrl_src_alu_a    <= "00";
             ctrl_src_alu_b    <= '0';
-            ctrl_alu          <= "0000";
+            ctrl_alu          <= "0010";
         
             ctrl_sh           <= "00";
 
