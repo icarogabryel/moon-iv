@@ -10,6 +10,7 @@ The instruction formats are shown in the following table. The opcode field is us
 | R-Type | Register | opcode(15-10) | &ac(9-8) | $rf1(7-4) | &rf2(3-0) |
 | I-Type | Immediate | opcode(15-10) | &ac(9-8) | imm(7-0) ||
 | S-Type | Shift | opcode(15-10) | &ac(9-8) | $rf1(7-4) | shamt(3-0) |
+| P-Type | Stack | opcode(15-10) | &ac(9-8) |||
 | J-Type | Jump | opcode(15-10) | imm(9-0) |||
 
 ## Instructions Subsets
@@ -49,9 +50,9 @@ Shift operations are used to shift the bits of the register to the left or right
 
 | Instruction | Mnemonic | Type | Opcode | Fields | Meaning |
 |-|-|-|-|-|-|
-| Shift Left Logical                     | sll  | I | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
-| Shift Right Logical                    | srl  | I | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
-| Shift Right Arithmetic                 | sra  | I | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
+| Shift Left Logical                     | sll  | S | 001010 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 << shamt |
+| Shift Right Logical                    | srl  | S | 001011 | ac(9-8), rf1(7-4), shamt(3-0) | ac = rf1 >> shamt |
+| Shift Right Arithmetic                 | sra  | S | 001100 | ac(9-8), rf1(7-4), shamt(3-0) | ac = signed(rf1) >> shamt |
 
 ### Move Operations
 
@@ -92,8 +93,8 @@ Memory access operations are used to load and store data from and to the memory.
 |-|-|-|-|-|-|
 | Load Word Register  | lwr  | R | 100001 | ac(9-8), rf1(7-4), rf2(3-0) | ac = memory\[rf1 + rf2\] |
 | Store Word Register | swr  | R | 100010 | ac(9-8), rf1(7-4), rf2(3-0) | memory\[rf1 + rf2\] = ac |
-| Push                | push | R | 100011 | ac(9-8)           | sp = sp - 1; memory\[sp\] = ac |
-| Pop                 | pop  | R | 100100 | ac(9-8)           | ac = memory\[sp\]; sp = sp + 1 |
+| Push                | push | P | 100011 | ac(9-8)           | sp = sp - 1; memory\[sp\] = ac |
+| Pop                 | pop  | P | 100100 | ac(9-8)           | ac = memory\[sp\]; sp = sp + 1 |
 
 ### Control Operations
 
