@@ -69,7 +69,7 @@ architecture bhv_main_mem of moon_main_mem is
     signal main_mem: memory;
 
 begin
-    rd_main_memory: process(request, main_rd_addr)
+    rd_main_memory: process(request, main_rd_addr, main_mem)
 
     begin
         if ((request = '1') and (conv_integer(main_rd_addr) < 1024)) then
@@ -89,11 +89,11 @@ begin
     
     end process rd_main_memory;
 
-    wr_main_memory: process(clk, rst, wr_main_from_data)
+    wr_main_memory: process(wr_main_from_data, clk, rst)
     
     begin
         if (rst = '1') then
-            main_mem <= read_main_memory_file("program_code.txt");
+            main_mem <= read_main_memory_file("code.txt");
 
         -- writing in main memory
         elsif ((clk'event and clk = '1') and (wr_main_from_data = '1')) then

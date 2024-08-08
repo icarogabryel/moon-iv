@@ -119,8 +119,8 @@ architecture bhv_moon of moon is
             main_wr_addr: in std_logic_vector(15 downto 0);
             data_to_main_bk: in std_logic_vector(63 downto 0);
 
-            main_to_cache_bk: out std_logic_vector(63 downto 0);
-            wr_cache_from_main: out std_logic
+            wr_cache_from_main: out std_logic;
+            main_to_cache_bk: out std_logic_vector(63 downto 0)
 
         );
 

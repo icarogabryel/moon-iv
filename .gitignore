@@ -2,6 +2,7 @@
 __pycache__/
 
 # GHDL files
+*.cf
 *.o
 testbench
 

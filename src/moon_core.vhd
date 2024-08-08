@@ -253,6 +253,7 @@ architecture bhv_core of moon_core is
 
             z_signal:        out std_logic;
             n_signal:        out std_logic;
+            c_signal:        out std_logic;
 
             alu_out:         out std_logic_vector(15 downto 0)
         );
@@ -494,6 +495,7 @@ begin
     
             z_signal => z_signal,
             n_signal => n_signal,
+            c_signal => open,
     
             alu_out => alu_out
 
