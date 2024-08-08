@@ -1,5 +1,0 @@
-[libraries]
-
-src.files = [
-  'src//*.vhd',
-]

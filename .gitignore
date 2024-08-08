@@ -1,4 +1,11 @@
+# Python files from the translator
 __pycache__/
+
+# GHDL files
 *.o
-*.cf
 testbench
+
+# Sigasi files
+.project
+.library_mapping.xml
+.settings/
