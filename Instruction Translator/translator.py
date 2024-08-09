@@ -1,7 +1,8 @@
 # function to make until 1024 lines
 def fillTo1024Lines(machineCode: str) -> str:
-    machineCode += (1025 - len(machineCode.split('\n'))) * '0000000000000000\n'
+    machineCode += "0000000000000000\n" * (1024 - machineCode.count('\n'))
     
+    print(repr(machineCode))
     return machineCode
 
 # Function to add 1 to a binary number in two's complement algorithm
