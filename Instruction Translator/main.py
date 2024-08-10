@@ -12,5 +12,7 @@ def main():
     with open(output_file, 'w') as f:
             f.write(machineCode)
 
+    print("Translation complete. Machine code saved to", output_file)
+
 if __name__ == "__main__":
     main()

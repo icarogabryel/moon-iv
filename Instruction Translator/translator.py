@@ -1,8 +1,7 @@
 # function to make until 1024 lines
 def fillTo1024Lines(machineCode: str) -> str:
     machineCode += "0000000000000000\n" * (1024 - machineCode.count('\n'))
-    
-    print(repr(machineCode))
+
     return machineCode
 
 # Function to add 1 to a binary number in two's complement algorithm
@@ -362,22 +361,22 @@ def toMachineCode(humanReadableInstructions: list[str]) -> str:
                 machineCode += f'100100{p1}00000000\n'
 
             # Control instructions
-            case 'jump':
+            case 'jr':
                 p1 = decimalToBinaryOrFillField(parameters, 10)
 
                 machineCode += f'100101{p1}\n'
 
-            case 'jal':
+            case 'jrl':
                 p1 = decimalToBinaryOrFillField(parameters, 10)
 
                 machineCode += f'100110{p1}\n'
 
-            case 'jr':
+            case 'ja':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 machineCode += f'10011100{p1}0000\n'
 
-            case 'jral':
+            case 'jal':
                 p1 = decimalToBinaryOrFillField(parameters[1:], 4)
 
                 machineCode += f'10100000{p1}0000\n'
