@@ -49,8 +49,8 @@ begin
         rf2_out(15 downto 0)         when '0',
         sign_extend_out(15 downto 0) when others;
 
-    extended_sign_a <= out_mux_a(15) & out_mux_a;
-    extended_sign_b <= out_mux_b(15) & out_mux_b;
+    extended_sign_a <= '0' & out_mux_a;
+    extended_sign_b <= '0' & out_mux_b;
 
     with ctrl_alu select op_result <=
         extended_sign_a                      when "0000",  -- A transparency

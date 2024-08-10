@@ -39,7 +39,7 @@ architecture bhv_hilo of moon_hilo is
 
 begin
     with low_register(0) select mul_mux_and_right_shifter <= -- Multiplication step.
-        c_signal & hi_out(15 downto 0) & lo_out(15 downto 1)      when '0', -- Just shift right.
+        '0' & hi_out(15 downto 0) & lo_out(15 downto 1)           when '0', -- Just shift right.
         c_signal & shifter_out(15 downto 0) & lo_out(15 downto 1) when others; -- Add and shift right.
 
     with shifter_out(15) select div_mux_and_left_shifter <= -- Division step.

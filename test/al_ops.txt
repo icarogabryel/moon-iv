@@ -1,5 +1,5 @@
 lli &0, 3        // load 3 (0011) in ac0
-lli &1, 5        // load 5 (0101) in ac1
+lsi &1, -2        // load 5 (0101) in ac1
 mfac $0, &0      // move 3 to rf0
 mfac $1, &1      // move 5 to rf1
 add &2, $0, $1   // arith and logic ops

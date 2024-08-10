@@ -1,7 +1,7 @@
 from translator import toMachineCode
 
 def main():
-    input_file = "../test/flow_ops.txt"
+    input_file = "../test/al_ops.txt"
     output_file = "../src/program_code.txt"
 
     with open(input_file, 'r') as f:
