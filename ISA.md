@@ -101,10 +101,10 @@ Control operations are used to control the flow of the program.
 
 | Instruction | Mnemonic | Type | Opcode | Fields | Meaning |
 |-|-|-|-|-|-|
-| Jump                              | jump  | J | 100101 | imm(9-0) | pc = pc(15-10) & imm |
-| Jump and Link                     | jal   | J | 100110 | imm(9-0) | lk = pc + 1; pc = pc(15-10) & imm |
-| Jump Register                     | jr    | R | 100111 | rf1(7-4) | pc = rf1 |
-| Jump Register and Link            | jral  | R | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 |
+| Jump Relative                     | jr    | J | 100101 | imm(9-0) | pc = pc + imm |
+| Jump Relative and Link            | jrl   | J | 100110 | imm(9-0) | lk = pc + 1; pc = pc + imm |
+| Jump Absolute                     | ja    | R | 100111 | rf1(7-4) | pc = rf1 |
+| Jump Absolute and Link            | jal   | R | 101000 | rf1(7-4) | lk = pc + 1; pc = rf1 |
 | Branch Greater Than Zero          | bgtz  | I | 101001 | rd(9-8), imm(7-0) | If ac > 0 then pc = (pc + 1) + imm |
 | Branch Less Than Zero             | bltz  | I | 101010 | rd(9-8), imm(7-0) | If ac < 0 then pc = (pc + 1) + imm |
 | Branch Equal To Zero              | beqz  | I | 101011 | rd(9-8), imm(7-0) | If ac == 0 then pc = (pc + 1) + imm |

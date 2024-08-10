@@ -93,7 +93,7 @@ begin
     
     begin
         if (rst = '1') then
-            main_mem <= read_main_memory_file("code.txt");
+            main_mem <= read_main_memory_file("program_code.txt");
 
         -- writing in main memory
         elsif ((clk'event and clk = '1') and (wr_main_from_data = '1')) then

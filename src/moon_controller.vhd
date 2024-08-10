@@ -12,7 +12,6 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-
 use work.opcodes.all;
 
 entity moon_controller is
@@ -1098,7 +1097,7 @@ begin
 			
 			-- Control Operations
 			
-			when jump_opcode =>
+			when jr_opcode =>
 
             ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
@@ -1126,7 +1125,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jal_opcode =>
+			when jrl_opcode =>
 
             ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
@@ -1154,7 +1153,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jr_opcode =>
+			when ja_opcode =>
 
             ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
@@ -1182,7 +1181,7 @@ begin
             ctrl_wr_data_mem  <= '0';
             ctrl_data_mem_use <= '0';
 			
-			when jral_opcode =>
+			when jal_opcode =>
 
             ctrl_src_cj       <= '0';
             ctrl_cj           <= "000";
