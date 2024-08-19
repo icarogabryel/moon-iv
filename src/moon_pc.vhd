@@ -35,7 +35,6 @@ end moon_pc;
 
 architecture bhv_pc of moon_pc is
     signal pc_reg                     : std_logic_vector(15 downto 0) := "0000000000000000";
-    signal extended_imm               : std_logic_vector(15 downto 0);
     signal take                       : std_logic;
     signal src_cj_mux, cj_mux, ij_mux : std_logic_vector(15 downto 0);
 
@@ -55,12 +54,10 @@ begin
         pc_plus_one when '0',
         src_cj_mux  when others;
 
-    extended_imm <= (0 to 5 => inst_mem_out(7)) & inst_mem_out(9 downto 0);
-    
     with ctrl_ij select ij_mux <=
-        cj_mux                when "00",
-        pc_reg + extended_imm when "01",
-        rf1_out               when others;
+        cj_mux                                          when "00",
+        pc_reg(15 downto 10) & inst_mem_out(9 downto 0) when "01",
+        rf1_out                                         when others;
 
     write_pc_reg : process(clk, rst, ij_mux)
     begin
