@@ -1,8 +1,10 @@
-# MOON IV - Instruction Set Architecture
+# MOOn-IV Instruction Set Architecture
+
+The Instruction Set Architecture (ISA) of a processor is the set of operations that it can interpret and execute. The MOOn-IV is a RISC processor with a 16-bit word. That means that the instructions are simpler and are 16-bit long. Its ISA is divided into five instruction formats (based on the instructions fields) and seven instruction subsets (based on the operation type).
 
 ## Instruction Formats
 
-The instruction formats are shown in the following table. The opcode field is used to determine the instruction to be executed. The remaining fields depend on the instruction type.
+The `opcode` (operation code) field is used to determine the instruction to be executed. The remaining fields depend on the instruction type. We have the N-type (No Operation type), which only has the `opcode` as a field, and only the No Operation instruction is part of this type. The R-type instructions (Register type) are register-use instructions in the 3-address model (destination receives operand 1 operation operand 2). The terms `ac` and `rf` refer to the address of a register in the ac and rf register banks, respectively. The I-type (Immediate type) instructions are immediate instructions (immediate value passed in the `imm` field) in the 2-address model (destination receives destination operation operand) to allow for an 8-bit immediate value instead of just 4-bits as in the 3-address model. The S-type (Shift type) contains shift instructions, with the `shamt` field (Shift Amount) receiving the shift value. Finally, there is the J-type (Jump type), which has a 10-bit immediate value field for jumps. The fields for each instruction type are listed in the table bellow.
 
 | Format | Meaning | Fields ||||
 |-|-|-|-|-|-|
@@ -14,7 +16,7 @@ The instruction formats are shown in the following table. The opcode field is us
 
 ## Instructions Subsets
 
-The instruction set is divided into the following subsets:
+In its subsets, we have seven groups. They are listed in the tables bellow.
 
 ### No Operation
 
